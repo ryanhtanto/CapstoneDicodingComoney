@@ -2,7 +2,18 @@ import React from 'react';
 
 function LoginPage() {
         return (
-                <h1>Login Page</h1>
+                <section>
+                        <div className='container'>
+                                <div className='row'>
+                                        <article className='col-lg-6'>
+
+                                        </article>
+                                        <div className='col-lg-6'>
+                                                
+                                        </div>
+                                </div>
+                        </div>
+                </section>
         );
 }
 
