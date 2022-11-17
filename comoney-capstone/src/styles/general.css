@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 *{
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* login page */
@@ -31,6 +31,11 @@
 
 .bg-auth{
   background: linear-gradient(211.86deg, #404EFB 0%, #013496 100%);
+}
+
+.auth-image{
+  width: 50%;
+  height: auto;
 }
 
 /* end login page */
