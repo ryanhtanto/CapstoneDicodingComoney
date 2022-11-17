@@ -1,5 +1,5 @@
 import React from "react";
-import { FiArrowLeft, FiPlusSquare } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 
 const AddEditSavingPlan = () => {
   return (
