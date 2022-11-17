@@ -19,7 +19,7 @@ function Navigation() {
 							<a className="nav-link" href="/news">News</a>
 						</li>
 						<li className="nav-item me-2">
-							<a className="nav-link" href="/savingplanner">Savings Planner</a>
+							<a className="nav-link" href="/saving-planner">Savings Planner</a>
 						</li>
 						<li className='nav-item me-2'>
 							<button className='navbar__button d-flex align-items-center'><FiLogOut/></button>

@@ -4,7 +4,19 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.input__height{
+.small__font {
+  font-size: 16px;
+}
+
+.medium__font {
+  font-size: 20px;
+}
+
+main {
+  min-height: 100vh;
+}
+
+.input__height {
   height: 44px;
 }
 
@@ -34,11 +46,6 @@
 /* end navbar */
 
 /* login page */
-
-/* #login{
-  overflow-x: hidden;
-} */
-
 .btn-color{
   background-color: #013496;
   border-radius: 10px;
@@ -78,7 +85,7 @@
 /* footer */
 .bg__footer{
   background-color:#F2F2F2;
-}
+} 
 
 .bg__footer p{
   margin: 0;
