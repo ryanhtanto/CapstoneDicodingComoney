@@ -9,6 +9,9 @@ import Dashboard from './pages/Dashboard';
 import DetailPage from './pages/DetailPage';
 import Footer from './components/Footer';
 import AddEditSavingPlan from './pages/AddEditSavingPlan';
+import NewsDetail from './pages/NewsDetail';
+import NewsListPage from './pages/NewsListpage';
+import SavingPlanner from './pages/SavingPlanner';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/editIncome" element={<EditIncomeExpense/>} />
           <Route path="/detail" element={<DetailPage/>} />
           <Route path="/editSavingPlan" element={<AddEditSavingPlan />} />
+          <Route path="/news" element={<NewsListPage />} />
+          <Route path="/news/detail" element={<NewsDetail />} />
+          <Route path="/savingplanner" element={<SavingPlanner/>} />
         </Routes>
       </main>
       <Footer/>
