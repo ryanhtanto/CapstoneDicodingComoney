@@ -1,0 +1,51 @@
+/* dashboard */
+.dashboard__card {
+  background-color: #F2F2F2;
+  border: none;
+}
+
+.dashboard__container h2 {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard__container li {
+  list-style: none;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.dashboard__container p, .dashboard__container h3 {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard__card svg {
+  font-size: 24px;
+}
+
+.green {
+  color: #3B9E0C;
+}
+
+.red {
+  color: #E86E53;
+}
+
+.card__balance, .card__income-expense {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.income-expense__time p {
+  background-color: #F3A100;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.transaction__date {
+  background-color: #F2F2F2;
+}
+
+/* end dashboard */
