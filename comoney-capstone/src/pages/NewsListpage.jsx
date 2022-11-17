@@ -12,7 +12,7 @@ function NewsListPage() {
                                                 </div>
                                                 <div class="col-md-8">
                                                         <div class="card-body">
-                                                                <h5 class="card-title fw-bold mb-0">Card title</h5>
+                                                                <h5 class="card-title fw-bold mb-0"><a className='text-decoration-none text-dark cursor-p' href='/news/detail'>Card title</a></h5>
                                                                 <p class="card-text"><small class="text-muted">15 November 2022</small></p>
                                                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
                                                         </div>

@@ -25,7 +25,7 @@ function LoginPage() {
                                                         <input type="password" className="form-control" id="password" placeholder='Password'/>
                                                 </div>
                                                 <div className="form-group mt-4">  
-                                                        <button type="button" className="btn btn-color col-12 text-white">Login</button>
+                                                        <button type="button" className="btn btn-primary btn-color col-12 text-white">Login</button>
                                                 </div>
                                                 <div className="form-group mt-4">  
                                                         <p className='text-center font-color'>Don't have an account?   <a href="/register" className='linkedAuth fw-bold'>Sign Up</a></p>

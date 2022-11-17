@@ -30,7 +30,7 @@ function RegisterPage() {
                                                         <input type="password" className="form-control" id="confirmPassword" placeholder='Confirm Password'/>
                                                 </div>
                                                 <div className="form-group mt-4">  
-                                                        <button type="button" className="btn btn-color col-12 text-white">Login</button>
+                                                        <button type="button" className="btn btn-primary btn-color col-12 text-white">Login</button>
                                                 </div>
                                                 
                                                 <div className="form-group mt-4">  

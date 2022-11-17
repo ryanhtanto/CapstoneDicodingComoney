@@ -15,3 +15,31 @@
   }
 }
 /* end navbar */
+/* news */
+.cursor-p{
+        cursor: pointer;
+}
+
+.news-detail-image{
+        width: 50%;
+        height: auto;
+}
+/* end of news */
+
+/* savings money */
+.bg-saving-color{
+        background-color: #F2F2F2;
+        border-radius: 10px;
+}
+.saving-image{
+        width: 35%;
+        height: auto;
+}
+.saving-image-item{
+        width: 100%;
+}
+.savings-planning{
+        background-color: #D3D3D3;
+        border-radius: 10px;
+}
+/* end of saving money */

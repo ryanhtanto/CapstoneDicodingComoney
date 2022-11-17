@@ -26,11 +26,11 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/addIncome" element={<AddIncomeExpense/>} />
           <Route path="/editIncome" element={<EditIncomeExpense/>} />
-          <Route path="/detail" element={<DetailPage/>} />
-          <Route path="/editSavingPlan" element={<AddEditSavingPlan />} />
           <Route path="/news" element={<NewsListPage />} />
           <Route path="/news/detail" element={<NewsDetail />} />
+          <Route path="/detail" element={<DetailPage/>} />
           <Route path="/savingplanner" element={<SavingPlanner/>} />
+          <Route path="/editSavingPlan" element={<AddEditSavingPlan />} />
         </Routes>
       </main>
       <Footer/>
