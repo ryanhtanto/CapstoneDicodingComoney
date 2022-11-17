@@ -24,13 +24,13 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/addIncome" element={<AddIncomeExpense/>} />
-          <Route path="/editIncome" element={<EditIncomeExpense/>} />
+          <Route path="/add-income" element={<AddIncomeExpense/>} />
+          <Route path="/edit-income" element={<EditIncomeExpense/>} />
           <Route path="/news" element={<NewsListPage />} />
           <Route path="/news/detail" element={<NewsDetail />} />
           <Route path="/detail" element={<DetailPage/>} />
-          <Route path="/savingplanner" element={<SavingPlanner/>} />
-          <Route path="/editSavingPlan" element={<AddEditSavingPlan />} />
+          <Route path="/saving-planner" element={<SavingPlanner/>} />
+          <Route path="/edit-saving-plan" element={<AddEditSavingPlan />} />
         </Routes>
       </main>
       <Footer/>
