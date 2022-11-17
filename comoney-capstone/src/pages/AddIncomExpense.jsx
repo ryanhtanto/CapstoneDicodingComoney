@@ -23,14 +23,14 @@ const AddIncomeExpense = () => {
           <h4 className="fw-bold">Add your income, here</h4>
           <p>Fill your detail income below</p>
           <form className="my-5">
-            <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name"></input>
-            <input type="text" className="form-control my-4" placeholder="Amount" aria-label="Amount"></input>
+            <input type="text" className="form-control my-4 input__height" placeholder="Name" aria-label="Name"></input>
+            <input type="text" className="form-control my-4 input__height" placeholder="Amount" aria-label="Amount"></input>
 
             <div className="text-center my-4">
               <div className="row">
                 <div className="col-sm-12 col-lg-9 mb-2">
                   <div className="dropdown">
-                    <button className="form-control dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="form-control dropdown-toggle input__height" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
                     </button>
                     <ul className="dropdown-menu">
@@ -54,7 +54,7 @@ const AddIncomeExpense = () => {
                 </div>
                 <div className="col">
                   {/* button trigger modal */}
-                  <button type="button" className="btn btn-primary form-control btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal"> <FiPlusSquare/> New Category</button>
+                  <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal"> <FiPlusSquare/> New Category</button>
                 </div>
               </div>
             </div>
@@ -69,12 +69,11 @@ const AddIncomeExpense = () => {
                   </div>
                   <div className="modal-body">
                     <form action="">
-                      <input type="text" className="form-control my-4" placeholder="New Category" aria-label="New Category"></input>
-                      <button type="button" className="btn btn-primary btn-color text-white">Save changes</button>
+                      <input type="text" className="form-control my-4 input__height" placeholder="New Category" aria-label="New Category"></input>
+                      <button type="button" className="btn btn-primary btn-color text-white input__height">Save changes</button>
                     </form>
                   </div>
                   <div className="modal-footer">
-                    
                   </div>
                 </div>
               </div>

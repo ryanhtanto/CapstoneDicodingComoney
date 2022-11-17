@@ -4,6 +4,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.input__height{
+  height: 44px;
+}
+
 /* navbar */
 .navbar__container {
   background-color: #013496;

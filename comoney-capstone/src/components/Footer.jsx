@@ -17,11 +17,11 @@ function Footer() {
             <div class="col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center footer__section my-2">
               <div>
                 <h5 className="fw-bold">About</h5>
-                <p><a href="#" className="py-1 my-1 text-decoration-none text-black">About CoMoney</a></p>
-                <p><a href="#" className="py-1 my-1 text-decoration-none text-black">Our Team</a></p>
+                <p><a href="#" className="py-3 my-1 text-decoration-none text-black ">About CoMoney</a></p>
+                <p><a href="#" className="py-3 my-1 text-decoration-none text-black ">Our Team</a></p>
               </div>
             </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center  footer__section my-2">
+            <div class="col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center footer__section my-2">
               <div>
                 <h5 className="fw-bold">Contacts</h5>
                 <p className="py-1"> <FiMail className="fs-5"/> comoney@gmail.com</p>

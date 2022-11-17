@@ -8,7 +8,7 @@ const AddEditSavingPlan = () => {
         <div className="my-4">
           <h4>
             <a href="" className="text-black text-decoration-none">
-              <FiArrowLeft className="warna" /> Back to Savings
+              <FiArrowLeft className="warna fs-2" /> Back to Savings
             </a>
           </h4>
         </div>

@@ -7,7 +7,7 @@ const DetailPage = () => {
       <div className="container">
         <div className="my-4">
           <h4>
-            <a href=""> <FiArrowLeft className="warna"/> Back to Dashboard</a>
+            <a href="" className="text-black text-decoration-none"> <FiArrowLeft className="warna fs-2"/> Back to Dashboard</a>
           </h4>
         </div>
 
