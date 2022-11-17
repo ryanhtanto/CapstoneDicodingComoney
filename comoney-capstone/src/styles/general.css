@@ -58,4 +58,9 @@
   background: linear-gradient(211.86deg, #404EFB 0%, #013496 100%);
 }
 
+.auth-image{
+  width: 50%;
+  height: auto;
+}
+
 /* end login page */
