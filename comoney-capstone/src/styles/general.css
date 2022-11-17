@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* navbar */
+.navbar__container {
+  background-color: #013496;
+}
+
+.navbar__logo {
+  width: 113px;
+}
+
+.nav-link {
+  color: white;
+  padding: 10px;
+}
+
+.navbar__button {
+  background-color: unset;
+  display: block;
+  cursor: pointer;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1.3em;
+  color: white;
+}
+/* end navbar */
+
+/* login page */
+
+/* #login{
+  overflow-x: hidden;
+} */
+
+.btn-color{
+  background-color: #013496;
+  border-radius: 10px;
+}
+
+.btn-color:hover{
+  border: solid 1px;
+}
+
+.font-color{  
+  color: #565656;
+}
+
+.linkedAuth{
+  text-decoration: none;
+  color: #013496;
+  cursor: pointer;
+}
+
+.bg-auth{
+  background: linear-gradient(211.86deg, #404EFB 0%, #013496 100%);
+}
+
+/* end login page */
