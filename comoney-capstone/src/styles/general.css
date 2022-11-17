@@ -64,3 +64,30 @@
 }
 
 /* end login page */
+
+
+/* warna buat tombol panah kembali */
+.warna{
+  color: #013496;
+}
+
+/* footer */
+.bg__footer{
+  background-color:#F2F2F2;
+}
+
+.bg__footer p{
+  margin: 0;
+}
+
+.footer__logo{
+  width: 113px;
+}
+
+@media only screen and (max-width: 770px) {
+  .footer__section{
+    justify-content: start !important;
+  }
+}
+
+/* end Footer */

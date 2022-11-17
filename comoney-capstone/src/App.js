@@ -6,6 +6,9 @@ import Navigation from './components/Navigation';
 import AddIncomeExpense from './pages/AddIncomExpense';
 import EditIncomeExpense from './pages/EditIncomeExpense';
 import Dashboard from './pages/Dashboard';
+import DetailPage from './pages/DetailPage';
+import Footer from './components/Footer';
+import AddEditSavingPlan from './pages/AddEditSavingPlan';
 
 function App() {
   return (
@@ -20,8 +23,11 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/addIncome" element={<AddIncomeExpense/>} />
           <Route path="/editIncome" element={<EditIncomeExpense/>} />
+          <Route path="/detail" element={<DetailPage/>} />
+          <Route path="/editSavingPlan" element={<AddEditSavingPlan />} />
         </Routes>
       </main>
+      <Footer/>
     </div>
   );
 }

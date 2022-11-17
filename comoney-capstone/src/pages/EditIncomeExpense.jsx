@@ -1,19 +1,18 @@
 import React from "react";
-import { FiArrowLeft } from "react-icons/fi";
-import { FiPlusSquare } from "react-icons/fi";
+import { FiArrowLeft, FiPlusSquare } from "react-icons/fi";
 
 const EditIncomeExpense = () => {
   return (
     <section>
       <div className="container">
         <div className="my-4">
-          <h3>
-            <a href=""> <FiArrowLeft/> Back to Detail</a>
-          </h3>
+          <h4>
+            <a href="" className="text-decoration-none text-black"> <FiArrowLeft className="warna"/> Back to Detail</a>
+          </h4>
         </div>
 
         <div className="content">
-          <h1>Edit your income / expense, here</h1>
+          <h4 className="fw-bold">Edit your expense, here</h4>
           <p>Fill your detail income below</p>
           <form className="my-5">
             <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name"></input>
@@ -21,7 +20,7 @@ const EditIncomeExpense = () => {
 
             <div className="text-center my-4">
               <div className="row">
-                <div className="col-9">
+                <div className="col-sm-12 col-lg-9 mb-2">
                   <div className="dropdown">
                     <button className="form-control dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
@@ -47,13 +46,13 @@ const EditIncomeExpense = () => {
                 </div>
                 <div className="col">
                 
-                  <button type="button" className="btn btn-primary form-control"> <FiPlusSquare/> New Category</button>
+                  <button type="button" className="btn btn-primary form-control btn-color"> <FiPlusSquare/> New Category</button>
                 </div>
               </div>
             </div>
 
             <textarea className="form-control my-4" placeholder="Description" aria-label="With textarea" style={{height: "120px"}}></textarea>
-            <button type="button" className="btn btn-primary form-control">Save</button>
+            <button type="submit" className="btn btn-primary btn-lg form-control btn-color">Save</button>
           </form>
         </div>
       </div>
