@@ -31,10 +31,6 @@
 
 /* login page */
 
-/* #login{
-  overflow-x: hidden;
-} */
-
 .btn-color{
   background-color: #013496;
   border-radius: 10px;
@@ -64,3 +60,9 @@
 }
 
 /* end login page */
+
+/* news */
+.news-img{
+  width: 100%;
+}
+/* end of news */

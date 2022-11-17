@@ -16,7 +16,7 @@ function Navigation() {
 							<a className="nav-link" href="/dashboard">Dashboard</a>
 						</li>
 						<li className="nav-item me-2">
-							<a className="nav-link" href="#">News</a>
+							<a className="nav-link" href="/news">News</a>
 						</li>
 						<li className="nav-item me-2">
 							<a className="nav-link" href="#">Savings Planner</a>
