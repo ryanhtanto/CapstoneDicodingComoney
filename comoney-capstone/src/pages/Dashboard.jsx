@@ -65,7 +65,7 @@ function Dashboard() {
             <p>Click category name to see the detail</p>
           </div>
           <div className="col-sm-12 col-md-4 mt-2">
-            <input className="form-control" type="date"/>
+            <input className="form-control input__height" type="date"/>
           </div>
         </div>
 
@@ -87,9 +87,6 @@ function Dashboard() {
           </li>
         </div>
       </section>
-      
-
-
     </div>
   );
 }
