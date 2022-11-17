@@ -31,6 +31,10 @@
 
 /* login page */
 
+/* #login{
+  overflow-x: hidden;
+} */
+
 .btn-color{
   background-color: #013496;
   border-radius: 10px;
@@ -61,8 +65,42 @@
 
 /* end login page */
 
-/* news */
-.news-img{
-  width: 100%;
+
+/* Add + Edit Income / Expense page */
+
+a{
+  text-decoration: none;
+  color: black;
 }
-/* end of news */
+
+h1, h5{
+  font-weight: bold;
+}
+
+FiArrowLeft{
+  color: #013496;
+}
+
+/* end Add + Edit */
+
+/* footer */
+.bg__footer{
+  background-color:#F2F2F2;
+}
+
+.bg__footer p{
+  margin: 0;
+}
+
+.footer__logo{
+  width: 113px;
+}
+
+@media only screen and (max-width: 770px) {
+  .footer__section{
+    /* background-color: red; */
+    justify-content: start !important;
+  }
+}
+
+/* end Footer */

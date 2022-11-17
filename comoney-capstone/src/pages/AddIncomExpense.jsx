@@ -20,7 +20,7 @@ const AddIncomeExpense = () => {
           </div>
         </div>
         <div className="content">
-          <h1>Add your income / expense, here</h1>
+          <h4 className="fw-bold">Add your income, here</h4>
           <p>Fill your detail income below</p>
           <form className="my-5">
             <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name"></input>
@@ -28,7 +28,7 @@ const AddIncomeExpense = () => {
 
             <div className="text-center my-4">
               <div className="row">
-                <div className="col-9">
+                <div className="col-sm-12 col-lg-9 mb-2">
                   <div className="dropdown">
                     <button className="form-control dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
@@ -53,13 +53,13 @@ const AddIncomeExpense = () => {
                   </div>
                 </div>
                 <div className="col">
-                  <button type="button" className="btn btn-primary form-control"> <FiPlusSquare/> New Category</button>
+                  <button type="button" className="btn btn-primary form-control btn-color"> <FiPlusSquare/> New Category</button>
                 </div>
               </div>
             </div>
 
             <textarea className="form-control my-4" placeholder="Description" aria-label="With textarea" style={{height: "120px"}}></textarea>
-            <button type="button" className="btn btn-primary form-control">Add New Income/Expense</button>
+            <button type="submit" className="btn btn-primary btn-lg form-control btn-color">Add New Income/Expense</button>
           </form>
         </div>
       </div>

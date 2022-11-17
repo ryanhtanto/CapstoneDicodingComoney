@@ -5,7 +5,8 @@ import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
 import AddIncomeExpense from './pages/AddIncomExpense';
 import EditIncomeExpense from './pages/EditIncomeExpense';
-import NewsListPage from './pages/NewsListpage';
+import DetailPage from './pages/DetailPage';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,13 +17,13 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/addIncome" element={<AddIncomeExpense/>} />
           <Route path="/editIncome" element={<EditIncomeExpense/>} />
-          <Route path="/news" element={<NewsListPage />} />
+          <Route path="/detail" element={<DetailPage/>} />
         </Routes>
       </main>
+      <Footer/>
     </div>
   );
 }
