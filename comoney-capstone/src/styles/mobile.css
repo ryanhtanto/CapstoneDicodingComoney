@@ -53,4 +53,7 @@
   .bg-auth{
     display: none;
   }
+  .saving-image-item{
+    display: none;
+  }
 }
