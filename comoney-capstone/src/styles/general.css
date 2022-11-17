@@ -66,22 +66,10 @@
 /* end login page */
 
 
-/* Add + Edit Income / Expense page */
-
-a{
-  text-decoration: none;
-  color: black;
-}
-
-h1, h5{
-  font-weight: bold;
-}
-
-FiArrowLeft{
+/* warna buat tombol panah kembali */
+.warna{
   color: #013496;
 }
-
-/* end Add + Edit */
 
 /* footer */
 .bg__footer{
@@ -98,7 +86,6 @@ FiArrowLeft{
 
 @media only screen and (max-width: 770px) {
   .footer__section{
-    /* background-color: red; */
     justify-content: start !important;
   }
 }

@@ -7,7 +7,7 @@ const EditIncomeExpense = () => {
       <div className="container">
         <div className="my-4">
           <h4>
-            <a href=""> <FiArrowLeft className="warna"/> Back to Detail</a>
+            <a href="" className="text-decoration-none text-black"> <FiArrowLeft className="warna"/> Back to Detail</a>
           </h4>
         </div>
 
