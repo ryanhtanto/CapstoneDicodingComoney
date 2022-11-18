@@ -1,6 +1,21 @@
 import React from 'react';
 import images from '../assets/images/register.png'
+import RegisterForm from '../components/RegisterForm';
+import { openDB } from 'idb';
+import CONFIG from '../global/config';
+
 function RegisterPage() {
+        const { DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME } = CONFIG;
+ 
+        const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
+                upgrade(database) {
+                        database.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'email' });
+                },
+        });
+        async function addUser(user) {
+                return (await dbPromise).add(OBJECT_STORE_NAME, user);
+        }
+
         return (
                 <section id="register" className='overflow-hidden'>
                         <div className='row'>
@@ -16,27 +31,7 @@ function RegisterPage() {
                                 <div className='col-lg-6 d-flex flex-column min-vh-100 justify-content-center px-5 container'>
                                         <h4 className='fw-bold'>Register your account</h4>
                                         <p className='font-color'>Hey, Nice to see you! Please fill your identity</p>
-                                        <form>
-                                                <div className="form-group">
-                                                        <input type="text" className="form-control" id="name" placeholder='Name'/>
-                                                </div>
-                                                <div className="form-group mt-4">
-                                                        <input type="email" className="form-control" id="email" placeholder='Email'/>
-                                                </div>
-                                                <div className="form-group mt-4">  
-                                                        <input type="password" className="form-control" id="password" placeholder='Password'/>
-                                                </div>
-                                                <div className="form-group mt-4">  
-                                                        <input type="password" className="form-control" id="confirmPassword" placeholder='Confirm Password'/>
-                                                </div>
-                                                <div className="form-group mt-4">  
-                                                        <button type="button" className="btn btn-primary btn-color col-12 text-white">Login</button>
-                                                </div>
-                                                
-                                                <div className="form-group mt-4">  
-                                                        <p className='text-center font-color'>Already have an account?   <a href="/" className='linkedAuth fw-bold'>Log In</a></p>
-                                                </div>
-                                        </form>
+                                        <RegisterForm addUser={addUser}/>
                                 </div>
                         </div>
                 </section>
