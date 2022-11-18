@@ -1,5 +1,6 @@
 import { openDB } from "idb";
 import CONFIG from "../global/config";
+import activeUser from "./active-user";
 
 const { DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME } = CONFIG;
 
@@ -14,8 +15,22 @@ const userIdb = {
     return (await dbPromise).add(OBJECT_STORE_NAME, user);
   },
 
-  async getUser(email){
-    return (await dbPromise).get(OBJECT_STORE_NAME, email);
+  async getUser(email, inputPassword) {
+    const user = await (await dbPromise).get(OBJECT_STORE_NAME, email);
+    if (user && user.password === inputPassword) {
+      await activeUser.addActiveUser({
+        accessToken: user.data.accessToken,
+        name: user.data.name,
+      });
+      return user.data;
+    }
+  },
+
+  async getUserLogged() {
+    const user = await activeUser.getActiveUser();
+    if (user) {
+      return user;
+    }
   }
 }
 

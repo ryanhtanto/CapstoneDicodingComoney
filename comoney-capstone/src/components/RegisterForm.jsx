@@ -9,7 +9,7 @@ function RegisterForm() {
 	const [repeatPassword, setRepeatPassword] = useInput('');
 
 	const onSubmit = (event) => {
-                event.preventDefault()
+		event.preventDefault()
 		if (password === repeatPassword) {
 			userIdb.addUser({
 				email,
