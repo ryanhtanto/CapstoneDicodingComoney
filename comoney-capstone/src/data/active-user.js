@@ -18,6 +18,10 @@ const activeUser = {
     const user = await (await dbPromise).getAll(OBJECT_STORE_NAME_TOKEN);
     return user[0];
   },
+
+  async delete(accessToken){
+    return (await dbPromise).delete(OBJECT_STORE_NAME_TOKEN, accessToken);
+  }
 }
 
 export default activeUser;
