@@ -9,12 +9,12 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
   },
 });
 
-const userIdb = () => {
-  const addUser = async (user) => {
+const userIdb = {
+  async addUser(user) {
     return (await dbPromise).add(OBJECT_STORE_NAME, user);
-  }
+  },
 
-  const getUser = async (email) => {
+  async getUser(email){
     return (await dbPromise).get(OBJECT_STORE_NAME, email);
   }
 }

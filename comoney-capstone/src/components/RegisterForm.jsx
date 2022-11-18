@@ -1,5 +1,5 @@
 import React from 'react';
-import addUser from '../data/user-idb';
+import userIdb from '../data/user-idb';
 import useInput from '../hooks/UseInput';
 
 function RegisterForm() {
@@ -8,9 +8,10 @@ function RegisterForm() {
 	const [password, setPassword] = useInput('');
 	const [repeatPassword, setRepeatPassword] = useInput('');
 
-	const onSubmit = () => {
+	const onSubmit = (event) => {
+                event.preventDefault()
 		if (password === repeatPassword) {
-			addUser({
+			userIdb.addUser({
 				email,
 				password,
 				data: {
