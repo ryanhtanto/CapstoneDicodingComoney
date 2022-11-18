@@ -33,8 +33,6 @@ function App() {
     }
   }, [user])
 
-  console.log(user);
-
   if (user === undefined) {
     return (
       <UserContext.Provider value={userContextValue}>
