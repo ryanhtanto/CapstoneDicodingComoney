@@ -12,6 +12,8 @@ import AddEditSavingPlan from './pages/AddEditSavingPlan';
 import NewsDetail from './pages/NewsDetail';
 import NewsListPage from './pages/NewsListpage';
 import SavingPlanner from './pages/SavingPlanner';
+import AboutUsPage from './pages/AboutUsPage';
+import AboutCoMoneyPage from './pages/AboutCoMoneyPage';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="/detail" element={<DetailPage/>} />
           <Route path="/saving-planner" element={<SavingPlanner/>} />
           <Route path="/edit-saving-plan" element={<AddEditSavingPlan />} />
+          <Route path="/about-us" element={<AboutUsPage/>} />
+          <Route path="/about-comoney" element={<AboutCoMoneyPage/>} />
         </Routes>
       </main>
       <Footer/>
