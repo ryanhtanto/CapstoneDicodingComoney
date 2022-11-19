@@ -1,6 +1,7 @@
 import activeUser from "../data/active-user";
 import savingMoneyIdb from "../data/saving-money-idb";
 import userIdb from "../data/user-idb";
+import newCategoryIdb from "../data/new-category-idb";
 
 const login = async (email, password) => {
   const user = await userIdb.getUser(email);
@@ -64,10 +65,21 @@ const savingsMoney = async (savingsName, amount, targetDate) => {
   });
 };
 
+const addCategory = async (categoryName) => {
+  const user = await activeUser.getActiveUser();
+
+  await newCategoryIdb.addCategory({
+    accessToken: user.accessToken,
+    id: +new Date(),
+    data:
+      categoryName,
+  })
+}
+
 const getActiveUser = async () => {
   const user = await activeUser.getActiveUser();
   return user;
 };
 
 
-export { login, logout, register, getActiveUser, savingsMoney };
+export { login, logout, register, getActiveUser, savingsMoney, addCategory };

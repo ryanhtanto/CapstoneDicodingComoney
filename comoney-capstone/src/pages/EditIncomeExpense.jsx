@@ -7,7 +7,9 @@ const EditIncomeExpense = () => {
       <div className="container">
         <div className="my-4">
           <h4>
-            <a href="" className="text-decoration-none text-black"> <FiArrowLeft className="warna fs-2"/> Back to Detail</a>
+            <a href="" className="text-decoration-none text-black">
+              <FiArrowLeft className="warna fs-2" /> Back to Detail
+            </a>
           </h4>
         </div>
 
@@ -47,38 +49,22 @@ const EditIncomeExpense = () => {
 
                 <div className="col">
                   {/* button trigger modal */}
-                  <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal"> <FiPlusSquare/> New Category</button>
+                  <button type="button" className="btn btn-primary form-control btn-color input__height" >
+                    <FiPlusSquare /> New Category
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* modal */}
-            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h1 className="modal-title fs-5" id="exampleModalLabel">Add New Category</h1>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body">
-                    <form action="">
-                      <input type="text" className="form-control my-4 input__height" placeholder="New Category" aria-label="New Category"></input>
-                      <button type="button" className="btn btn-primary btn-color text-white input__height">Save changes</button>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <textarea className="form-control my-4" placeholder="Description" aria-label="With textarea" style={{height: "120px"}}></textarea>
-            <button type="submit" className="btn btn-primary btn-lg form-control btn-color">Save</button>
+            <textarea className="form-control my-4" placeholder="Description" aria-label="With textarea" style={{ height: "120px" }}></textarea>
+            <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
+              Save
+            </button>
           </form>
         </div>
       </div>
     </section>
   );
-}
+};
 
-export default EditIncomeExpense
+export default EditIncomeExpense;
