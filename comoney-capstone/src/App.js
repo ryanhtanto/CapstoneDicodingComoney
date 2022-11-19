@@ -13,15 +13,15 @@ import NewsDetail from './pages/NewsDetail';
 import NewsListPage from './pages/NewsListpage';
 import SavingPlanner from './pages/SavingPlanner';
 import UserContext from './context/UserContext';
-import activeUser from './data/active-user';
+import { getActiveUser } from './utils/authentication-user';
 
 function App() {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     const checkUser = async () => {
-      const data = await activeUser.getActiveUser();
-      setUser(data || null);
+      const dataUser = await getActiveUser();
+      setUser(dataUser || null);
     }
     checkUser();
   }, [])

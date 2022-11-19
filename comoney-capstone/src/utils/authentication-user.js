@@ -43,4 +43,9 @@ const register = async (email, password, name) => {
   });
 };
 
-export { login, logout, register };
+const getActiveUser = async () => {
+  const user = await activeUser.getActiveUser();
+  return user;
+};
+
+export { login, logout, register, getActiveUser };
