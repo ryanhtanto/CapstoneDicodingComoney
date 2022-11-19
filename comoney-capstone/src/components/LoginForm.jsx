@@ -1,8 +1,7 @@
 import React from 'react';
-import userIdb from '../data/user-idb';
 import useInput from '../hooks/UseInput';
 import userContext from '../context/UserContext';
-import activeUser from '../data/active-user';
+import { login } from '../utils/authentication-user';
 
 function LoginForm() {
 	const [email, setEmail] = useInput('');
@@ -11,8 +10,10 @@ function LoginForm() {
 
 	const onSubmit = async (event) => {
 		event.preventDefault()
-		const test = await userIdb.getUser(email, password);
-		setUser(test);
+		const user = await login(email, password);
+		if (user) {
+			setUser(user);
+		}
 	}
 
 	return (

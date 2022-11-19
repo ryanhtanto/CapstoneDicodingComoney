@@ -1,15 +1,15 @@
 import React from "react";
 import logo from "../assets/logo-light.svg";
 import { FiMoon, FiLogOut } from "react-icons/fi";
-import activeUser from "../data/active-user";
 import UserContext from "../context/UserContext";
+import { logout } from "../utils/authentication-user";
 
 function Navigation() {
   const { user, setUser } = React.useContext(UserContext);
 
   const onLogout = () => {
-    activeUser.delete(user.accessToken);
-		setUser(undefined);
+    logout(user.accessToken);
+    setUser(null);
   };
 
   return (

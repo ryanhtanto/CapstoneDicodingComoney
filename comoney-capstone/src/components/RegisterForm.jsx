@@ -1,6 +1,6 @@
 import React from 'react';
-import userIdb from '../data/user-idb';
 import useInput from '../hooks/UseInput';
+import { register } from '../utils/authentication-user';
 
 function RegisterForm() {
 	const [name, setName] = useInput('');
@@ -11,14 +11,9 @@ function RegisterForm() {
 	const onSubmit = (event) => {
 		event.preventDefault()
 		if (password === repeatPassword) {
-			userIdb.addUser({
-				email,
-				password,
-				data: {
-					name,
-					accessToken: +new Date(),
-				}
-			});
+			register(email, password, name);
+		} else {
+			alert('Password dan Repeat Password Tidak Sama');
 		}
 	}
 
