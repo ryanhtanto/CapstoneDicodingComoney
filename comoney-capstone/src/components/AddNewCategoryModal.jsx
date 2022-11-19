@@ -21,7 +21,7 @@ const AddNewCategoryModal = () => {
           <div className="modal-body">
             <form onSubmit={onSubmit}>
               <input type="text" className="form-control my-4 input__height" placeholder="New Category" aria-label="New Category" value={categoryName} onChange={setCategoryName}></input>
-              <button type="submit" className="btn btn-primary btn-color text-white input__height">
+              <button type="submit" className="btn btn-primary btn-color text-white input__height" data-bs-dismiss="modal">
                 Save changes
               </button>
             </form>

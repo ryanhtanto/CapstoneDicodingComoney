@@ -2,10 +2,6 @@ import React from "react";
 import CategoryList from "./CategoryList";
 
 const AddNewCategoryDropdown = ({ categories }) => {
-  // const [categoryUser, setCategoryUser] = React.useState('');
-
-
-
   return (
     <div className="col-sm-12 col-lg-9 mb-2">
       <div className="dropdown">

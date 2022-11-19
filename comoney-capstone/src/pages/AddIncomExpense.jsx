@@ -19,10 +19,12 @@ const AddIncomeExpense = () => {
             </div>
           </div>
         </div>
+
+        {/* ini nanti ternary aja kali ya? kalau user pilih expense baru nanti rendernya AddExpensePage */}
         <AddIncomePage />
       </div>
     </section>
   );
-}
+};
 
 export default AddIncomeExpense;
