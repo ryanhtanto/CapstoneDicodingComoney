@@ -21,7 +21,7 @@ const activeUser = {
 
   async delete(accessToken) {
     return (await dbPromise).delete(OBJECT_STORE_NAME_ACTIVE_USER, accessToken);
-  }
-}
+  },
+};
 
 export default activeUser;
