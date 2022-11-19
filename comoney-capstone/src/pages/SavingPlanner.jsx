@@ -1,9 +1,12 @@
 import React from 'react';
 import images from '../assets/books.png'
 import savings from '../assets/images/saving-item.png'
-import { FiCalendar, FiCheckSquare, FiEdit, FiTrash2 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiCalendar, FiCheckSquare, FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
+import savingMoneyIdb from '../data/saving-money-idb';
 
 function SavingPlanner() {
+        const savingAllList = savingMoneyIdb.FavoriteRestaurantIdb();
         return (
                 <section>
                         <div className='container'> 
@@ -40,6 +43,11 @@ function SavingPlanner() {
                                                 </div>
                                         </div>
                                 </div>
+                                <Link to={`/add-saving-plan`}>
+                                        <button aria-label="add savings" id="addButton" class="addButton">
+                                                <FiPlus />
+                                        </button>
+                                </Link>
                         </div>
                 </section>
         );

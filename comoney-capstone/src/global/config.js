@@ -1,8 +1,10 @@
 const CONFIG = {
   DATABASE_USER_NAME: 'comoney-user-db',
-  DATABASE_ACTIVE_USER_NAME: 'comoney-active-user',
-  OBJECT_STORE_NAME_ACTIVE_USER: 'active-user',
+  DATABASE_ACTIVE_USER_NAME: 'comoney-active-user-db',
+  DATABASE_SAVINGS_NAME: 'comoney-savings-user-db',
   OBJECT_STORE_NAME_USER: 'users',
+  OBJECT_STORE_NAME_ACTIVE_USER: 'active-user',
+  OBJECT_STORE_NAME_SAVINGS: 'savings-information',
   DATABASE_VERSION: 1,
 }
 

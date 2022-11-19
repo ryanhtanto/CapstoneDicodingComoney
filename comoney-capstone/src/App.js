@@ -8,7 +8,7 @@ import EditIncomeExpense from './pages/EditIncomeExpense';
 import Dashboard from './pages/Dashboard';
 import DetailPage from './pages/DetailPage';
 import Footer from './components/Footer';
-import AddEditSavingPlan from './pages/AddEditSavingPlan';
+import AddSavingPlan from './pages/AddSavingPlan';
 import NewsDetail from './pages/NewsDetail';
 import NewsListPage from './pages/NewsListpage';
 import SavingPlanner from './pages/SavingPlanner';
@@ -61,7 +61,7 @@ function App() {
             <Route path="/news/detail" element={<NewsDetail />} />
             <Route path="/detail" element={<DetailPage />} />
             <Route path="/saving-planner" element={<SavingPlanner />} />
-            <Route path="/edit-saving-plan" element={<AddEditSavingPlan />} />
+            <Route path="/add-saving-plan" element={<AddSavingPlan />} />
           </Routes>
         </main>
         <Footer />
