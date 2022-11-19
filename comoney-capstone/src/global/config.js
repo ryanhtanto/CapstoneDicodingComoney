@@ -1,9 +1,9 @@
 const CONFIG = {
-  DATABASE_NAME: 'comoney-user-db',
-  DATABASE_TOKEN_NAME: 'comoney-active-user',
-  OBJECT_STORE_NAME_TOKEN: 'active-user',
+  DATABASE_USER_NAME: 'comoney-user-db',
+  DATABASE_ACTIVE_USER_NAME: 'comoney-active-user',
+  OBJECT_STORE_NAME_ACTIVE_USER: 'active-user',
+  OBJECT_STORE_NAME_USER: 'users',
   DATABASE_VERSION: 1,
-  OBJECT_STORE_NAME: 'users',
 }
 
 export default CONFIG;

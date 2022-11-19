@@ -9,7 +9,7 @@ function Navigation() {
 
   const onLogout = () => {
     logout(user.accessToken);
-    setUser(undefined);
+    setUser(null);
   };
 
   return (

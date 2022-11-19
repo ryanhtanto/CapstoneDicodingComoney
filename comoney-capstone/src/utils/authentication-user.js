@@ -23,6 +23,24 @@ const login = async (email, password) => {
 
 const logout = async (accessToken) => {
   await activeUser.delete(accessToken);
-}
+};
 
-export { login, logout };
+const register = async (email, password, name) => {
+  const userExist = await userIdb.getUser(email);
+
+  if (userExist) {
+    alert('Email Telah Terdaftar, Silahkan Login');
+    return false;
+  }
+
+  userIdb.addUser({
+    email,
+    password,
+    data: {
+      name,
+      accessToken: +new Date(),
+    }
+  });
+};
+
+export { login, logout, register };

@@ -16,12 +16,12 @@ import UserContext from './context/UserContext';
 import activeUser from './data/active-user';
 
 function App() {
-  const [user, setUser] = React.useState(undefined);
+  const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     const checkUser = async () => {
       const data = await activeUser.getActiveUser();
-      setUser(data);
+      setUser(data || null);
     }
     checkUser();
   }, [])
@@ -33,7 +33,7 @@ function App() {
     }
   }, [user])
 
-  if (user === undefined) {
+  if (user === null) {
     return (
       <UserContext.Provider value={userContextValue}>
         <main>
