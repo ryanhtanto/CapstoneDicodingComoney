@@ -1,9 +1,6 @@
 import React,  { useState }  from "react";
 import savingMoneyIdb from '../data/saving-money-idb';
 import SavingPlanItem from "./SavingPlanItem";
-import userContext from '../context/UserContext';
-import { editSavingsMoney, getActiveSavings } from "../utils/authentication-user";
-import EditSavingsForm from "./EditSavingsForm";
 
 function SavingPlan() {
 
@@ -25,16 +22,12 @@ function SavingPlan() {
     setSavings( valueFromDb );
   }
 
-  async function onEditHandler(id) {
-    console.log(id)
-  }
-
   if(loading === false){
     return(
       savings.map((saving) => {
         return(
           <div className='col-sm-6 mb-3'>
-            <SavingPlanItem saving = {saving} onDelete = {onDeleteHandler} onEdit={onEditHandler}/>
+            <SavingPlanItem saving = {saving} onDelete = {onDeleteHandler}/>
           </div>
         ) 
       })

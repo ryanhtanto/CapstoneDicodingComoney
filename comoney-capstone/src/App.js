@@ -64,7 +64,7 @@ function App() {
             <Route path="/detail" element={<DetailPage />} />
             <Route path="/saving-planner" element={<SavingPlanner />} />
             <Route path="/add-saving-plan" element={<AddSavingPlan />} />
-            <Route path="/edit-saving-plan" element={<EditSavingPlan />} />
+            <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />
           </Routes>
         </main>
         <Footer />

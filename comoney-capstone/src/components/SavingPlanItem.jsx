@@ -29,8 +29,8 @@ function SavingPlanItem({saving, onDelete, onEdit }) {
                                         <span className="savings-planning p-2">Rp {saving.data.amount}</span>
                                         <h6 className='mt-2'><FiCalendar /><span className='mx-2'>Target: {date}</span></h6>
                                         <h6 className='mt-2'><FiCheckSquare /><span className='mx-2'>Spend Rp {rounded} / month</span></h6>
-                                        <Link to={`/edit-saving-plan`}>
-                                                <EditSavingButton id={saving.id} onEdit={onEdit}/>
+                                        <Link to={`/edit-saving-plan/${saving.id}`}>
+                                                <EditSavingButton />
                                         </Link>
                                         <DeleteSavings id={saving.id} onDelete={onDelete} />
                                 </div>

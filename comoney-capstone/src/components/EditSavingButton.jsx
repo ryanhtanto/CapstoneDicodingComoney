@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiEdit } from 'react-icons/fi';
 
-function EditSavingButton({id, onEdit}) {
+function EditSavingButton() {
         return (
-                <button type="button" class="btn btn-warning" onClick={() => onEdit(id)}>
+                <button type="button" class="btn btn-warning">
                         <FiEdit  />
                 </button>
         ) 

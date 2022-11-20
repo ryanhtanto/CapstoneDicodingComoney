@@ -65,17 +65,19 @@ const savingsMoney = async (savingsName, amount, targetDate) => {
   });
 };
 
-const editSavingsMoney = async (savingsName, amount, targetDate) => {
+const editSavingsMoney = async (getId, savingsName, amount, targetDate) => {
   const user = await activeUser.getActiveUser();
   const date = new Date();
   let day = date.getDate();
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
   let currentDate = `${year}-${month}-${day}`;
-
+  const parseId = JSON.stringify(getId)
+  const jsonParse = JSON.parse(parseId);
+  
   await savingMoneyIdb.editSavingsMoney({
     accessToken: user.accessToken,
-    id: 1668855704042, //masih harus cari cara ambil id nya gimana
+    id: parseFloat(jsonParse.getId),
     data: {
       savingsName,
       amount,
