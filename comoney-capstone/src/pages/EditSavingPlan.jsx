@@ -1,7 +1,8 @@
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
+import EditSavingsForm from "../components/EditSavingsForm";
 
-const AddEditSavingPlan = () => {
+const EditSavingPlan = () => {
   return (
     <section>
       <div className="container">
@@ -15,19 +16,12 @@ const AddEditSavingPlan = () => {
 
         <div className="content">
           <h4 className="fw-bold">Savings money for better future</h4>
-          <p>Get your target by fill the information below</p>
-          <form className="my-5">
-            <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name"></input>
-            <input type="text" className="form-control my-4" placeholder="Amount target" aria-label="Amount target"></input>
-            <input className="form-control my-4" type="date"/>
-            <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
-              Add New Savings / Save
-            </button>
-          </form>
+          <p>Edit your target by fill the information below</p>
+          <EditSavingsForm />
         </div>
       </div>
     </section>
   );
 };
 
-export default AddEditSavingPlan;
+export default EditSavingPlan;

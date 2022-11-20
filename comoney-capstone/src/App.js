@@ -14,6 +14,8 @@ import NewsListPage from './pages/NewsListpage';
 import SavingPlanner from './pages/SavingPlanner';
 import UserContext from './context/UserContext';
 import { getActiveUser } from './utils/authentication-user';
+import EditSavingPlan from './pages/EditSavingPlan';
+
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -62,6 +64,7 @@ function App() {
             <Route path="/detail" element={<DetailPage />} />
             <Route path="/saving-planner" element={<SavingPlanner />} />
             <Route path="/add-saving-plan" element={<AddSavingPlan />} />
+            <Route path="/edit-saving-plan" element={<EditSavingPlan />} />
           </Routes>
         </main>
         <Footer />

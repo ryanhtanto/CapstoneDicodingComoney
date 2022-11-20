@@ -2,7 +2,7 @@ import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import AddSavingForm from "../components/AddSavingsForm";
 
-const AddEditSavingPlan = () => {
+const AddSavingPlan = () => {
   return (
     <section>
       <div className="container">
@@ -24,4 +24,4 @@ const AddEditSavingPlan = () => {
   );
 };
 
-export default AddEditSavingPlan;
+export default AddSavingPlan;

@@ -65,6 +65,27 @@ const savingsMoney = async (savingsName, amount, targetDate) => {
   });
 };
 
+const editSavingsMoney = async (savingsName, amount, targetDate) => {
+  const user = await activeUser.getActiveUser();
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+
+  await savingMoneyIdb.editSavingsMoney({
+    accessToken: user.accessToken,
+    id: 1668855704042, //masih harus cari cara ambil id nya gimana
+    data: {
+      savingsName,
+      amount,
+      targetDate,
+      currentDate,
+    }
+  });
+};
+
+
 const addCategory = async (categoryName) => {
   const user = await activeUser.getActiveUser();
 
@@ -82,4 +103,4 @@ const getActiveUser = async () => {
 };
 
 
-export { login, logout, register, getActiveUser, savingsMoney, addCategory };
+export { login, logout, register, getActiveUser, savingsMoney, addCategory, editSavingsMoney};

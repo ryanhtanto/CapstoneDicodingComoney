@@ -15,7 +15,13 @@ const savingMoneyIdb = {
   },
   async getAllSavingsMoney() {
     return (await dbPromise).getAll(OBJECT_STORE_NAME_SAVINGS)
-  }
+  },
+  async deleteSavingsMoney(id) {
+    return (await dbPromise).delete(OBJECT_STORE_NAME_SAVINGS, id);
+  },
+  async editSavingsMoney(detail) {
+    return (await dbPromise).put(OBJECT_STORE_NAME_SAVINGS, detail);
+  },
 }
 
 export default savingMoneyIdb;
