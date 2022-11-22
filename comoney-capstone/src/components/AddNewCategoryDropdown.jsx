@@ -1,21 +1,29 @@
 import React from "react";
 import CategoryList from "./CategoryList";
+import newCategoryIdb from "../data/new-category-idb";
 
-const AddNewCategoryDropdown = ({ categories }) => {
-  return (
-    <div className="col-sm-12 col-lg-9 mb-2">
-      <div className="dropdown">
-        <button className="form-control dropdown-toggle input__height" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Category
-        </button>
-        <ul className="dropdown-menu">
-          {categories?.map((category) => {
-            return <CategoryList key={category.id} data={category.data} />;
-          })}
-        </ul>
-      </div>
-    </div>
-  );
+const AddNewCategoryDropdown = () => {
+  const [categories, setCategories] = React.useState();
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(function () {
+    async function getData() {
+      const categoryFromDb = await newCategoryIdb.getAllCategory();
+      setCategories(categoryFromDb);
+      setLoading(false);
+    }
+    getData();
+  }, []);
+
+  if (loading === false) {
+    return (
+      <ul className="dropdown-menu">
+        {categories?.map((category) => {
+          return <CategoryList key={category.id} data={category.data} />;
+        })}
+      </ul>
+    );
+  }
 };
 
 export default AddNewCategoryDropdown;

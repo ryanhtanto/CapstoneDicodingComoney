@@ -1,34 +1,20 @@
 import React from "react";
 import { FiPlusSquare } from "react-icons/fi";
-import AddNewCategoryDropdown from "../components/AddNewCategoryDropdown";
-import AddNewCategoryModal from "../components/AddNewCategoryModal";
-import newCategoryIdb from "../data/new-category-idb";
+import AddNewCategoryDropdown from "./AddNewCategoryDropdown";
+import AddNewCategoryModal from "./AddNewCategoryModal";
 import useInput from "../hooks/UseInput";
 
 const AddIncomeForm = () => {
-  const [categories, setCategories] = React.useState();
-  const [name, setName] = useInput('');
-  const [amount, setAmount] = useInput('');
-  const [description, setDescription] = useInput('');
-
-  // nah masalah yang berkaitan sama useEffect dibawah
-  // jadi tiap ada user nge buat category baru dia kan masuk ke db, baru di tampilin di dropdown
-  // nah itu tuh perlu waktu, jadi si render ini uda keburu jalan duluan, jadi usernya harus refresh page itu baru muncul si category yg baru dia bikin
-  // aku uda coba bikin parameter ke 2 dari useEffect jadi categories (state yg nampung semua karegori yg dibuat) tapi malah nge abuse WKWKWK, langsung muncul sih gaperlu user refresh pagenya, tapi malah nge abuse
-
-  React.useEffect(function(){
-    async function getData(){
-      const categoryFromDb = await newCategoryIdb.getAllCategory();
-      setCategories(categoryFromDb);
-    }
-    getData()
-  }, []);
+  const [name, setName] = useInput("");
+  const [amount, setAmount] = useInput("");
+  // const [selectedCategory, setSelectedCategory] = React.useState('');
+  const [description, setDescription] = useInput("");
 
   // ini belum kelar :v, lagi pikir cara ambil value dari si category yg di tekan sama user (detailnya aku ada tulis di CategoryList.jsx)
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(name, amount, description);
-  }
+  };
   console.log(name, amount, description);
 
   return (
@@ -39,7 +25,15 @@ const AddIncomeForm = () => {
 
         <div className="text-center my-4">
           <div className="row">
-            <AddNewCategoryDropdown categories={categories} />
+            <div className="col-sm-12 col-lg-9 mb-2">
+              <div className="dropdown">
+                <button className="form-control dropdown-toggle input__height" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Category
+                </button>
+                <AddNewCategoryDropdown />
+              </div>
+            </div>
+
             <div className="col">
               {/* button trigger modal */}
               <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal">

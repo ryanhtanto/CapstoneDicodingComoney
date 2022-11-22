@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
-import AddIncomeExpense from './pages/AddIncomExpense';
 import EditIncomeExpense from './pages/EditIncomeExpense';
 import Dashboard from './pages/Dashboard';
 import DetailPage from './pages/DetailPage';
@@ -15,6 +14,8 @@ import SavingPlanner from './pages/SavingPlanner';
 import UserContext from './context/UserContext';
 import { getActiveUser } from './utils/authentication-user';
 import EditSavingPlan from './pages/EditSavingPlan';
+import AddExpensePage from './pages/AddExpensePage';
+import AddIncomePage from './pages/AddIncomePage';
 
 
 function App() {
@@ -57,7 +58,8 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/add-income" element={<AddIncomeExpense />} />
+            <Route path="/add-income" element={<AddIncomePage />} />
+            <Route path="/add-expense" element={<AddExpensePage />} />
             <Route path="/edit-income" element={<EditIncomeExpense />} />
             <Route path="/news" element={<NewsListPage />} />
             <Route path="/news/detail" element={<NewsDetail />} />

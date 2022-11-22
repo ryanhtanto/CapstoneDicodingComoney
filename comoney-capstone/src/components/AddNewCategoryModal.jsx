@@ -1,12 +1,13 @@
 import React from "react";
 import useInput from "../hooks/UseInput";
 import { addCategory } from "../utils/authentication-user";
+// import { useNavigate } from "react-router-dom";
 
 const AddNewCategoryModal = () => {
   const [categoryName, setCategoryName] = useInput("");
+  // const navigate = useNavigate();
 
   const onSubmit = async (e) => {
-    e.preventDefault();
     addCategory(categoryName);
   };
 
@@ -15,7 +16,9 @@ const AddNewCategoryModal = () => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">Add New Category</h1>
+            <h1 className="modal-title fs-5" id="exampleModalLabel">
+              Add New Category
+            </h1>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">

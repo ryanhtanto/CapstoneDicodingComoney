@@ -101,6 +101,12 @@ main {
   color: #013496;
 }
 
+/* warna sama garis buat income / expense */
+.warnaBar{
+  color: #013496;
+  text-decoration: underline !important;
+}
+
 /* footer */
 .bg__footer{
   background-color:#F2F2F2;

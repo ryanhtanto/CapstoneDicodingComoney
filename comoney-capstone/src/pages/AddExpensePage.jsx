@@ -2,32 +2,33 @@ import React from "react";
 import AddTransactionForm from "../components/AddTransactionForm";
 import { Link } from "react-router-dom";
 
-const AddIncomePage = () => {
+const AddExpensePage = () => {
   return (
     <section>
       <div className="container">
         <div className="container text-center my-4  ">
           <div className="row">
             <div className="col">
-              <p className="fs-3 fw-semibold text-decoration-none warnaBar">
+              {/* <Link to={}></Link> */}
+              <Link to={`/add-income`} className="fs-3 fw-semibold text-decoration-none text-black">
                 Income
-              </p>
+              </Link>
             </div>
             <div className="col">
-              <Link to={`/add-expense`} className="fs-3 fw-semibold text-decoration-none text-black">
+              <p className="fs-3 fw-semibold text-decoration-none warnaBar">
                 Expense
-              </Link>
+              </p>
             </div>
           </div>
         </div>
         <div className="content">
-          <h4 className="fw-bold">Add your income, here</h4>
+          <h4 className="fw-bold">Add your expense, here</h4>
           <p>Fill your detail income below</p>
-          <AddTransactionForm />
         </div>
+        <AddTransactionForm />
       </div>
     </section>
   );
 };
 
-export default AddIncomePage;
+export default AddExpensePage;
