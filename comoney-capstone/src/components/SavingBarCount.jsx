@@ -12,10 +12,12 @@ function SavingBarCount() {
     async function getData(){
       const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
       const userData = await activeUser.getActiveUser();
+      let totalAmount = 0;
       for(let  i = 0; i < valueFromDb.length; i++){
         if(valueFromDb[i].accessToken === userData.accessToken){
+                totalAmount += parseFloat(valueFromDb[i].data.amount);
+                setTotal(totalAmount)
                 setTarget(valueFromDb.length)
-                console.count(valueFromDb[i].data.amount)
                 setLoading(false)
         }else{
                 setLoading(true)
