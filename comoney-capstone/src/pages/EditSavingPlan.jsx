@@ -1,6 +1,6 @@
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import EditSavingsForm from "../components/EditSavingsForm";
 
 const EditSavingPlan = () => {
@@ -11,9 +11,9 @@ const EditSavingPlan = () => {
       <div className="container">
         <div className="my-4">
           <h4>
-            <a href="" className="text-black text-decoration-none">
+            <Link to={`/saving-planner`}>
               <FiArrowLeft className="warna fs-2" /> Back to Savings
-            </a>
+            </Link>
           </h4>
         </div>
 

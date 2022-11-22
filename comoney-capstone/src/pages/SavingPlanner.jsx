@@ -3,6 +3,7 @@ import images from '../assets/books.png'
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 import SavingPlan from '../components/SavingPlan';
+import SavingBarCount from '../components/SavingBarCount';
 
 function SavingPlanner() {
         return (
@@ -12,10 +13,7 @@ function SavingPlanner() {
                                         <div className='col-sm-6 px-4'>
                                                 <div className='d-flex'>
                                                         <img src={images} alt="icon-savings" className='saving-image' srcset="" />
-                                                        <div className='mx-4 my-auto'>
-                                                                <p className='fw-bold mb-0'>You have 2 savings target!</p>
-                                                                <p>Total Rp 350.000.000</p>
-                                                        </div>
+                                                        <SavingBarCount />
                                                 </div>
                                         </div>
                                         <div className='col-sm-6 px-4 my-auto'>

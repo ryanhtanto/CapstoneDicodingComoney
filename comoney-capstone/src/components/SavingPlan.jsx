@@ -1,7 +1,7 @@
 import React,  { useState }  from "react";
 import savingMoneyIdb from '../data/saving-money-idb';
 import SavingPlanItem from "./SavingPlanItem";
-
+import activeUser from "../data/active-user";
 function SavingPlan() {
 
   const [ savings, setSavings ] = useState();
@@ -10,8 +10,15 @@ function SavingPlan() {
   React.useEffect(function(){
     async function getData(){
       const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
-      setSavings( valueFromDb );
-      setLoading(false)
+      const userData = await activeUser.getActiveUser();
+      for(let  i = 0; i < valueFromDb.length; i++){
+        if(valueFromDb[i].accessToken === userData.accessToken){
+          setSavings( valueFromDb );
+          setLoading(false)
+        }else{
+          setLoading(true)
+        }
+      }
     }
     getData()
   },[]);
@@ -31,6 +38,10 @@ function SavingPlan() {
           </div>
         ) 
       })
+    )
+  }else{
+    return(
+      <h4 className="text-center fw-bold">You don't have savings item</h4>
     )
   }
   
