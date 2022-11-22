@@ -17,11 +17,11 @@ const AddNewCategoryDropdown = () => {
 
   if (loading === false) {
     return (
-      <ul className="dropdown-menu">
+      <datalist id="dropdown" className="dropdown-menu">
         {categories?.map((category) => {
           return <CategoryList key={category.id} data={category.data} />;
         })}
-      </ul>
+      </datalist>
     );
   }
 };

@@ -7,15 +7,14 @@ import useInput from "../hooks/UseInput";
 const AddIncomeForm = () => {
   const [name, setName] = useInput("");
   const [amount, setAmount] = useInput("");
-  // const [selectedCategory, setSelectedCategory] = React.useState('');
+  const [selectedCategory, setSelectedCategory] = useInput("");
   const [description, setDescription] = useInput("");
 
-  // ini belum kelar :v, lagi pikir cara ambil value dari si category yg di tekan sama user (detailnya aku ada tulis di CategoryList.jsx)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, amount, description);
+    console.log(name, amount, selectedCategory, description);
   };
-  console.log(name, amount, description);
+  // console.log(name, amount, description);
 
   return (
     <>
@@ -27,9 +26,7 @@ const AddIncomeForm = () => {
           <div className="row">
             <div className="col-sm-12 col-lg-9 mb-2">
               <div className="dropdown">
-                <button className="form-control dropdown-toggle input__height" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Category
-                </button>
+                <input type="text" className="form-control dropdown-toggle input__height" list="dropdown" placeholder="Select Category" onKeyDown={(e) => e.preventDefault()} value={selectedCategory} onChange={setSelectedCategory} />
                 <AddNewCategoryDropdown />
               </div>
             </div>

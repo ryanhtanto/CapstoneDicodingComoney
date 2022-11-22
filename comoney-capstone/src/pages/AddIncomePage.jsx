@@ -9,9 +9,7 @@ const AddIncomePage = () => {
         <div className="container text-center my-4  ">
           <div className="row">
             <div className="col">
-              <p className="fs-3 fw-semibold text-decoration-none warnaBar">
-                Income
-              </p>
+              <p className="fs-3 fw-semibold text-decoration-none warnaBar">Income</p>
             </div>
             <div className="col">
               <Link to={`/add-expense`} className="fs-3 fw-semibold text-decoration-none text-black">

@@ -9,15 +9,12 @@ const AddExpensePage = () => {
         <div className="container text-center my-4  ">
           <div className="row">
             <div className="col">
-              {/* <Link to={}></Link> */}
               <Link to={`/add-income`} className="fs-3 fw-semibold text-decoration-none text-black">
                 Income
               </Link>
             </div>
             <div className="col">
-              <p className="fs-3 fw-semibold text-decoration-none warnaBar">
-                Expense
-              </p>
+              <p className="fs-3 fw-semibold text-decoration-none warnaBar">Expense</p>
             </div>
           </div>
         </div>
