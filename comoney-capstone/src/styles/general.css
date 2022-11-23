@@ -70,6 +70,10 @@ main {
   border-radius: 10px;
 }
 
+.btn-hapus{
+  border-radius: 10px;
+}
+
 .btn-color:hover {
   border: solid 1px;
 }
