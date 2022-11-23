@@ -1,12 +1,12 @@
-import React from "react";
+// import React from "react";
 
-const CategoryList = ({ data }) => {
+// const CategoryList = ({ data }) => {
 
-  return (
-    <option className="dropdown-item">
-      {data}
-    </option>
-  );
-};
+//   return (
+//     <option className="dropdown-item">
+//       {data}
+//     </option>
+//   );
+// };
 
-export default CategoryList;
+// export default CategoryList;
