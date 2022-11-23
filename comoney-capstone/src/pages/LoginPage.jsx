@@ -3,7 +3,6 @@ import React from 'react';
 import images from '../assets/images/login.jpeg'
 import LoginForm from '../components/LoginForm';
 
-
 function LoginPage() {
 	return (
 		<section id="login" className='overflow-hidden'>
