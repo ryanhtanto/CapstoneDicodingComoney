@@ -7,14 +7,13 @@ import useInput from "../hooks/UseInput";
 const AddIncomeForm = () => {
   const [name, setName] = useInput("");
   const [amount, setAmount] = useInput("");
-  const [selectedCategory, setSelectedCategory] = useInput("");
+  const [selectedCategory, setSelectedCategory] = React.useState("");
   const [description, setDescription] = useInput("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, amount, selectedCategory, description);
+    console.log(name, amount, selectedCategory ,description);
   };
-  // console.log(name, amount, description);
 
   return (
     <>
@@ -26,8 +25,7 @@ const AddIncomeForm = () => {
           <div className="row">
             <div className="col-sm-12 col-lg-9 mb-2">
               <div className="dropdown">
-                <input type="text" className="form-control dropdown-toggle input__height" list="dropdown" placeholder="Select Category" onKeyDown={(e) => e.preventDefault()} value={selectedCategory} onChange={setSelectedCategory} />
-                <AddNewCategoryDropdown />
+                <AddNewCategoryDropdown placeHolder="Select Category" categoryCallback={(value) => {setSelectedCategory(value.data)}}/>
               </div>
             </div>
 
@@ -42,7 +40,7 @@ const AddIncomeForm = () => {
 
         <textarea className="form-control my-4" placeholder="Description" aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
-          Add New Income/Expense
+          Add
         </button>
       </form>
       <AddNewCategoryModal />
