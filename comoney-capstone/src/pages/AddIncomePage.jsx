@@ -5,6 +5,7 @@ import LocaleContext from "../context/LocaleContext";
 
 const AddIncomePage = () => {
   const { locale } = React.useContext(LocaleContext);
+  const type = 'income';
 
   return (
     <section>

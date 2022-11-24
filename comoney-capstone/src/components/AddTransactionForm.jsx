@@ -6,10 +6,13 @@ import useInput from "../hooks/UseInput";
 import { FiTrash2 } from "react-icons/fi";
 import newCategoryIdb from "../data/new-category-idb";
 import LocaleContext from "../context/LocaleContext";
+import { addTransaction } from "../utils/transaction";
+import UserContext from "../context/UserContext";
 
-const AddIncomeForm = () => {
+const AddTransactionForm = ({ transactionType }) => {
   const [name, setName] = useInput("");
   const [amount, setAmount] = useInput("");
+  const [type, setType] = React.useState(null);
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription] = useInput("");
@@ -23,6 +26,27 @@ const AddIncomeForm = () => {
   const onDelete = () => {
     newCategoryIdb.deleteCategory(categoryId);
     window.location.reload();
+  const { user } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    const getData = async () => {
+      if (transactionType !== null) {
+        setType(transactionType);
+      }
+    };
+
+    getData();
+  }, [transactionType])
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addTransaction({
+      name,
+      amount,
+      type,
+      category: selectedCategory,
+      description
+    }, user.uid);
   };
 
   return (
@@ -69,4 +93,4 @@ const AddIncomeForm = () => {
   );
 };
 
-export default AddIncomeForm;
+export default AddTransactionForm;

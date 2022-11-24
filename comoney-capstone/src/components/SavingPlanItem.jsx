@@ -1,11 +1,11 @@
 import React from "react";
-import { FiCalendar, FiCheckSquare, FiEdit } from 'react-icons/fi';
+import { FiCalendar, FiCheckSquare } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 import savings from '../assets/images/saving-item.png'
 import DeleteSavings from "./DeleteSavings";
 import EditSavingButton from "./EditSavingButton";
 
-function SavingPlanItem({saving, onDelete, onEdit }) {
+function SavingPlanItem({saving, onDelete }) {
         const nowDate = new Date(saving.data.currentDate);
         const targetDate = new Date(saving.data.targetDate);
         const Difference_In_Time = targetDate.getTime() - nowDate.getTime();
