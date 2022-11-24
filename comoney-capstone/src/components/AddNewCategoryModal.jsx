@@ -1,10 +1,12 @@
 import React from "react";
 import useInput from "../hooks/UseInput";
 import { addCategory } from "../utils/authentication-user";
+import LocaleContext from "../context/LocaleContext";
 // import { useNavigate } from "react-router-dom";
 
 const AddNewCategoryModal = () => {
   const [categoryName, setCategoryName] = useInput("");
+  const { locale } = React.useContext(LocaleContext);
   // const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -17,15 +19,15 @@ const AddNewCategoryModal = () => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Add New Category
+              {locale === "en" ? "Add New Category" : "Tambah Kategori Baru"}
             </h1>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
             <form onSubmit={onSubmit}>
-              <input type="text" className="form-control my-4 input__height" placeholder="New Category" aria-label="New Category" value={categoryName} onChange={setCategoryName}></input>
+              <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "New Category" : "Kategori Baru"} aria-label={locale === "en" ? "New Category" : "Kategori Baru"} value={categoryName} onChange={setCategoryName}></input>
               <button type="submit" className="btn btn-primary btn-color text-white input__height" data-bs-dismiss="modal">
-                Save changes
+                {locale === "en" ? "Save Category" : "Simpan Kategori"}
               </button>
             </form>
           </div>
