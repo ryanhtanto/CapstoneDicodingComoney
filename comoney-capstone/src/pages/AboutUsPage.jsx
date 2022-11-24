@@ -1,9 +1,12 @@
 import React from "react";
+import LocaleContext from "../context/LocaleContext";
 
 const AboutUsPage = () => {
+  const { locale } = React.useContext(LocaleContext);
+
   return (
     <section className="container mt-4">
-      <h4 className="fw-bold my-5">About Us</h4>
+      <h4 className="fw-bold my-5">{locale === "en" ? "About Us" : "Tentang Kami"}</h4>
       <div className="container text-center">
         <div className="row">
           <div className="col-lg-4 col-md-4 d-flex justify-content-center mb-4">
