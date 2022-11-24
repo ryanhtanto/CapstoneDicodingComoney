@@ -1,8 +1,10 @@
 import React from "react";
 import AddTransactionForm from "../components/AddTransactionForm";
 import { Link } from "react-router-dom";
+import LocaleContext from "../context/LocaleContext";
 
 const AddIncomePage = () => {
+  const { locale } = React.useContext(LocaleContext);
   const type = 'income';
 
   return (
@@ -21,9 +23,9 @@ const AddIncomePage = () => {
           </div>
         </div>
         <div className="content">
-          <h4 className="fw-bold">Add your income, here</h4>
-          <p>Fill your detail income below</p>
-          <AddTransactionForm transactionType={type} />
+          <h4 className="fw-bold">{locale === "en" ? "Add your income, here" : "Tambahkan pemasukan Anda, di sini"}</h4>
+          <p>{locale === "en" ? "Fill your detail income below" : "Isi detail pemasukan Anda di bawah ini"}</p>
+          <AddTransactionForm />
         </div>
       </div>
     </section>
