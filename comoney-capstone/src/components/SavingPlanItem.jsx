@@ -14,9 +14,44 @@ function SavingPlanItem({saving, onDelete }) {
 
         const goalsDate = new Date(saving.data.targetDate)
         const date = goalsDate.toDateString()
-        
-        const spend = saving.data.amount / Difference_In_Month
-        const rounded = Math.round(spend)
+
+        const [rupias, setRupias] = React.useState([]);
+        const [roundedAmount, setRoundedAmount] = React.useState([]);
+        React.useEffect(function(){
+                async function formatRupias(){
+                        let number_string = saving.data.amount.replace(/[^,\d]/g, "").toString()
+                        let split = number_string.split(",")
+                        let sisa = split[0].length % 3
+                        let rupiah = split[0].substr(0, sisa)
+                        let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                        
+                        if (ribuan) {
+                                let separator = sisa ? "." : "";
+                                rupiah += separator + ribuan.join(".");
+                        }
+                        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+                        setRupias(rupiah)
+                }
+                async function spendPerMonth(){
+                        const spend = saving.data.amount / Difference_In_Month
+                        const rounded = Math.round(spend)
+
+                        let number_string = rounded.toString()
+                        let split = number_string.split(",")
+                        let sisa = split[0].length % 3
+                        let rupiah = split[0].substr(0, sisa)
+                        let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                        
+                        if (ribuan) {
+                                let separator = sisa ? "." : "";
+                                rupiah += separator + ribuan.join(".");
+                        }
+                        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+                        setRoundedAmount(rupiah)
+                }
+                formatRupias();
+                spendPerMonth()
+        },[]);
 
         return(
                 <div className="card">
@@ -26,9 +61,9 @@ function SavingPlanItem({saving, onDelete }) {
                                 </div>
                                 <div className="card-body">
                                         <h6 className="card-title fw-bold">{saving.data.savingsName}</h6>
-                                        <span className="savings-planning p-2">Rp {saving.data.amount}</span>
+                                        <span className="savings-planning p-2">Rp {rupias}</span>
                                         <h6 className='mt-2'><FiCalendar /><span className='mx-2'>Target: {date}</span></h6>
-                                        <h6 className='mt-2'><FiCheckSquare /><span className='mx-2'>Spend Rp {rounded} / month</span></h6>
+                                        <h6 className='mt-2'><FiCheckSquare /><span className='mx-2'>Spend Rp {roundedAmount} / month</span></h6>
                                         <Link to={`/edit-saving-plan/${saving.id}`}>
                                                 <EditSavingButton />
                                         </Link>

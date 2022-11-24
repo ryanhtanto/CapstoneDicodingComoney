@@ -27,6 +27,7 @@ function SavingPlan() {
     await savingMoneyIdb.deleteSavingsMoney(id);
     const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
     setSavings( valueFromDb );
+    window.location.reload();
   }
 
   if(loading === false){
