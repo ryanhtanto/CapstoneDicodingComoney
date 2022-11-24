@@ -3,16 +3,36 @@ import { FiPlusSquare } from "react-icons/fi";
 import AddNewCategoryDropdown from "./AddNewCategoryDropdown";
 import AddNewCategoryModal from "./AddNewCategoryModal";
 import useInput from "../hooks/UseInput";
+import { addTransaction } from "../utils/transaction";
+import UserContext from "../context/UserContext";
 
-const AddIncomeForm = () => {
+const AddTransactionForm = ({ transactionType }) => {
   const [name, setName] = useInput("");
   const [amount, setAmount] = useInput("");
+  const [type, setType] = React.useState(null);
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [description, setDescription] = useInput("");
+  const { user } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    const getData = async () => {
+      if (transactionType !== null) {
+        setType(transactionType);
+      }
+    };
+
+    getData();
+  }, [transactionType])
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, amount, selectedCategory ,description);
+    addTransaction({
+      name,
+      amount,
+      type,
+      category: selectedCategory,
+      description
+    }, user.uid);
   };
 
   return (
@@ -25,7 +45,7 @@ const AddIncomeForm = () => {
           <div className="row">
             <div className="col-sm-12 col-lg-9 mb-2">
               <div className="dropdown">
-                <AddNewCategoryDropdown placeHolder="Select Category" categoryCallback={(value) => {setSelectedCategory(value.data)}}/>
+                <AddNewCategoryDropdown placeHolder="Select Category" categoryCallback={(value) => { setSelectedCategory(value.data) }} />
               </div>
             </div>
 
@@ -48,4 +68,4 @@ const AddIncomeForm = () => {
   );
 };
 
-export default AddIncomeForm;
+export default AddTransactionForm;

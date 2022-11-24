@@ -2,9 +2,12 @@ import React from 'react';
 import CardInformation from '../components/CardInformation';
 import ListTransaction from '../components/ListTransaction';
 import useInput from '../hooks/UseInput';
+import { FiPlus } from 'react-icons/fi';
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [date, setDate] = useInput(null);
+
   return (
     <div className="container dashboard__container px-3">
       <CardInformation />
@@ -21,7 +24,12 @@ function Dashboard() {
 
         <ListTransaction dateSelected={date} />
       </section>
-    </div>
+      <Link to={`/add-income`}>
+        <button aria-label="add savings" id="addButton" className="addButton">
+          <FiPlus />
+        </button>
+      </Link>
+    </div >
   );
 }
 

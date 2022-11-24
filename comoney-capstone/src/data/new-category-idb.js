@@ -13,6 +13,7 @@ const newCategoryIdb = {
   async addCategory(detail) {
     return (await dbPromise).add(OBJECT_STORE_NAME_CATEGORY, detail);
   },
+
   async getAllCategory() {
     return (await dbPromise).getAll(OBJECT_STORE_NAME_CATEGORY)
   }

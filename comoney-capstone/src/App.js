@@ -60,10 +60,10 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/add-income" element={<AddIncomePage />} />
             <Route path="/add-expense" element={<AddExpensePage />} />
-            <Route path="/edit-income" element={<EditIncomeExpense />} />
+            <Route path="/edit/:id" element={<EditIncomeExpense />} />
             <Route path="/news" element={<NewsListPage />} />
             <Route path="/news/detail" element={<NewsDetail />} />
-            <Route path="/detail" element={<DetailPage />} />
+            <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/saving-planner" element={<SavingPlanner />} />
             <Route path="/add-saving-plan" element={<AddSavingPlan />} />
             <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />

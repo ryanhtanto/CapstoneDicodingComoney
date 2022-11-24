@@ -1,8 +1,10 @@
 import React from "react";
-import AddTransactionForm from "../components/AddTransactionForm";
+import TransactionForm from "../components/AddTransactionForm";
 import { Link } from "react-router-dom";
 
 const AddExpensePage = () => {
+  const type = 'expense';
+
   return (
     <section>
       <div className="container">
@@ -22,7 +24,7 @@ const AddExpensePage = () => {
           <h4 className="fw-bold">Add your expense, here</h4>
           <p>Fill your detail income below</p>
         </div>
-        <AddTransactionForm />
+        <TransactionForm transactionType={type} />
       </div>
     </section>
   );
