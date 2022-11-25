@@ -1,7 +1,7 @@
 import React from 'react';
 import savingMoneyIdb from '../data/saving-money-idb';
 import useInput from '../hooks/UseInput';
-import { editSavingsMoney } from '../utils/authentication-user';
+import { editSavingsMoney } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
 
 function EditSavingsForm(getId) {
