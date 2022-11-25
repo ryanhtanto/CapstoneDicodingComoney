@@ -60,7 +60,7 @@ function SavingPlanItem({ saving, onDelete }) {
     <div className="card">
       <div className="d-flex">
         <div className="my-auto">
-          <img src={savings} alt="icon-saving-item" className="saving-image-item" srcset="" />
+          <img src={savings} alt="icon-saving-item" className="saving-image-item" />
         </div>
         <div className="card-body">
           <h6 className="card-title fw-bold">{saving.data.savingsName}</h6>
@@ -76,7 +76,7 @@ function SavingPlanItem({ saving, onDelete }) {
           <Link to={`/edit-saving-plan/${saving.id}`}>
             <EditSavingButton />
           </Link>
-          <DeleteSavings id={saving.id} onDelete={onDelete}/>
+          <DeleteSavings id={saving.id} onDelete={onDelete} />
         </div>
       </div>
     </div>

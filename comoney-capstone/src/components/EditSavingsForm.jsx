@@ -6,13 +6,13 @@ import LocaleContext from '../context/LocaleContext';
 
 function EditSavingsForm(getId) {
         const [selectedSaving, setSelectedSaving] = React.useState('')
-        const [savingsName, setSavingsName] = useInput('');
-	const [amount, setAmount] = useInput('');
-        const [targetDate, setTargetDate] = useInput('');
-        const { locale } = React.useContext(LocaleContext); 
+        const [savingsName, setSavingsName, setDefaultName] = useInput('');
+        const [amount, setAmount, setDefaultAmount] = useInput('');
+        const [targetDate, setTargetDate, setDefaultTarget] = useInput('');
+        const { locale } = React.useContext(LocaleContext);
 
-        React.useEffect(function(){
-                async function selectedSavings(){
+        React.useEffect(function () {
+                async function selectedSavings() {
                         const parseId = JSON.stringify(getId)
                         const jsonParse = JSON.parse(parseId);
                         const detail = await savingMoneyIdb.getEditSavingsMoney(parseFloat(jsonParse.getId))
@@ -21,23 +21,30 @@ function EditSavingsForm(getId) {
                                 amount: detail.data.amount,
                                 targetDate: detail.data.targetDate
                         })
+
+                        setDefaultName(detail.data.savingsName);
+                        setDefaultAmount(detail.data.amount);
+                        setDefaultTarget(detail.data.targetDate)
                 }
                 selectedSavings()
-        },[]);
-        
-        const onSubmit = async (event) => {
-		event.preventDefault()
-                editSavingsMoney(getId, savingsName, amount, targetDate);
-	}
+                console.log(savingsName)
+                console.log(amount)
+                console.log(targetDate);
+        }, []);
 
-	return (
+        const onSubmit = async (event) => {
+                event.preventDefault()
+                editSavingsMoney(getId, savingsName, amount, targetDate);
+        }
+
+        return (
                 <form className="my-5" onSubmit={onSubmit}>
-                        <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name" value={savingsName || selectedSaving.name} onChange={setSavingsName}/> 
-                        <input type="text" className="form-control my-4" placeholder="Amount target" aria-label="Amount target" value={amount || selectedSaving.amount } onChange={setAmount}/>
-                        <input className="form-control my-4" type="date" value={targetDate || selectedSaving.targetDate } onChange={setTargetDate}/>
+                        <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name" value={savingsName || selectedSaving.name} onChange={setSavingsName} />
+                        <input type="text" className="form-control my-4" placeholder="Amount target" aria-label="Amount target" value={amount || selectedSaving.amount} onChange={setAmount} />
+                        <input className="form-control my-4" type="date" value={targetDate || selectedSaving.targetDate} onChange={setTargetDate} />
                         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">{locale === "en" ? "Edit your Savings" : "Edit Tabungan Anda"}</button>
                 </form>
-	);
+        );
 
 }
 

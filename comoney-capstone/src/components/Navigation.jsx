@@ -27,7 +27,7 @@ function Navigation({ toggleLocale }) {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto d-flex align-items-center">
             <li className="nav-item me-2 active">
-              <a className="nav-link" href="/dashboard">
+              <a className="nav-link" href="/">
                 {locale === "en" ? "Dashboard" : "Dasbor"}
               </a>
             </li>

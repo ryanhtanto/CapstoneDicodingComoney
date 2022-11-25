@@ -1,6 +1,6 @@
 import React from "react";
 import useInput from "../hooks/UseInput";
-import { addCategory } from "../utils/authentication-user";
+import addCategory from "../utils/category";
 import LocaleContext from "../context/LocaleContext";
 // import { useNavigate } from "react-router-dom";
 

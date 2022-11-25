@@ -26,7 +26,7 @@ function SavingPlanner() {
         <div className="row bg-saving-color p-4 mt-5 mb-5 w-75 mx-auto">
           <div className="col-sm-6 px-4">
             <div className="d-flex">
-              <img src={images} alt="icon-savings" className="saving-image" srcset="" />
+              <img src={images} alt="icon-savings" className="saving-image" />
               <SavingBarCount />
             </div>
           </div>
@@ -40,7 +40,7 @@ function SavingPlanner() {
           <SavingPlan />
         </div>
         <Link to={`/add-saving-plan`}>
-          <button aria-label="add savings" id="addButton" class="addButton" title={locale === "en" ? "Add Saving Plan" : "Tambah Rencana Tabungan"}>
+          <button aria-label="add savings" id="addButton" className="addButton" title={locale === "en" ? "Add Saving Plan" : "Tambah Rencana Tabungan"}>
             <FiPlus />
           </button>
         </Link>

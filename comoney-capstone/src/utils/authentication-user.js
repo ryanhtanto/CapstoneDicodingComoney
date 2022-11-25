@@ -83,17 +83,6 @@ const editSavingsMoney = async (getId, savingsName, amount, targetDate) => {
   });
 };
 
-
-const addCategory = async (categoryName) => {
-  const user = await getActiveUser();
-  await newCategoryIdb.addCategory({
-    accessToken: user.accessToken,
-    id: +new Date(),
-    data:
-      categoryName,
-  })
-}
-
 const getActiveUser = () => {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, (user) => {
@@ -105,6 +94,4 @@ const getActiveUser = () => {
 };
 
 
-
-
-export { login, logout, register, getActiveUser, savingsMoney, addCategory, editSavingsMoney, getStatusAuthenticated };
+export { login, logout, register, getActiveUser, savingsMoney, editSavingsMoney, getStatusAuthenticated };
