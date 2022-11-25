@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
-*{
-  font-family: 'Montserrat', sans-serif;
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
 .small__font {
@@ -27,13 +27,13 @@ main {
   align-items: center;
   justify-content: center;
   background-color: #013496;
-  
+
   position: absolute;
   bottom: 16px;
   right: 7vw;
   border-radius: 50%;
   border: 0;
-  
+
   font-size: 18px;
   color: white;
   cursor: pointer;
@@ -65,65 +65,123 @@ main {
 /* end navbar */
 
 /* login page */
-.btn-color{
+.btn-color {
   background-color: #013496;
   border-radius: 10px;
 }
 
-.btn-color:hover{
+.btn-hapus{
+  border-radius: 10px;
+}
+
+.btn-color:hover {
   border: solid 1px;
 }
 
-.font-color{  
+.font-color {
   color: #565656;
 }
 
-.linkedAuth{
+.linkedAuth {
   text-decoration: none;
   color: #013496;
   cursor: pointer;
 }
 
-.bg-auth{
-  background: linear-gradient(211.86deg, #404EFB 0%, #013496 100%);
+.bg-auth {
+  background: linear-gradient(211.86deg, #404efb 0%, #013496 100%);
 }
 
-.auth-image{
+.auth-image {
   width: 50%;
   height: auto;
 }
 
 /* end login page */
 
-
 /* warna buat tombol panah kembali */
-.warna{
+.warna {
   color: #013496;
 }
 
 /* warna sama garis buat income / expense */
-.warnaBar{
+.warnaBar {
   color: #013496;
   text-decoration: underline !important;
 }
 
 /* footer */
-.bg__footer{
-  background-color:#F2F2F2;
-} 
+.bg__footer {
+  background-color: #f2f2f2;
+}
 
-.bg__footer p{
+.bg__footer p {
   margin: 0;
 }
 
-.footer__logo{
+.footer__logo {
   width: 113px;
 }
 
 @media only screen and (max-width: 770px) {
-  .footer__section{
+  .footer__section {
     justify-content: start !important;
   }
 }
 
 /* end Footer */
+
+/* start Dropdown */
+
+.dropdown-container {
+  text-align: left;
+  border: 1px solid #ccc;
+  position: relative;
+  border-radius: 5px;
+}
+
+.dropdown-input {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.dropdown-menus {
+  position: absolute;
+  transform: translateY(4px);
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: auto;
+  max-height: 150px;
+  background-color: #fff;
+}
+
+.dropdown-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #9fc3f870;
+}
+
+.dropdown-item.selected {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.search-box {
+  padding: 5px;
+  background-color: #eee;
+}
+.search-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* end Dropdown */

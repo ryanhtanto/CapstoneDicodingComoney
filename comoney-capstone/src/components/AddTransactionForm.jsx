@@ -3,46 +3,65 @@ import { FiPlusSquare } from "react-icons/fi";
 import AddNewCategoryDropdown from "./AddNewCategoryDropdown";
 import AddNewCategoryModal from "./AddNewCategoryModal";
 import useInput from "../hooks/UseInput";
+import { FiTrash2 } from "react-icons/fi";
+import newCategoryIdb from "../data/new-category-idb";
+import LocaleContext from "../context/LocaleContext";
 
 const AddIncomeForm = () => {
   const [name, setName] = useInput("");
   const [amount, setAmount] = useInput("");
-  const [selectedCategory, setSelectedCategory] = useInput("");
+  const [selectedCategory, setSelectedCategory] = React.useState("");
+  const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription] = useInput("");
+  const { locale } = React.useContext(LocaleContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, amount, selectedCategory, description);
+    console.log(name, amount, selectedCategory, categoryId, description);
   };
-  // console.log(name, amount, description);
+
+  const onDelete = () => {
+    newCategoryIdb.deleteCategory(categoryId);
+    window.location.reload();
+  };
 
   return (
     <>
       <form className="my-5" onSubmit={onSubmit}>
-        <input type="text" className="form-control my-4 input__height" placeholder="Name" aria-label="Name" value={name} onChange={setName}></input>
-        <input type="text" className="form-control my-4 input__height" placeholder="Amount" aria-label="Amount" value={amount} onChange={setAmount}></input>
+        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName}></input>
+        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount}></input>
 
         <div className="text-center my-4">
           <div className="row">
-            <div className="col-sm-12 col-lg-9 mb-2">
+            <div className="col-sm-12 col-lg-8 mb-2">
               <div className="dropdown">
-                <input type="text" className="form-control dropdown-toggle input__height" list="dropdown" placeholder="Select Category" onKeyDown={(e) => e.preventDefault()} value={selectedCategory} onChange={setSelectedCategory} />
-                <AddNewCategoryDropdown />
+                <AddNewCategoryDropdown
+                  placeHolder={locale === "en" ? "Select Category" : "Pilih Kategori"}
+                  categoryCallback={(value) => {
+                    setSelectedCategory(value.data);
+                    setCategoryId(value.id);
+                  }}
+                />
               </div>
             </div>
 
-            <div className="col">
+            <div className="col-sm-8 col-lg-3 mb-2">
               {/* button trigger modal */}
-              <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === 'en' ? 'Add New Category' : 'Tambah Kategori Baru'}>
                 <FiPlusSquare /> New Category
+              </button>
+            </div>
+            <div className="col-sm-4 col-lg-1">
+              <button type="submit" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => onDelete()}>
+                <FiTrash2 />
               </button>
             </div>
           </div>
         </div>
 
-        <textarea className="form-control my-4" placeholder="Description" aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
+        <textarea className="form-control my-4" placeholder={locale === "en" ? "Description" : "Deskripsi"} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
-          Add New Income/Expense
+          {locale === "en" ? "Add" : "Tambah"}
         </button>
       </form>
       <AddNewCategoryModal />

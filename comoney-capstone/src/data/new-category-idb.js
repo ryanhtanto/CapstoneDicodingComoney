@@ -15,7 +15,10 @@ const newCategoryIdb = {
   },
   async getAllCategory() {
     return (await dbPromise).getAll(OBJECT_STORE_NAME_CATEGORY)
-  }
+  },
+  async deleteCategory(id) {
+    return (await dbPromise).delete(OBJECT_STORE_NAME_CATEGORY, id);
+  },
 }
 
 export default newCategoryIdb;
