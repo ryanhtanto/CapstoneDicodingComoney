@@ -21,7 +21,6 @@ function Dashboard() {
             <input className='form-control' type="date" onChange={setDate} />
           </div>
         </div>
-
         <ListTransaction dateSelected={date} />
       </section>
       <Link to={`/add/transaction`}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { FiPlusSquare } from "react-icons/fi";
-import AddNewCategoryDropdown from "./AddNewCategoryDropdown";
-import AddNewCategoryModal from "./AddNewCategoryModal";
+import CategoryDropdown from "./CategoryDropdown";
+import CategoryModal from "./CategoryModal";
 import useInput from "../hooks/UseInput";
 import { FiTrash2 } from "react-icons/fi";
 import newCategoryIdb from "../data/new-category-idb";
@@ -11,21 +11,16 @@ import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddTransactionForm = ({ transactionType }) => {
-  const [name, setName] = useInput("");
-  const [amount, setAmount] = useInput("");
+const TransactionForm = ({ transactionType, transactionData }) => {
+  const [name, setName, setDefaultName] = useInput("");
+  const [amount, setAmount, setDefaultAmount] = useInput("");
   const [type, setType] = React.useState(null);
-  const [selectedCategory, setSelectedCategory] = React.useState("");
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categoryId, setCategoryId] = React.useState("");
-  const [description, setDescription] = useInput("");
+  const [description, setDescription, setDefaultDescription] = useInput("");
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
-
-  const onDelete = (e) => {
-    newCategoryIdb.deleteCategory(categoryId);
-    window.location.reload();
-  }
 
   React.useEffect(() => {
     const getData = async () => {
@@ -33,9 +28,38 @@ const AddTransactionForm = ({ transactionType }) => {
         setType(transactionType);
       }
     };
-
     getData();
   }, [transactionType])
+
+  React.useEffect(() => {
+    if (transactionData) {
+      setDefaultName(transactionData.name);
+      setDefaultAmount(transactionData.amount);
+      setDefaultDescription(transactionData.description);
+      setSelectedCategory(transactionData.category);
+      setType(transactionData.type);
+    }
+  }, [])
+
+  const deleteCategory = () => {
+    if (selectedCategory !== null) {
+      newCategoryIdb.deleteCategory(categoryId);
+      setSelectedCategory(null);
+      Swal.fire({
+        icon: 'success',
+        title: 'Delete Category Success',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Select Category First',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -76,8 +100,8 @@ const AddTransactionForm = ({ transactionType }) => {
           <div className="row">
             <div className="col-sm-12 col-lg-8 mb-2">
               <div className="dropdown">
-                <AddNewCategoryDropdown
-                  placeHolder={locale === "en" ? "Select Category" : "Pilih Kategori"}
+                <CategoryDropdown
+                  placeholder={locale === "en" ? "Select Category" : "Pilih Kategori"}
                   categoryCallback={(value) => {
                     setSelectedCategory(value.data);
                     setCategoryId(value.id);
@@ -92,7 +116,7 @@ const AddTransactionForm = ({ transactionType }) => {
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">
-              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => onDelete()}>
+              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => deleteCategory()}>
                 <FiTrash2 />
               </button>
             </div>
@@ -104,9 +128,9 @@ const AddTransactionForm = ({ transactionType }) => {
           {locale === "en" ? "Add" : "Tambah"}
         </button>
       </form>
-      <AddNewCategoryModal />
+      <CategoryModal />
     </>
   );
 };
 
-export default AddTransactionForm;
+export default TransactionForm;

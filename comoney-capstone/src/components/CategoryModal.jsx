@@ -2,12 +2,10 @@ import React from "react";
 import useInput from "../hooks/UseInput";
 import addCategory from "../utils/category";
 import LocaleContext from "../context/LocaleContext";
-// import { useNavigate } from "react-router-dom";
 
-const AddNewCategoryModal = () => {
+const CategoryModal = () => {
   const [categoryName, setCategoryName] = useInput("");
   const { locale } = React.useContext(LocaleContext);
-  // const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     addCategory(categoryName);
@@ -38,4 +36,4 @@ const AddNewCategoryModal = () => {
   );
 };
 
-export default AddNewCategoryModal;
+export default CategoryModal;
