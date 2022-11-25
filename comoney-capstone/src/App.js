@@ -24,9 +24,13 @@ function App() {
 
   React.useEffect(() => {
     const checkUser = async () => {
-      const dataUser = await getActiveUser();
-      setUser(dataUser || null);
-      setLoading(false);
+      try {
+        const dataUser = await getActiveUser();
+        setUser(dataUser || null);
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+      }
     };
 
     function initialLoad() {
