@@ -15,8 +15,7 @@ import UserContext from "./context/UserContext";
 import LocaleContext from "./context/LocaleContext";
 import { getActiveUser } from "./utils/authentication-user";
 import EditSavingPlan from "./pages/EditSavingPlan";
-import AddExpensePage from "./pages/AddExpensePage";
-import AddIncomePage from "./pages/AddIncomePage";
+import AddTransaction from "./pages/AddTransaction";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -86,12 +85,13 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/add-income" element={<AddIncomePage />} />
-              <Route path="/add-expense" element={<AddExpensePage />} />
+              {/* <Route path="/add-income" element={<AddIncomePage />} />
+              <Route path="/add-expense" element={<AddExpensePage />} /> */}
+              <Route path="/add/transaction" element={<AddTransaction />} />
               <Route path="/edit/:id" element={<EditIncomeExpense />} />
               <Route path="/news" element={<NewsListPage />} />
               <Route path="/news/detail" element={<NewsDetail />} />
-              <Route path="/detail" element={<DetailPage />} />
+              <Route path="/detail/:id" element={<DetailPage />} />
               <Route path="/saving-planner" element={<SavingPlanner />} />
               <Route path="/add-saving-plan" element={<AddSavingPlan />} />
               <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />

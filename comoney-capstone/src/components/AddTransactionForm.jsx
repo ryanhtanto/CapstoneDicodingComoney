@@ -8,6 +8,8 @@ import newCategoryIdb from "../data/new-category-idb";
 import LocaleContext from "../context/LocaleContext";
 import { addTransaction } from "../utils/transaction";
 import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddTransactionForm = ({ transactionType }) => {
   const [name, setName] = useInput("");
@@ -16,9 +18,9 @@ const AddTransactionForm = ({ transactionType }) => {
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription] = useInput("");
-  // const { locale } = React.useContext(LocaleContext);
-  const locale = 'en';
+  const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
+  const navigate = useNavigate();
 
   const onDelete = (e) => {
     newCategoryIdb.deleteCategory(categoryId);
@@ -35,15 +37,33 @@ const AddTransactionForm = ({ transactionType }) => {
     getData();
   }, [transactionType])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    addTransaction({
+    Swal.showLoading();
+    const data = await addTransaction({
       name,
       amount,
       type,
       category: selectedCategory,
       description
     }, user.uid);
+
+    if (data.success) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Add Transaction Success',
+        showConfirmButton: false,
+        timer: 1000
+      })
+      navigate('/');
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: data.message,
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
   };
 
   return (
@@ -67,7 +87,6 @@ const AddTransactionForm = ({ transactionType }) => {
             </div>
 
             <div className="col-sm-8 col-lg-3 mb-2">
-              {/* button trigger modal */}
               <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === 'en' ? 'Add New Category' : 'Tambah Kategori Baru'}>
                 <FiPlusSquare /> New Category
               </button>

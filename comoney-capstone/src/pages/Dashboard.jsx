@@ -24,7 +24,7 @@ function Dashboard() {
 
         <ListTransaction dateSelected={date} />
       </section>
-      <Link to={`/add-income`}>
+      <Link to={`/add/transaction`}>
         <button aria-label="add savings" id="addButton" className="addButton">
           <FiPlus />
         </button>

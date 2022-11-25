@@ -67,8 +67,14 @@ const addTransaction = async (transaction, accessToken) => {
       category: transaction.category,
       description: transaction.description,
     });
+    return {
+      success: true,
+    }
   } catch (error) {
-    alert(error);
+    return {
+      success: false,
+      message: `Failed Add Transaction ${error.message}`
+    }
   }
 };
 
