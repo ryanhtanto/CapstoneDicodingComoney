@@ -57,6 +57,8 @@ const getActiveUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         resolve(user);
+      } else {
+        reject()
       }
     });
   })
