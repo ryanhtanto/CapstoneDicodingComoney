@@ -6,23 +6,44 @@ import useInput from "../hooks/UseInput";
 import { FiTrash2 } from "react-icons/fi";
 import newCategoryIdb from "../data/new-category-idb";
 import LocaleContext from "../context/LocaleContext";
+import { addTransaction } from "../utils/transaction";
+import UserContext from "../context/UserContext";
 
-const AddIncomeForm = () => {
+const AddTransactionForm = ({ transactionType }) => {
   const [name, setName] = useInput("");
   const [amount, setAmount] = useInput("");
+  const [type, setType] = React.useState(null);
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription] = useInput("");
-  const { locale } = React.useContext(LocaleContext);
+  // const { locale } = React.useContext(LocaleContext);
+  const locale = 'en';
+  const { user } = React.useContext(UserContext);
+
+  const onDelete = (e) => {
+    newCategoryIdb.deleteCategory(categoryId);
+    window.location.reload();
+  }
+
+  React.useEffect(() => {
+    const getData = async () => {
+      if (transactionType !== null) {
+        setType(transactionType);
+      }
+    };
+
+    getData();
+  }, [transactionType])
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, amount, selectedCategory, categoryId, description);
-  };
-
-  const onDelete = () => {
-    newCategoryIdb.deleteCategory(categoryId);
-    window.location.reload();
+    addTransaction({
+      name,
+      amount,
+      type,
+      category: selectedCategory,
+      description
+    }, user.uid);
   };
 
   return (
@@ -52,7 +73,7 @@ const AddIncomeForm = () => {
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">
-              <button type="submit" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => onDelete()}>
+              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => onDelete()}>
                 <FiTrash2 />
               </button>
             </div>
@@ -69,4 +90,4 @@ const AddIncomeForm = () => {
   );
 };
 
-export default AddIncomeForm;
+export default AddTransactionForm;

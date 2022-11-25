@@ -27,8 +27,7 @@ function App() {
       const dataUser = await getActiveUser();
       setUser(dataUser || null);
     };
-    checkUser();
-
+    
     function initialLoad() {
       if (localStorage.getItem("locale") === undefined) {
         localStorage.setItem("locale", "id");
@@ -38,6 +37,7 @@ function App() {
       }
     }
     initialLoad();
+    checkUser();
   }, []);
 
   const userContextValue = React.useMemo(() => {
@@ -87,7 +87,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/add-income" element={<AddIncomePage />} />
               <Route path="/add-expense" element={<AddExpensePage />} />
-              <Route path="/edit-income" element={<EditIncomeExpense />} />
+              <Route path="/edit/:id" element={<EditIncomeExpense />} />
               <Route path="/news" element={<NewsListPage />} />
               <Route path="/news/detail" element={<NewsDetail />} />
               <Route path="/detail" element={<DetailPage />} />

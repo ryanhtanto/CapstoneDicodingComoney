@@ -2,7 +2,7 @@ import React from "react";
 import { BsGraphDown, BsGraphUp, BsWallet2 } from "react-icons/bs";
 import waveHand from '../assets/wavehand.png';
 import UserContext from '../context/UserContext';
-import { getAllTransactions, getThisMonthTransactions, getTodayTransactions } from "../utils/user-financial";
+import { getAllTransactions, getThisMonthTransactions, getTodayTransactions } from "../utils/transaction";
 
 function CardInformation() {
   const { user } = React.useContext(UserContext);
@@ -14,27 +14,33 @@ function CardInformation() {
 
   React.useEffect(() => {
     const getDailyIncome = async () => {
-      const transactions = await getTodayTransactions(user.accessToken);
+      const transactions = await getTodayTransactions(user.uid);
 
-      if (transactions === undefined) {
+      if (!transactions) {
         return false;
       }
 
       let total = 0;
       transactions.forEach((transaction) => {
         if (transaction.type === 'income') {
-          total += transaction.amount;
+          total = transaction.amount;
         }
       });
+
       setIncomeDaily(total);
     };
 
     const getMonthlyIncome = async () => {
-      const monthlyTransactions = await getThisMonthTransactions(user.accessToken);
+      const monthlyTransactions = await getThisMonthTransactions(user.uid);
+
+      if (!monthlyTransactions) {
+        return false;
+      }
+
       let total = 0;
 
       monthlyTransactions.forEach((transaction) => {
-        if (transaction.type === 'expense') {
+        if (transaction.type === 'income') {
           total += transaction.amount;
         }
       });
@@ -42,9 +48,9 @@ function CardInformation() {
     };
 
     const getDailyExpense = async () => {
-      const transactions = await getTodayTransactions(user.accessToken);
+      const transactions = await getTodayTransactions(user.uid);
 
-      if (transactions === undefined) {
+      if (!transactions) {
         return false;
       }
 
@@ -58,7 +64,12 @@ function CardInformation() {
     };
 
     const getMonthlyExpense = async () => {
-      const monthlyTransactions = await getThisMonthTransactions(user.accessToken);
+      const monthlyTransactions = await getThisMonthTransactions(user.uid);
+
+      if (!monthlyTransactions) {
+        return false;
+      }
+
       let total = 0;
 
       monthlyTransactions.forEach((transaction) => {
@@ -66,14 +77,19 @@ function CardInformation() {
           total += transaction.amount;
         }
       });
+
       setExpenseMonthly(total);
     };
 
     const getCurrentBalance = async () => {
+      const transactions = await getAllTransactions(user.uid);
+
+      if (!transactions) {
+        return false;
+      }
+
       let income = 0;
       let expense = 0;
-
-      const transactions = await getAllTransactions(user.accessToken);
 
       transactions.forEach((transaction) => {
         if (transaction.type === 'income') {
@@ -96,7 +112,7 @@ function CardInformation() {
   return (
     <section className="card mt-4 dashboard__card">
       <div className="card-body">
-        <h2 className="col-sm-12 fw-bold">Welcome back {user.name} <img src={waveHand} alt="wave hand emoji" /></h2>
+        <h2 className="col-sm-12 fw-bold">Welcome back {user.displayName} <img src={waveHand} alt="wave hand emoji" /></h2>
         <div className="card-content">
           <article className="card__balance py-3 d-flex align-items-center px-4 mt-3">
             <BsWallet2 />

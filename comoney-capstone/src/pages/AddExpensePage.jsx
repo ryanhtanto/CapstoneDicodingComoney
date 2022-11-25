@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import LocaleContext from "../context/LocaleContext";
 
 const AddExpensePage = () => {
+  const type = 'expense';
   const { locale } = React.useContext(LocaleContext);
 
   return (
@@ -25,7 +26,7 @@ const AddExpensePage = () => {
           <h4 className="fw-bold">{locale === "en" ? "Add your expense, here" : "Tambahkan pengeluaran Anda, di sini"}</h4>
           <p>{locale === "en" ? "Fill your detail expense below" : "Isi detail pengeluaran Anda di bawah ini"}</p>
         </div>
-        <AddTransactionForm />
+        <AddTransactionForm transactionType={type} />
       </div>
     </section>
   );

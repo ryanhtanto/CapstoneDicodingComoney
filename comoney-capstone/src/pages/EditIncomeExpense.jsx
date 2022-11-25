@@ -1,15 +1,19 @@
 import React from "react";
 import { FiArrowLeft, FiPlusSquare } from "react-icons/fi";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditIncomeExpense = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   return (
     <section>
       <div className="container">
         <div className="my-4">
           <h4>
-            <a href="" className="text-decoration-none text-black">
+            <p onClick={navigate(`/detail/${id}`)} className="text-decoration-none text-black">
               <FiArrowLeft className="warna fs-2" /> Back to Detail
-            </a>
+            </p>
           </h4>
         </div>
 

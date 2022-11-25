@@ -1,7 +1,7 @@
 import React from 'react';
 import useInput from '../hooks/UseInput';
 import userContext from '../context/UserContext';
-import { login } from '../utils/authentication-user';
+import { getActiveUser, login } from '../utils/authentication-user';
 
 function LoginForm() {
 	const [email, setEmail] = useInput('');
@@ -10,10 +10,8 @@ function LoginForm() {
 
 	const onSubmit = async (event) => {
 		event.preventDefault()
-		const user = await login(email, password);
-		if (user) {
-			setUser(user);
-		}
+		const user = login(email, password);
+		setUser(user);
 	}
 
 	return (

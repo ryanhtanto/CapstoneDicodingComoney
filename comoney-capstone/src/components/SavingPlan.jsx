@@ -12,17 +12,17 @@ function SavingPlan() {
   React.useEffect(function () {
     async function getData() {
       const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
-      const userData = await activeUser.getActiveUser();
+      const userData = await getActiveUser();
       for (let i = 0; i < valueFromDb.length; i++) {
         if (valueFromDb[i].accessToken === userData.accessToken) {
           setSavings(valueFromDb);
-          setLoading(false);
+          setLoading(false)
         } else {
-          setLoading(true);
+          setLoading(true)
         }
       }
     }
-    getData();
+    getData()
   }, []);
 
   async function onDeleteHandler(id) {
