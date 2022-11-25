@@ -1,8 +1,10 @@
 import React from 'react';
-import savingMoneyIdb from '../data/saving-money-idb';
 import useInput from '../hooks/UseInput';
-import { editSavingsMoney } from '../utils/savings';
+import { editSavingsMoney, getSavings } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
+import UserContext from "../context/UserContext";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function EditSavingsForm(getId) {
         const [selectedSaving, setSelectedSaving] = React.useState('')
@@ -10,16 +12,18 @@ function EditSavingsForm(getId) {
         const [amount, setAmount, setDefaultAmount] = useInput('');
         const [targetDate, setTargetDate, setDefaultTarget] = useInput('');
         const { locale } = React.useContext(LocaleContext);
+        const { user } = React.useContext(UserContext);
+        const navigate = useNavigate();
 
         React.useEffect(function () {
                 async function selectedSavings() {
                         const parseId = JSON.stringify(getId)
                         const jsonParse = JSON.parse(parseId);
-                        const detail = await savingMoneyIdb.getEditSavingsMoney(parseFloat(jsonParse.getId))
+                        const detail = await getSavings(user.uid, parseFloat(jsonParse.getId))
                         setSelectedSaving({
                                 name: detail.data.savingsName,
                                 amount: detail.data.amount,
-                                targetDate: detail.data.targetDate
+                                targetDate: detail.data.targetDate,
                         })
 
                         setDefaultName(detail.data.savingsName);
@@ -27,14 +31,38 @@ function EditSavingsForm(getId) {
                         setDefaultTarget(detail.data.targetDate)
                 }
                 selectedSavings()
-                console.log(savingsName)
-                console.log(amount)
-                console.log(targetDate);
         }, []);
 
         const onSubmit = async (event) => {
                 event.preventDefault()
-                editSavingsMoney(getId, savingsName, amount, targetDate);
+                const parseId = JSON.stringify(getId)
+                const jsonParse = JSON.parse(parseId);
+                const detail = await getSavings(user.uid, parseFloat(jsonParse.getId))
+                const edit = await editSavingsMoney(
+                        detail.id, 
+                        savingsName, 
+                        amount, 
+                        targetDate, 
+                        detail.data.currentDate, 
+                        user.uid
+                )
+                if (edit.success) {
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Edit Saving Plan Success',
+                          showConfirmButton: false,
+                          timer: 1000
+                        })
+                        navigate('/saving-planner');
+                } else {
+                        Swal.fire({
+                          icon: 'error',
+                          title: edit.message,
+                          showConfirmButton: false,
+                          timer: 1000
+                        })
+                }
+                
         }
 
         return (

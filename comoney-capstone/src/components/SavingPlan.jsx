@@ -1,35 +1,53 @@
 import React, { useState } from "react";
-import savingMoneyIdb from "../data/saving-money-idb";
 import SavingPlanItem from "./SavingPlanItem";
 import LocaleContext from "../context/LocaleContext";
-import { getActiveUser } from "../utils/authentication-user";
+import { getAllSavings, deleteSavings } from '../utils/savings';
+import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function SavingPlan() {
   const [savings, setSavings] = useState();
   const [loading, setLoading] = useState(true);
   const { locale } = React.useContext(LocaleContext);
-
+  const { user } = React.useContext(UserContext);
+  const navigate = useNavigate();
   React.useEffect(function () {
     async function getData() {
-      const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
-      const userData = await getActiveUser();
-      for (let i = 0; i < valueFromDb.length; i++) {
-        if (valueFromDb[i].accessToken === userData.accessToken) {
-          setSavings(valueFromDb);
-          setLoading(false)
-        } else {
-          setLoading(true)
-        }
+      const valueFromDb = await getAllSavings(user.uid);
+      if(valueFromDb.length !== 0){
+        setSavings(valueFromDb);
+        setLoading(false)
+      }else{
+        setLoading(true)
       }
     }
     getData()
   }, []);
 
   async function onDeleteHandler(id) {
-    await savingMoneyIdb.deleteSavingsMoney(id);
-    const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
+    const deleteHandler = await deleteSavings(id, user.uid);
+    const valueFromDb = await getAllSavings(user.uid);
     setSavings(valueFromDb);
-    window.location.reload();
+    if (deleteHandler.success) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Delete Saving Plan Success',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setSavings(valueFromDb);
+      navigate('/saving-planner');
+      window.location.reload();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: deleteHandler.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
+    }
+    
   }
 
   if (loading === false) {
