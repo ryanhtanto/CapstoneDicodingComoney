@@ -1,4 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import UserContext from '../context/UserContext';
 import useInput from '../hooks/UseInput';
 import { register } from '../utils/authentication-user';
 
@@ -7,11 +10,31 @@ function RegisterForm() {
 	const [email, setEmail] = useInput('');
 	const [password, setPassword] = useInput('');
 	const [repeatPassword, setRepeatPassword] = useInput('');
+	const { setUser } = React.useContext(UserContext);
+	const navigate = useNavigate();
 
-	const onSubmit = (event) => {
+	const onSubmit = async (event) => {
 		event.preventDefault()
 		if (password === repeatPassword) {
-			register(email, password, name);
+			Swal.showLoading();
+			const data = await register(email, password, name);
+			if (data.success) {
+				Swal.fire({
+					icon: 'success',
+					title: 'Register Success',
+					showConfirmButton: false,
+					timer: 1000
+				})
+				setUser(data.user);
+				navigate('/');
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: data.message,
+					showConfirmButton: false,
+					timer: 1500
+				})
+			}
 		} else {
 			alert('Password dan Repeat Password Tidak Sama');
 		}

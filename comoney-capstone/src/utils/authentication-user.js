@@ -1,26 +1,33 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
-import savingMoneyIdb from "../data/saving-money-idb";
-import newCategoryIdb from "../data/new-category-idb";
-
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  updateProfile
+} from "firebase/auth";
 import app from '../global/firebase-config';
 const auth = getAuth(app);
+
 
 const getStatusAuthenticated = () => {
   const state = localStorage.getItem('authenticated');
   return state;
 }
 
-const login = (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user
-      return user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
-    });
+const login = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return {
+      success: true,
+      user: userCredential.user,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Wrong Email / Password"
+    }
+  }
 };
 
 const logout = () => {
@@ -28,17 +35,21 @@ const logout = () => {
 };
 
 const register = async (email, password, name) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      updateProfile(userCredential.user, {
-        displayName: name
-      })
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(userCredential.user, {
+      displayName: name,
     });
+    return {
+      success: true,
+      user: userCredential.user,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: `Failed Create Account ${error.message}`
+    }
+  }
 };
 
 const getActiveUser = () => {

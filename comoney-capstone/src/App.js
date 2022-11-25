@@ -27,7 +27,7 @@ function App() {
       const dataUser = await getActiveUser();
       setUser(dataUser || null);
     };
-    
+
     function initialLoad() {
       if (localStorage.getItem("locale") === undefined) {
         localStorage.setItem("locale", "id");
@@ -36,8 +36,9 @@ function App() {
         setLocale(localStorage.getItem("locale"));
       }
     }
-    initialLoad();
+
     checkUser();
+    initialLoad();
   }, []);
 
   const userContextValue = React.useMemo(() => {
@@ -80,7 +81,7 @@ function App() {
       <UserContext.Provider value={userContextValue}>
         <LocaleContext.Provider value={localeContextValue}>
           <header>
-            <Navigation toggleLocale={toggleLocale}/>
+            <Navigation toggleLocale={toggleLocale} />
           </header>
           <main>
             <Routes>

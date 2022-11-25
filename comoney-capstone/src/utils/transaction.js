@@ -6,6 +6,7 @@ const dateToday = getFullDate();
 const db = getFirestore(app);
 
 const getAllTransactions = async (accessToken) => {
+  console.log(accessToken);
   const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
