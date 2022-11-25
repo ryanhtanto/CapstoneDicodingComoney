@@ -1,22 +1,27 @@
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import AddSavingForm from "../components/AddSavingsForm";
+import { Link } from 'react-router-dom';
+import LocaleContext from "../context/LocaleContext";
 
 const AddSavingPlan = () => {
+  const { locale } = React.useContext(LocaleContext);
+
   return (
     <section>
       <div className="container">
         <div className="my-4">
           <h4>
-            <a href="#" className="text-black text-decoration-none">
-              <FiArrowLeft className="warna fs-2" /> Back to Savings
-            </a>
+            <Link to={`/saving-planner`} className="text-black text-decoration-none">
+              <FiArrowLeft className="warna fs-2" />
+              {locale === "en" ? "Back to Savings Planner" : "Kembali ke Perencana Tabungan"}
+            </Link>
           </h4>
         </div>
 
         <div className="content">
-          <h4 className="fw-bold">Savings money for better future</h4>
-          <p>Get your target by fill the information below</p>
+          <h4 className="fw-bold">{locale === "en" ? "Savings money for better future" : "Menabung untuk masa depan yang lebih baik"}</h4>
+          <p>{locale === "en" ? "Get your target by fill the information below" : "Capai target Anda dengan mengisi informasi di bawah ini"}</p>
           <AddSavingForm />
         </div>
       </div>

@@ -36,8 +36,6 @@ const AddTransactionForm = ({ transactionType }) => {
   }, [transactionType])
 
   const onSubmit = (e) => {
-    alert(type);
-    alert(description);
     e.preventDefault();
     addTransaction({
       name,

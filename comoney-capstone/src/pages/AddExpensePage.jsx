@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import LocaleContext from "../context/LocaleContext";
 
 const AddExpensePage = () => {
-  // const { locale } = React.useContext(LocaleContext);
-  const locale = 'en';
   const type = 'expense';
+  const { locale } = React.useContext(LocaleContext);
 
   return (
     <section>
