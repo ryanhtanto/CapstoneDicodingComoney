@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import savingMoneyIdb from "../data/saving-money-idb";
 import SavingPlanItem from "./SavingPlanItem";
-import activeUser from "../data/active-user";
 import LocaleContext from "../context/LocaleContext";
+import { getActiveUser } from "../utils/authentication-user";
 
 function SavingPlan() {
   const [savings, setSavings] = useState();

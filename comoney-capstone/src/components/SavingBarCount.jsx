@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import savingMoneyIdb from '../data/saving-money-idb';
 import { getActiveUser } from "../utils/authentication-user";
-import savingMoneyIdb from "../data/saving-money-idb";
-import activeUser from "../data/active-user";
 import LocaleContext from "../context/LocaleContext";
 
 function SavingBarCount() {
   const [target, setTarget] = useState();
   const [total, setTotal] = useState();
   const [loading, setLoading] = useState(true);
-  const [rupias, setRupias] = React.useState([]);
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(function () {
     async function getData() {
       const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
-      const userData = await activeUser.getActiveUser();
+      const userData = await getActiveUser;
       let totalAmount = 0;
       for (let i = 0; i < valueFromDb.length; i++) {
         if (valueFromDb[i].accessToken === userData.accessToken) {
