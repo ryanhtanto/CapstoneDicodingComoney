@@ -2,6 +2,7 @@ import React from 'react';
 import useInput from '../hooks/UseInput';
 import userContext from '../context/UserContext';
 import { getActiveUser, login } from '../utils/authentication-user';
+import Swal from 'sweetalert2';
 
 function LoginForm() {
 	const [email, setEmail] = useInput('');
@@ -10,8 +11,19 @@ function LoginForm() {
 
 	const onSubmit = async (event) => {
 		event.preventDefault()
-		const user = login(email, password);
-		setUser(user);
+		Swal.showLoading();
+		const data = await login(email, password);
+		if (data.success) {
+			Swal.fire({
+				icon: 'success',
+				title: 'Login Success',
+				showConfirmButton: false,
+				timer: 1000
+			})
+			setUser(data.user || null);
+		} else {
+			alert(data.message);
+		}
 	}
 
 	return (
