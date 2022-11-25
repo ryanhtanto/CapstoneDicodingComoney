@@ -35,7 +35,7 @@ function SavingPlan() {
   if (loading === false) {
     return savings.map((saving) => {
       return (
-        <div className="col-sm-6 mb-3">
+        <div className="col-sm-6 mb-3" key={saving.id}>
           <SavingPlanItem saving={saving} onDelete={onDeleteHandler} />
         </div>
       );
