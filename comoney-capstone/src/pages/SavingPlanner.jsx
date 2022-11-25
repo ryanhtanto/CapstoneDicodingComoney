@@ -1,48 +1,52 @@
-import React from 'react';
-import images from '../assets/books.png'
-import savings from '../assets/images/saving-item.png'
-import { FiCalendar, FiCheckSquare, FiEdit, FiTrash2 } from 'react-icons/fi';
+import React from "react";
+import images from "../assets/books.png";
+import { Link } from "react-router-dom";
+import { FiPlus } from "react-icons/fi";
+import SavingPlan from "../components/SavingPlan";
+import SavingBarCount from "../components/SavingBarCount";
+import axios from "axios";
+import LocaleContext from "../context/LocaleContext";
 
 function SavingPlanner() {
-        return (
-                <section>
-                        <div className='container'> 
-                                <div className='row bg-saving-color p-4 mt-5 mb-5 w-75 mx-auto'>
-                                        <div className='col-sm-6 px-4'>
-                                                <div className='d-flex'>
-                                                        <img src={images} alt="icon-savings" className='saving-image' srcset="" />
-                                                        <div className='mx-4 my-auto'>
-                                                                <p className='fw-bold mb-0'>You have 2 savings target!</p>
-                                                                <p>Total Rp 350.000.000</p>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div className='col-sm-6 px-4 my-auto'>
-                                                <p className='text-center mx-auto'> “ Some daily quoute to booost your motivation to reach target ” bisa pake quotes API</p>
-                                        </div>
-                                </div>
-                                <div className='row mt-5 mb-5 w-75 mx-auto'>
-                                        <div className='col-sm-6'>
-                                                <div className="card">
-                                                        <div className='d-flex'>
-                                                                <div className='my-auto'>
-                                                                        <img src={savings} alt="icon-saving-item" className='saving-image-item' srcset="" />
-                                                                </div>
-                                                                <div className="card-body">
-                                                                        <h6 className="card-title fw-bold">House at Kota Baru Parahyangan</h6>
-                                                                        <span className="savings-planning p-2">Rp 300.000.000</span>
-                                                                        <h6 className='mt-2'><FiCalendar /><span className='mx-2'>Target 20 November 2022</span></h6>
-                                                                        <h6 className='mt-2'><FiCheckSquare /><span className='mx-2'>Spend Rp 1.000.000 / month</span></h6>
-                                                                        <button type="button" class="btn btn-warning"><FiEdit /></button>
-                                                                        <button type="button" class="btn btn-danger mx-2"><FiTrash2 /></button>
-                                                                </div>
-                                                        </div>   
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                </section>
-        );
+  const [quotes, setQuotes] = React.useState([]);
+  const { locale } = React.useContext(LocaleContext);
+
+  React.useEffect(function () {
+    async function getQuotes() {
+      let current = Math.floor(Math.random() * 1000);
+      let response = await axios.get("https://type.fit/api/quotes");
+      setQuotes(response.data[current]);
+    }
+
+    getQuotes();
+  }, []);
+  return (
+    <section>
+      <div className="container">
+        <div className="row bg-saving-color p-4 mt-5 mb-5 w-75 mx-auto">
+          <div className="col-sm-6 px-4">
+            <div className="d-flex">
+              <img src={images} alt="icon-savings" className="saving-image" srcset="" />
+              <SavingBarCount />
+            </div>
+          </div>
+          <div className="col-sm-6 px-4 my-auto">
+            <p className="text-center mx-auto">
+              {quotes.text} - <b>{quotes.author}</b>
+            </p>
+          </div>
+        </div>
+        <div className="row mt-5 mb-5 w-75 mx-auto">
+          <SavingPlan />
+        </div>
+        <Link to={`/add-saving-plan`}>
+          <button aria-label="add savings" id="addButton" class="addButton" title={locale === "en" ? "Add Saving Plan" : "Tambah Rencana Tabungan"}>
+            <FiPlus />
+          </button>
+        </Link>
+      </div>
+    </section>
+  );
 }
 
 export default SavingPlanner;
