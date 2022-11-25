@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import savingMoneyIdb from '../data/saving-money-idb';
-import { getActiveUser } from "../utils/authentication-user";
+import UserContext from "../context/UserContext";
+import { getAllSavings } from '../utils/savings';
 import LocaleContext from "../context/LocaleContext";
 
 function SavingBarCount() {
@@ -8,20 +8,20 @@ function SavingBarCount() {
   const [total, setTotal] = useState();
   const [loading, setLoading] = useState(true);
   const { locale } = React.useContext(LocaleContext);
+  const { user } = React.useContext(UserContext);
 
   React.useEffect(function () {
     async function getData() {
-      const valueFromDb = await savingMoneyIdb.getAllSavingsMoney();
-      const userData = await getActiveUser;
-      let totalAmount = 0;
-      for (let i = 0; i < valueFromDb.length; i++) {
-        if (valueFromDb[i].accessToken === userData.accessToken) {
-          totalAmount += parseFloat(valueFromDb[i].data.amount);
+      const valueFromDb = await getAllSavings(user.uid);
+      if(valueFromDb){
+        let totalAmount = 0;
+        valueFromDb.forEach((doc) => {
+          totalAmount += parseFloat(doc.data.amount);
           let number_string = totalAmount.toString().replace(/[^,\d]/g, "");
           let split = number_string.split(",");
           let sisa = split[0].length % 3;
-          let rupiah = split[0].substr(0, sisa);
-          let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+          let rupiah = split[0].substring(0, sisa);
+          let ribuan = split[0].substring(sisa).match(/\d{3}/gi);
 
           if (ribuan) {
             let separator = sisa ? "." : "";
@@ -31,9 +31,9 @@ function SavingBarCount() {
           setTotal(rupiah);
           setTarget(valueFromDb.length);
           setLoading(false);
-        } else {
-          setLoading(true);
-        }
+        })
+      } else {
+        setLoading(true);
       }
     }
     getData();

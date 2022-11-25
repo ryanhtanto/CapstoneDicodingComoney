@@ -1,46 +1,98 @@
 import savingMoneyIdb from "../data/saving-money-idb";
+import { getFirestore, setDoc, doc, collection, getDocs, deleteDoc, getDoc } from "firebase/firestore";
 import { getActiveUser } from "./authentication-user";
+import app from '../global/firebase-config';
 
-const savingsMoney = async (savingsName, amount, targetDate) => {
-  const user = await getActiveUser();
-  const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let currentDate = `${year}-${month}-${day}`;
+const db = getFirestore(app);
 
-  await savingMoneyIdb.addSavings({
-    accessToken: user.accessToken,
-    id: +new Date(),
-    data: {
-      savingsName,
-      amount,
-      targetDate,
-      currentDate,
+const addSavingsMoney = async (savingsName, amount, targetDate, accessToken) => {
+  try { 
+    const id = +new Date();
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${year}-${month}-${day}`;
+    await setDoc(doc(db, 'financials', `${accessToken}`, 'savings', `${id}`), {
+      id,
+      data: {
+        savingsName,
+        amount,
+        targetDate,
+        currentDate,
+      }
+    });
+    return {
+      success: true,
     }
-  });
+  } catch (error) {
+    return {
+      success: false,
+      message: `Failed Add Savings Plan ${error.message}`
+    }
+  }
+}
+
+const getAllSavings = async (accessToken) => {
+  const docsRef = collection(db, 'financials', `${accessToken}`, 'savings');
+  const docsSnap = await getDocs(docsRef);
+
+  let data = [];
+  docsSnap.forEach((doc) => {
+    data.push(doc.data());
+  })
+
+  return data;
+}
+
+const getSavings = async (accessToken, id) => {
+  const docRef = doc(db, 'financials', `${accessToken}`, 'savings', `${id}`);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    alert("No such document!");
+  }
+}
+
+const deleteSavings = async (id, accessToken) => {
+  try{
+    await deleteDoc(doc(db, 'financials', `${accessToken}`, 'savings', `${id}`))
+    return {
+      success: true,
+    }
+  } catch(error){
+    return {
+      success: false,
+      message: `Can't Delete Savings Plan ${error.message}`
+    }
+  }
+  
+}
+
+const editSavingsMoney = async (savingsID, savingsName, amount, targetDate, currentDate, accessToken) => {
+  const id = savingsID;
+
+  try { 
+    await setDoc(doc(db, 'financials', `${accessToken}`, 'savings', `${id}`), {
+      id,
+      data: {
+        savingsName,
+        amount,
+        targetDate,
+        currentDate,
+      }
+    });
+    return {
+      success: true,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: `Failed Add Savings Plan ${error.message}`
+    }
+  }
 };
 
-const editSavingsMoney = async (getId, savingsName, amount, targetDate) => {
-  const user = await getActiveUser();
-  const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let currentDate = `${year}-${month}-${day}`;
-  const parseId = JSON.stringify(getId)
-  const jsonParse = JSON.parse(parseId);
-
-  await savingMoneyIdb.editSavingsMoney({
-    accessToken: user.accessToken,
-    id: parseFloat(jsonParse.getId),
-    data: {
-      savingsName,
-      amount,
-      targetDate,
-      currentDate,
-    }
-  });
-};
-
-export { savingsMoney, editSavingsMoney }
+export { deleteSavings, addSavingsMoney, getAllSavings, getSavings, editSavingsMoney }

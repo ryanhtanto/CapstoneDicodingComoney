@@ -1,17 +1,43 @@
 import React from 'react';
 import useInput from '../hooks/UseInput';
-import { savingsMoney } from '../utils/savings';
+import { addSavingsMoney } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
+import { useNavigate } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import Swal from "sweetalert2";
 
 function AddSavingForm() {
         const [savingsName, setSavingsName] = useInput('');
         const [amount, setAmount] = useInput('');
         const [targetDate, setTargetDate] = useInput('');
         const { locale } = React.useContext(LocaleContext);
+        const { user } = React.useContext(UserContext);
+        const navigate = useNavigate();
 
         const onSubmit = async (event) => {
                 event.preventDefault()
-                savingsMoney(savingsName, amount, targetDate);
+                const savingsDetail = await addSavingsMoney(
+                        savingsName,
+                        amount,
+                        targetDate,
+                        user.uid
+                )
+                if (savingsDetail.success) {
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Add Saving Plan Success',
+                          showConfirmButton: false,
+                          timer: 1000
+                        })
+                        navigate('/saving-planner');
+                } else {
+                        Swal.fire({
+                          icon: 'error',
+                          title: savingsDetail.message,
+                          showConfirmButton: false,
+                          timer: 1000
+                        })
+                }
         }
 
         return (
