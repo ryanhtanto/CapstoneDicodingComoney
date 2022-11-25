@@ -9,9 +9,8 @@ const Icon = () => {
   );
 };
 
-const AddNewCategoryDropdown = ({ placeHolder, categoryCallback }) => {
+const CategoryDropdown = ({ placeholder, categoryCallback }) => {
   const [categories, setCategories] = React.useState();
-  // const [loading, setLoading] = React.useState(true);
   const [showMenu, setShowMenu] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(null);
 
@@ -19,14 +18,12 @@ const AddNewCategoryDropdown = ({ placeHolder, categoryCallback }) => {
     async function getData() {
       const categoryFromDb = await newCategoryIdb.getAllCategory();
       setCategories(categoryFromDb);
-      // setLoading(false);
     }
     getData();
-  }, []);
+  }, [showMenu]);
 
   React.useEffect(() => {
     const handler = () => setShowMenu(false);
-
     window.addEventListener("click", handler);
     return () => {
       window.removeEventListener("click", handler);
@@ -42,7 +39,7 @@ const AddNewCategoryDropdown = ({ placeHolder, categoryCallback }) => {
     if (selectedValue) {
       return selectedValue.data;
     }
-    return placeHolder;
+    return placeholder;
   };
 
   const onItemClick = (category) => {
@@ -57,7 +54,6 @@ const AddNewCategoryDropdown = ({ placeHolder, categoryCallback }) => {
     return selectedValue.data === category.data;
   };
 
-  // if (loading === false) {
   return (
     <div className="dropdown-container">
       <div className="dropdown-input input__height" onClick={handleInputClick}>
@@ -70,16 +66,18 @@ const AddNewCategoryDropdown = ({ placeHolder, categoryCallback }) => {
       </div>
       {showMenu && (
         <div className="dropdown-menus">
-          {categories?.map((category) => (
-            <div onClick={() => onItemClick(category)} key={category.id} className={`dropdown-item ${isSelected(category) && "selected"}`}>
-              {category.data}
-            </div>
-          ))}
+          {
+            categories?.map((category) => (
+              <div onClick={() => onItemClick(category)} key={category.id} className={`dropdown-item ${isSelected(category) && "selected"}`}>
+                {category.data}
+              </div>
+            ))
+          }
         </div>
       )}
     </div>
   );
-  // }
+
 };
 
-export default AddNewCategoryDropdown;
+export default CategoryDropdown;

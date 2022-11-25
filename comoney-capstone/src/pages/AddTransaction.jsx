@@ -1,5 +1,5 @@
 import React from "react";
-import AddTransactionForm from "../components/AddTransactionForm";
+import TransactionForm from "../components/TransactionForm";
 import { Link } from "react-router-dom";
 import LocaleContext from "../context/LocaleContext";
 
@@ -37,7 +37,7 @@ const AddTransaction = () => {
                 <p>{locale === "en" ? "Fill your detail expense below" : "Isi detail pengeluaran Anda di bawah ini"}</p>
               </>
           }
-          <AddTransactionForm transactionType={type} />
+          <TransactionForm transactionType={type} />
         </div>
       </div>
     </section>

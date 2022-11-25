@@ -62,4 +62,10 @@ const getActiveUser = () => {
   })
 };
 
-export { login, logout, register, getActiveUser, getStatusAuthenticated };
+export {
+  login,
+  logout,
+  register,
+  getActiveUser,
+  getStatusAuthenticated
+};

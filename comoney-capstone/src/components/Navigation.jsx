@@ -5,6 +5,7 @@ import { BsTranslate } from "react-icons/bs";
 import UserContext from "../context/UserContext";
 import { logout } from "../utils/authentication-user";
 import LocaleContext from "../context/LocaleContext";
+import { Link } from "react-router-dom";
 
 function Navigation({ toggleLocale }) {
   const { user, setUser } = React.useContext(UserContext);
@@ -27,19 +28,19 @@ function Navigation({ toggleLocale }) {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto d-flex align-items-center">
             <li className="nav-item me-2 active">
-              <a className="nav-link" href="/">
+              <Link to={'/'} className="nav-link">
                 {locale === "en" ? "Dashboard" : "Dasbor"}
-              </a>
+              </Link>
             </li>
             <li className="nav-item me-2">
-              <a className="nav-link" href="/news">
+              <Link to={'/news'} className="nav-link">
                 {locale === "en" ? "News" : "Berita"}
-              </a>
+              </Link>
             </li>
             <li className="nav-item me-2">
-              <a className="nav-link" href="/saving-planner">
+              <Link to={'/saving-planner'} className="nav-link">
                 {locale === "en" ? "Savings Planner" : "Perencana Tabungan"}
-              </a>
+              </Link>
             </li>
             <li className="nav-item me-2">
               <button className="navbar__button d-flex align-items-center" title={locale === 'en' ? 'Log Out' : 'Keluar'} type="submit" onClick={onLogout}>

@@ -60,10 +60,8 @@ const DetailPage = () => {
               <h5>Description</h5>
               <p>{transaction.description}</p>
             </div>
-
-
-            <button type="submit" className="btn btn-primary btn-lg form-control btn-color my-4" onClick={() => navigate(`/edit/${id}`)}>Edit Income</button>
-            <button type="submit" className="btn btn-primary btn-lg form-control btn-color mb-4" onClick={() => onDelete(transaction.id)}>Delete Income</button>
+            <button type="submit" className="btn btn-primary btn-lg form-control btn-color my-4" onClick={() => navigate(`/edit/transaction/${id}`)}>Edit</button>
+            <button type="submit" className="btn btn-primary btn-lg form-control btn-color mb-4" onClick={() => onDelete(transaction.id)}>Delete</button>
           </div>
         </div>
       </section>

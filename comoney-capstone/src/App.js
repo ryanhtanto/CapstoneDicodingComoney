@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import Navigation from "./components/Navigation";
-import EditIncomeExpense from "./pages/EditIncomeExpense";
+import EditTransaction from "./pages/EditTransaction";
 import Dashboard from "./pages/Dashboard";
 import DetailPage from "./pages/DetailPage";
 import Footer from "./components/Footer";
@@ -20,11 +20,13 @@ import AddTransaction from "./pages/AddTransaction";
 function App() {
   const [user, setUser] = React.useState(null);
   const [locale, setLocale] = React.useState("en");
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const checkUser = async () => {
       const dataUser = await getActiveUser();
       setUser(dataUser || null);
+      setLoading(false);
     };
 
     function initialLoad() {
@@ -60,6 +62,10 @@ function App() {
     };
   }, [locale]);
 
+  if (loading) {
+    return;
+  }
+
   if (user === null) {
     return (
       <UserContext.Provider value={userContextValue}>
@@ -85,10 +91,8 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              {/* <Route path="/add-income" element={<AddIncomePage />} />
-              <Route path="/add-expense" element={<AddExpensePage />} /> */}
               <Route path="/add/transaction" element={<AddTransaction />} />
-              <Route path="/edit/:id" element={<EditIncomeExpense />} />
+              <Route path="/edit/transaction/:id" element={<EditTransaction />} />
               <Route path="/news" element={<NewsListPage />} />
               <Route path="/news/detail" element={<NewsDetail />} />
               <Route path="/detail/:id" element={<DetailPage />} />
