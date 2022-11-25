@@ -1,0 +1,50 @@
+[
+  {
+    "accessToken": 1668845740874,
+    "transaction": {
+      "id": 1,
+      "date": "2022-11-22",
+      "type": "expense",
+      "name": "Sushi Date",
+      "amount": 500000,
+      "category": "Food",
+      "description": "Lorem Ipsum"
+    }
+  },
+  {
+    "accessToken": 1668845740874,
+    "transaction": {
+      "id": 2,
+      "date": "2022-11-22",
+      "type": "income",
+      "name": "Salary from hell",
+      "amount": 10000000,
+      "category": "Salary",
+      "description": "Lorem Ipsum"
+    }
+  },
+  {
+    "accessToken": 1668845740874,
+    "transaction": {
+      "id": 9,
+      "date": "2022-11-26",
+      "type": "income",
+      "name": "Salary from work",
+      "amount": 5000000,
+      "category": "Salary",
+      "description": "Lorem Ipsum"
+    }
+  },
+  {
+    "accessToken": 166884574023121321874,
+    "transaction": {
+      "id": 3,
+      "date": "2022-11-22",
+      "type": "expense",
+      "name": "Warteg",
+      "amount": 50000,
+      "category": "Food",
+      "description": "Lorem Ipsum"
+    }
+  }
+]
