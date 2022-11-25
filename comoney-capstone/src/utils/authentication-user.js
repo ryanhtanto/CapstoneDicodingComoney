@@ -41,48 +41,6 @@ const register = async (email, password, name) => {
     });
 };
 
-const savingsMoney = async (savingsName, amount, targetDate) => {
-  const user = await getActiveUser();
-  const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let currentDate = `${year}-${month}-${day}`;
-
-  await savingMoneyIdb.addSavings({
-    accessToken: user.accessToken,
-    id: +new Date(),
-    data: {
-      savingsName,
-      amount,
-      targetDate,
-      currentDate,
-    }
-  });
-};
-
-const editSavingsMoney = async (getId, savingsName, amount, targetDate) => {
-  const user = await getActiveUser();
-  const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let currentDate = `${year}-${month}-${day}`;
-  const parseId = JSON.stringify(getId)
-  const jsonParse = JSON.parse(parseId);
-
-  await savingMoneyIdb.editSavingsMoney({
-    accessToken: user.accessToken,
-    id: parseFloat(jsonParse.getId),
-    data: {
-      savingsName,
-      amount,
-      targetDate,
-      currentDate,
-    }
-  });
-};
-
 const getActiveUser = () => {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, (user) => {
@@ -93,5 +51,4 @@ const getActiveUser = () => {
   })
 };
 
-
-export { login, logout, register, getActiveUser, savingsMoney, editSavingsMoney, getStatusAuthenticated };
+export { login, logout, register, getActiveUser, getStatusAuthenticated };
