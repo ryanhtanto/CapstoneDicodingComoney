@@ -1,6 +1,6 @@
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { deleteTransaction, getTransaction } from "../utils/transaction";
 
@@ -33,7 +33,7 @@ const DetailPage = () => {
         <div className="container">
           <div className="my-4">
             <h4>
-              <a href="/" className="text-black text-decoration-none"> <FiArrowLeft className="warna fs-2" />Back to Dashboard</a>
+              <Link className="text-black text-decoration-none" to={'/'}><FiArrowLeft className="warna fs-2" />Back to Dashboard</Link>
             </h4>
           </div>
 

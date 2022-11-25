@@ -1,6 +1,6 @@
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import TransactionForm from "../components/TransactionForm";
 import LocaleContext from "../context/LocaleContext";
 import UserContext from "../context/UserContext";
@@ -12,7 +12,6 @@ const EditTransaction = ({ transactiontype }) => {
   const { user } = React.useContext(UserContext);
   const [transaction, setTransaction] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     const getData = async () => {
@@ -30,9 +29,7 @@ const EditTransaction = ({ transactiontype }) => {
           <div className="container">
             <div className="my-4">
               <h4>
-                <p onClick={() => navigate(`/detail/${id}`)} className="text-decoration-none text-black">
-                  <FiArrowLeft className="warna fs-2" /> Back to Detail
-                </p>
+                <Link className="text-black text-decoration-none" to={`/detail/${id}`}><FiArrowLeft className="warna fs-2" />Back to Detail</Link>
               </h4>
             </div>
           </div>
