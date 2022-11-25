@@ -2,8 +2,15 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import savingMoneyIdb from "../data/saving-money-idb";
 import newCategoryIdb from "../data/new-category-idb";
 
+import app from '../global/firebase-config';
+const auth = getAuth(app);
+
+const getStatusAuthenticated = () => {
+  const state = localStorage.getItem('authenticated');
+  return state;
+}
+
 const login = (email, password) => {
-  const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user
@@ -12,15 +19,15 @@ const login = (email, password) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      alert(errorMessage);
     });
 };
 
 const logout = () => {
-  signOut(getAuth())
+  signOut(auth);
 };
 
 const register = async (email, password, name) => {
-  const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       updateProfile(userCredential.user, {
@@ -30,6 +37,7 @@ const register = async (email, password, name) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      alert(errorMessage);
     });
 };
 
@@ -78,7 +86,6 @@ const editSavingsMoney = async (getId, savingsName, amount, targetDate) => {
 
 const addCategory = async (categoryName) => {
   const user = await getActiveUser();
-
   await newCategoryIdb.addCategory({
     accessToken: user.accessToken,
     id: +new Date(),
@@ -89,7 +96,6 @@ const addCategory = async (categoryName) => {
 
 const getActiveUser = () => {
   return new Promise((resolve, reject) => {
-    const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         resolve(user);
@@ -99,4 +105,6 @@ const getActiveUser = () => {
 };
 
 
-export { login, logout, register, getActiveUser, savingsMoney, addCategory, editSavingsMoney };
+
+
+export { login, logout, register, getActiveUser, savingsMoney, addCategory, editSavingsMoney, getStatusAuthenticated };

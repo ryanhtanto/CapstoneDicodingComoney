@@ -1,10 +1,11 @@
 import React from "react";
-import TransactionForm from "../components/AddTransactionForm";
+import AddTransactionForm from "../components/AddTransactionForm";
 import { Link } from "react-router-dom";
 import LocaleContext from "../context/LocaleContext";
 
 const AddExpensePage = () => {
-  const { locale } = React.useContext(LocaleContext);
+  // const { locale } = React.useContext(LocaleContext);
+  const locale = 'en';
   const type = 'expense';
 
   return (
@@ -26,7 +27,7 @@ const AddExpensePage = () => {
           <h4 className="fw-bold">{locale === "en" ? "Add your expense, here" : "Tambahkan pengeluaran Anda, di sini"}</h4>
           <p>{locale === "en" ? "Fill your detail expense below" : "Isi detail pengeluaran Anda di bawah ini"}</p>
         </div>
-        <TransactionForm transactionType={type} />
+        <AddTransactionForm transactionType={type} />
       </div>
     </section>
   );

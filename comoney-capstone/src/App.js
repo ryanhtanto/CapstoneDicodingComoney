@@ -26,6 +26,7 @@ function App() {
       const dataUser = await getActiveUser();
       setUser(dataUser || null);
     }
+
     checkUser();
   }, [])
 

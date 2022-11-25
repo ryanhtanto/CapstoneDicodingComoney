@@ -1,10 +1,12 @@
 import { getFullDate } from "./date-formatter";
 import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore";
+import app from '../global/firebase-config';
 
 const dateToday = getFullDate();
+const db = getFirestore(app);
 
 const getAllTransactions = async (accessToken) => {
-  const docsRef = collection(getFirestore(), 'financials', `${accessToken}`, 'transactions');
+  const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
   let data = [];
@@ -16,7 +18,7 @@ const getAllTransactions = async (accessToken) => {
 }
 
 const getTransaction = async (accessToken, id) => {
-  const docRef = doc(getFirestore(), 'financials', `${accessToken}`, 'transactions', `${id}`);
+  const docRef = doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
@@ -27,7 +29,7 @@ const getTransaction = async (accessToken, id) => {
 }
 
 const getTodayTransactions = async (accessToken, dateSelected = dateToday) => {
-  const todayQuery = query(collection(getFirestore(), 'financials', `${accessToken}`, 'transactions'), where("date", "==", dateSelected));
+  const todayQuery = query(collection(db, 'financials', `${accessToken}`, 'transactions'), where("date", "==", dateSelected));
   const querySnapshot = await getDocs(todayQuery);
 
   let data = [];
@@ -39,7 +41,7 @@ const getTodayTransactions = async (accessToken, dateSelected = dateToday) => {
 };
 
 const getThisMonthTransactions = async (accessToken) => {
-  const docsRef = collection(getFirestore(), 'financials', `${accessToken}`, 'transactions');
+  const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
   let data = [];
@@ -55,7 +57,7 @@ const getThisMonthTransactions = async (accessToken) => {
 const addTransaction = async (transaction, accessToken) => {
   try {
     const id = +new Date();
-    await setDoc(doc(getFirestore(), 'financials', `${accessToken}`, 'transactions', `${id}`), {
+    await setDoc(doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`), {
       id,
       date: getFullDate(),
       type: transaction.type,
@@ -70,7 +72,7 @@ const addTransaction = async (transaction, accessToken) => {
 };
 
 const deleteTransaction = async (id, accessToken) => {
-  await deleteDoc(doc(getFirestore(), 'financials', `${accessToken}`, 'transactions', `${id}`))
+  await deleteDoc(doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`))
 }
 
 export {

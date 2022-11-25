@@ -1,3 +1,5 @@
+import { initializeApp } from "firebase/app";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDltfLgZrKwxJpkHFsQ6F_AlzYF6ybK88g",
   authDomain: "comoney-dicoding.firebaseapp.com",
@@ -8,4 +10,6 @@ const firebaseConfig = {
   measurementId: "G-7YDZSDDS2X"
 };
 
-export default firebaseConfig;
+const app = initializeApp(firebaseConfig);
+
+export default app;

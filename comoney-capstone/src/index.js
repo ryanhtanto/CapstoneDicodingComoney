@@ -1,5 +1,4 @@
 import React from 'react';
-import { initializeApp } from "firebase/app";
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
@@ -8,9 +7,7 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import './styles/general.css';
 import './styles/mobile.css';
 import './styles/desktop.css';
-import firebaseConfig from './global/firebaseConfig';
 
-initializeApp(firebaseConfig);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

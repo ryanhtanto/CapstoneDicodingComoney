@@ -11,7 +11,7 @@ function RegisterPage() {
 						<h3 className='text-center fw-bold text-white'>On the go!</h3>
 						<p className='text-center text-white'>Do incredible things anywhere in the world</p>
 						<div className='d-flex justify-content-center align-items-center'>
-							<img src={images} alt="register-image" className='auth-image' />
+							<img src={images} alt="register" className='auth-image' />
 						</div>
 					</div>
 				</article>

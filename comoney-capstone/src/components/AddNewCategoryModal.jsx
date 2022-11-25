@@ -6,7 +6,8 @@ import LocaleContext from "../context/LocaleContext";
 
 const AddNewCategoryModal = () => {
   const [categoryName, setCategoryName] = useInput("");
-  const { locale } = React.useContext(LocaleContext);
+  // const { locale } = React.useContext(LocaleContext);
+  const locale = 'en';
   // const navigate = useNavigate();
 
   const onSubmit = async (e) => {

@@ -16,17 +16,14 @@ const AddTransactionForm = ({ transactionType }) => {
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription] = useInput("");
-  const { locale } = React.useContext(LocaleContext);
+  // const { locale } = React.useContext(LocaleContext);
+  const locale = 'en';
+  const { user } = React.useContext(UserContext);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(name, amount, selectedCategory, categoryId, description);
-  };
-
-  const onDelete = () => {
+  const onDelete = (e) => {
     newCategoryIdb.deleteCategory(categoryId);
     window.location.reload();
-  const { user } = React.useContext(UserContext);
+  }
 
   React.useEffect(() => {
     const getData = async () => {
@@ -39,6 +36,8 @@ const AddTransactionForm = ({ transactionType }) => {
   }, [transactionType])
 
   const onSubmit = (e) => {
+    alert(type);
+    alert(description);
     e.preventDefault();
     addTransaction({
       name,
@@ -76,7 +75,7 @@ const AddTransactionForm = ({ transactionType }) => {
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">
-              <button type="submit" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => onDelete()}>
+              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => onDelete()}>
                 <FiTrash2 />
               </button>
             </div>
