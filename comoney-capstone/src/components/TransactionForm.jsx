@@ -107,6 +107,8 @@ const TransactionForm = ({ transactionType, transactionData }) => {
     setCategoryId(data[1]);
   };
 
+  // console.log(selectedCategory);
+
   return (
     <>
       <form className="my-5" onSubmit={onSubmit}>
