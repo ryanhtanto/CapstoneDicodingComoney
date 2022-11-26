@@ -1,14 +1,35 @@
 import React from "react";
 import useInput from "../hooks/UseInput";
-import addCategory from "../utils/category";
+import { addCategory } from "../utils/category";
 import LocaleContext from "../context/LocaleContext";
+import UserContext from "../context/UserContext";
+import Swal from "sweetalert2";
 
-const CategoryModal = () => {
+const CategoryModal = ({ transactionType }) => {
   const [categoryName, setCategoryName] = useInput("");
   const { locale } = React.useContext(LocaleContext);
+  const { user } = React.useContext(UserContext);
 
   const onSubmit = async (e) => {
-    addCategory(categoryName);
+    console.log(categoryName, user.uid, transactionType)
+    e.preventDefault();
+    Swal.showLoading();
+    const data = await addCategory(categoryName, user.uid, transactionType);
+    if (data.success) {
+      Swal.fire({
+        icon: "success",
+        title: "Add Category Success",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: data.message,
+        showConfirmButton: false,
+        timer: 20000,
+      });
+    }
   };
 
   return (

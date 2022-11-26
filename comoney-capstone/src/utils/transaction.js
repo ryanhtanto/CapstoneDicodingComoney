@@ -1,5 +1,15 @@
 import { getFullDate } from "./date-formatter";
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  where
+} from "firebase/firestore";
 import app from '../global/firebase-config';
 
 const dateToday = getFullDate();

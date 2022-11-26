@@ -3,56 +3,51 @@ import { FiPlusSquare } from "react-icons/fi";
 import CategoryModal from "./CategoryModal";
 import useInput from "../hooks/UseInput";
 import { FiTrash2 } from "react-icons/fi";
-import newCategoryIdb from "../data/new-category-idb";
 import LocaleContext from "../context/LocaleContext";
 import { addTransaction } from "../utils/transaction";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { deleteCategory, getExpenseCategories, getIncomeCategories } from "../utils/category";
 
 const TransactionForm = ({ transactionType, transactionData }) => {
   const [name, setName, setDefaultName] = useInput("");
   const [amount, setAmount, setDefaultAmount] = useInput("");
-  const [type, setType] = React.useState(null);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription, setDefaultDescription] = useInput("");
-  const [categories, setCategories] = React.useState();
+  const [categories, setCategories] = React.useState([]);
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     async function getData() {
-      const categoryFromDb = await newCategoryIdb.getAllCategory();
-      setCategories(categoryFromDb);
+      if (transactionType === "income") {
+        console.log("income");
+        const data = await getIncomeCategories(user.uid);
+        setCategories(data);
+      } else {
+        console.log("expense")
+        const data = await getExpenseCategories(user.uid);
+        setCategories(data);
+      }
     }
     getData();
-  }, []);
-
-  React.useEffect(() => {
-    const getData = async () => {
-      if (transactionType !== null) {
-        setType(transactionType);
-      }
-    };
-    getData();
-  }, [transactionType]);
+  }, [transactionType, user]);
 
   React.useEffect(() => {
     if (transactionData) {
       setDefaultName(transactionData.name);
       setDefaultAmount(transactionData.amount);
       setDefaultDescription(transactionData.description);
-      setSelectedCategory(transactionData.category);
-      setType(transactionData.type);
     }
   }, []);
 
-  const deleteCategory = () => {
+  const onDeleteCategory = async () => {
     if (selectedCategory !== null) {
-      newCategoryIdb.deleteCategory(Number(categoryId));
-      setSelectedCategory(null);
+      await deleteCategory(categoryId, user.uid);
+      console.log(19291)
       Swal.fire({
         icon: "success",
         title: "Delete Category Success",
@@ -76,7 +71,7 @@ const TransactionForm = ({ transactionType, transactionData }) => {
       {
         name,
         amount,
-        type,
+        type: transactionType,
         category: selectedCategory,
         description,
       },
@@ -101,31 +96,39 @@ const TransactionForm = ({ transactionType, transactionData }) => {
     }
   };
 
+  const setCategoryData = (e) => {
+    if (e.target.value === null) {
+      return;
+    }
+
+    console.log(e.target.value)
+    const data = e.target.value.split("^");
+    setSelectedCategory(data[0]);
+    setCategoryId(data[1]);
+  };
+
   return (
     <>
       <form className="my-5" onSubmit={onSubmit}>
-        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName}></input>
-        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount}></input>
-
+        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName} required></input>
+        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} required></input>
         <div className="text-center my-4">
           <div className="row">
             <div className="col-sm-12 col-lg-8 mb-2">
               <div className="dropdown">
                 <select
-                  className="form-select"
+                  className="form-select input__height"
                   aria-label="Default select example"
-                  onChange={(e) => {
-                    const data = e.target.value.split("^");
-                    setSelectedCategory(data[0]);
-                    setCategoryId(data[1]);
-                  }}
-                >
-                  <option value>{selectedCategory === null ? (locale === "en" ? "Choose Category" : "Pilih Kategori") : selectedCategory}</option>
-                  {categories?.map((category) => (
-                    <option value={`${category.data}^${category.id}`} key={category.id}>
-                      {category.data}
-                    </option>
-                  ))}
+                  onChange={(e) => setCategoryData(e)}
+                  required>
+                  <option value="">Select Category</option>
+                  {
+                    categories?.map((category) => (
+                      <option value={`${category.categoryName}^${category.id}`} key={category.id}>
+                        {category.categoryName}
+                      </option>
+                    ))
+                  }
                 </select>
               </div>
             </div>
@@ -136,7 +139,7 @@ const TransactionForm = ({ transactionType, transactionData }) => {
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">
-              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === "en" ? "Delete Category" : "Hapus Kategori"} onClick={() => deleteCategory()}>
+              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === "en" ? "Delete Category" : "Hapus Kategori"} onClick={() => onDeleteCategory()}>
                 <FiTrash2 />
               </button>
             </div>
@@ -148,7 +151,7 @@ const TransactionForm = ({ transactionType, transactionData }) => {
           {locale === "en" ? "Add" : "Tambah"}
         </button>
       </form>
-      <CategoryModal />
+      <CategoryModal transactionType={transactionType} />
     </>
   );
 };
