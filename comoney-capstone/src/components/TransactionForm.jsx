@@ -18,9 +18,18 @@ const TransactionForm = ({ transactionType, transactionData }) => {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categoryId, setCategoryId] = React.useState("");
   const [description, setDescription, setDefaultDescription] = useInput("");
+  const [categories, setCategories] = React.useState();
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    async function getData() {
+      const categoryFromDb = await newCategoryIdb.getAllCategory();
+      setCategories(categoryFromDb);
+    }
+    getData();
+  }, []);
 
   React.useEffect(() => {
     const getData = async () => {
@@ -29,7 +38,7 @@ const TransactionForm = ({ transactionType, transactionData }) => {
       }
     };
     getData();
-  }, [transactionType])
+  }, [transactionType]);
 
   React.useEffect(() => {
     if (transactionData) {
@@ -39,56 +48,61 @@ const TransactionForm = ({ transactionType, transactionData }) => {
       setSelectedCategory(transactionData.category);
       setType(transactionData.type);
     }
-  }, [])
+  }, []);
 
   const deleteCategory = () => {
     if (selectedCategory !== null) {
       newCategoryIdb.deleteCategory(categoryId);
       setSelectedCategory(null);
       Swal.fire({
-        icon: 'success',
-        title: 'Delete Category Success',
+        icon: "success",
+        title: "Delete Category Success",
         showConfirmButton: false,
-        timer: 1000
-      })
+        timer: 1000,
+      });
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Select Category First',
+        icon: "error",
+        title: "Select Category First",
         showConfirmButton: false,
-        timer: 1000
-      })
+        timer: 1000,
+      });
     }
-  }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     Swal.showLoading();
-    const data = await addTransaction({
-      name,
-      amount,
-      type,
-      category: selectedCategory,
-      description
-    }, user.uid);
+    const data = await addTransaction(
+      {
+        name,
+        amount,
+        type,
+        category: selectedCategory,
+        description,
+      },
+      user.uid
+    );
 
     if (data.success) {
       Swal.fire({
-        icon: 'success',
-        title: 'Add Transaction Success',
+        icon: "success",
+        title: "Add Transaction Success",
         showConfirmButton: false,
-        timer: 1000
-      })
-      navigate('/');
+        timer: 1000,
+      });
+      navigate("/");
     } else {
       Swal.fire({
-        icon: 'error',
+        icon: "error",
         title: data.message,
         showConfirmButton: false,
-        timer: 1000
-      })
+        timer: 1000,
+      });
     }
   };
+
+  console.log(selectedCategory);
 
   return (
     <>
@@ -100,23 +114,24 @@ const TransactionForm = ({ transactionType, transactionData }) => {
           <div className="row">
             <div className="col-sm-12 col-lg-8 mb-2">
               <div className="dropdown">
-                <CategoryDropdown
-                  placeholder={locale === "en" ? "Select Category" : "Pilih Kategori"}
-                  categoryCallback={(value) => {
-                    setSelectedCategory(value.data);
-                    setCategoryId(value.id);
-                  }}
-                />
+                <select className="form-select" aria-label="Default select example" onChange={(e) => {setSelectedCategory(e.target.value); setCategoryId(e.target.key)}}>
+                  <option value>{selectedCategory === null ? locale === "en" ? "Choose Category" : "Pilih Kategori" : selectedCategory}</option>
+                  {categories?.map((category) => (
+                    <option value={category.data} key={category.id}>
+                      {category.data}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
             <div className="col-sm-8 col-lg-3 mb-2">
-              <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === 'en' ? 'Add New Category' : 'Tambah Kategori Baru'}>
+              <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === "en" ? "Add New Category" : "Tambah Kategori Baru"}>
                 <FiPlusSquare /> New Category
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">
-              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === 'en' ? 'Delete Category' : 'Hapus Kategori'} onClick={() => deleteCategory()}>
+              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === "en" ? "Delete Category" : "Hapus Kategori"} onClick={() => deleteCategory()}>
                 <FiTrash2 />
               </button>
             </div>
