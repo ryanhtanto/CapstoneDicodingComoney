@@ -1,12 +1,10 @@
-import savingMoneyIdb from "../data/saving-money-idb";
 import { getFirestore, setDoc, doc, collection, getDocs, deleteDoc, getDoc } from "firebase/firestore";
-import { getActiveUser } from "./authentication-user";
 import app from '../global/firebase-config';
 
 const db = getFirestore(app);
 
 const addSavingsMoney = async (savingsName, amount, targetDate, accessToken) => {
-  try { 
+  try {
     const id = +new Date();
     const date = new Date();
     let day = date.getDate();
@@ -57,24 +55,24 @@ const getSavings = async (accessToken, id) => {
 }
 
 const deleteSavings = async (id, accessToken) => {
-  try{
+  try {
     await deleteDoc(doc(db, 'financials', `${accessToken}`, 'savings', `${id}`))
     return {
       success: true,
     }
-  } catch(error){
+  } catch (error) {
     return {
       success: false,
       message: `Can't Delete Savings Plan ${error.message}`
     }
   }
-  
+
 }
 
 const editSavingsMoney = async (savingsID, savingsName, amount, targetDate, currentDate, accessToken) => {
   const id = savingsID;
 
-  try { 
+  try {
     await setDoc(doc(db, 'financials', `${accessToken}`, 'savings', `${id}`), {
       id,
       data: {
