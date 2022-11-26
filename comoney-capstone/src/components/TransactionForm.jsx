@@ -1,6 +1,5 @@
 import React from "react";
 import { FiPlusSquare } from "react-icons/fi";
-import CategoryDropdown from "./CategoryDropdown";
 import CategoryModal from "./CategoryModal";
 import useInput from "../hooks/UseInput";
 import { FiTrash2 } from "react-icons/fi";
@@ -114,8 +113,15 @@ const TransactionForm = ({ transactionType, transactionData }) => {
           <div className="row">
             <div className="col-sm-12 col-lg-8 mb-2">
               <div className="dropdown">
-                <select className="form-select" aria-label="Default select example" onChange={(e) => {setSelectedCategory(e.target.value); setCategoryId(e.target.key)}}>
-                  <option value>{selectedCategory === null ? locale === "en" ? "Choose Category" : "Pilih Kategori" : selectedCategory}</option>
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setSelectedCategory(e.target.value);
+                    setCategoryId(e.target.key);
+                  }}
+                >
+                  <option value>{selectedCategory === null ? (locale === "en" ? "Choose Category" : "Pilih Kategori") : selectedCategory}</option>
                   {categories?.map((category) => (
                     <option value={category.data} key={category.id}>
                       {category.data}
