@@ -29,7 +29,7 @@ const EditTransaction = ({ transactiontype }) => {
           <div className="container">
             <div className="my-4">
               <h4>
-                <Link className="text-black text-decoration-none" to={`/detail/${id}`}><FiArrowLeft className="warna fs-2" />Back to Detail</Link>
+                <Link className="text-black text-decoration-none" to={`/detail/${id}`}><FiArrowLeft className="warna fs-2" />{locale === "en" ? "Back to Detail" : "Kembali ke Detail"}</Link>
               </h4>
             </div>
           </div>
