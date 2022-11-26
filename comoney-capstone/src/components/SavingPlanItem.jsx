@@ -9,12 +9,15 @@ import LocaleContext from "../context/LocaleContext";
 function SavingPlanItem({ saving, onDelete }) {
   const nowDate = new Date(saving.data.currentDate);
   const targetDate = new Date(saving.data.targetDate);
-  const Difference_In_Time = targetDate.getTime() - nowDate.getTime();
-  const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-  const Difference_In_Month = Difference_In_Days / 30;
+  const Difference_In_Month = (targetDate.getFullYear() - nowDate.getFullYear()) * 12;
+
+  // const Difference_In_Time = targetDate.getTime() - nowDate.getTime();
+  // const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+  // const Difference_In_Month = Difference_In_Days;
 
   const goalsDate = new Date(saving.data.targetDate);
-  const date = goalsDate.toDateString();
+  const month = goalsDate.toLocaleString('default', { month: 'long' });
+  const year = goalsDate.getFullYear()
 
   const [rupias, setRupias] = React.useState([]);
   const [roundedAmount, setRoundedAmount] = React.useState([]);
@@ -27,7 +30,6 @@ function SavingPlanItem({ saving, onDelete }) {
       let sisa = split[0].length % 3;
       let rupiah = split[0].substr(0, sisa);
       let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
       if (ribuan) {
         let separator = sisa ? "." : "";
         rupiah += separator + ribuan.join(".");
@@ -36,21 +38,39 @@ function SavingPlanItem({ saving, onDelete }) {
       setRupias(rupiah);
     }
     async function spendPerMonth() {
-      const spend = saving.data.amount / Difference_In_Month;
-      const rounded = Math.round(spend);
+      console.log(Difference_In_Month)
+      let spend = 0
+      if(Difference_In_Month !== 0){
+        spend = saving.data.amount / Difference_In_Month;
+        const rounded = Math.round(spend);
+        let number_string = rounded.toString();
+        let split = number_string.split(",");
+        let sisa = split[0].length % 3;
+        let rupiah = split[0].substr(0, sisa);
+        let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
-      let number_string = rounded.toString();
-      let split = number_string.split(",");
-      let sisa = split[0].length % 3;
-      let rupiah = split[0].substr(0, sisa);
-      let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+        if (ribuan) {
+          let separator = sisa ? "." : "";
+          rupiah += separator + ribuan.join(".");
+        }
+        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+        setRoundedAmount(rupiah);
+      }else{
+        spend = saving.data.amount
+        const rounded = Math.round(spend);
+        let number_string = rounded.toString();
+        let split = number_string.split(",");
+        let sisa = split[0].length % 3;
+        let rupiah = split[0].substr(0, sisa);
+        let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
-      if (ribuan) {
-        let separator = sisa ? "." : "";
-        rupiah += separator + ribuan.join(".");
+        if (ribuan) {
+          let separator = sisa ? "." : "";
+          rupiah += separator + ribuan.join(".");
+        }
+        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+        setRoundedAmount(rupiah);
       }
-      rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-      setRoundedAmount(rupiah);
     }
     formatRupias();
     spendPerMonth();
@@ -67,7 +87,7 @@ function SavingPlanItem({ saving, onDelete }) {
           <span className="savings-planning p-2">Rp {rupias}</span>
           <h6 className="mt-2">
             <FiCalendar />
-            <span className="mx-2">Target: {date}</span>
+            <span className="mx-2">Target: {month}, {year}</span>
           </h6>
           <h6 className="mt-2">
             <FiCheckSquare />
