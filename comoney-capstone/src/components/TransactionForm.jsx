@@ -119,7 +119,7 @@ const TransactionForm = ({ transactionType, transactionData }) => {
             <div className="col-sm-12 col-lg-8 mb-2">
               <div className="dropdown">
                 <select
-                  className="form-select input__height"
+                  className="form-select input__height mb-2"
                   aria-label="Default select example"
                   onChange={(e) => setCategoryData(e)}
                   required>
@@ -136,12 +136,12 @@ const TransactionForm = ({ transactionType, transactionData }) => {
             </div>
 
             <div className="col-sm-8 col-lg-3 mb-2">
-              <button type="button" className="btn btn-primary form-control btn-color input__height" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === "en" ? "Add New Category" : "Tambah Kategori Baru"}>
+              <button type="button" className="btn btn-primary form-control btn-color input__height mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === "en" ? "Add New Category" : "Tambah Kategori Baru"}>
                 <FiPlusSquare /> New Category
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">
-              <button type="button" className="btn btn-danger form-control input__height btn-hapus" title={locale === "en" ? "Delete Category" : "Hapus Kategori"} onClick={() => onDeleteCategory()}>
+              <button type="button" className="btn btn-danger form-control input__height btn-hapus mb-2" title={locale === "en" ? "Delete Category" : "Hapus Kategori"} onClick={() => onDeleteCategory()}>
                 <FiTrash2 />
               </button>
             </div>

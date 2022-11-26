@@ -13,14 +13,14 @@ const AddTransaction = () => {
         <div className="container text-center my-4  ">
           <div className="row">
             <div className="col">
-              <button className="fw-semibold medium__font button__no-style" onClick={() => setType('income')}>
-                <p className={type === 'income' ? "text-decoration-underline" : ''}>Income</p>
-              </button>
+              <Link className="fw-semibold medium__font button__no-style text-decoration-none text-dark input__height d-block pt-2" onClick={() => setType('income')}>
+                <p className={type === 'income' ? "text-decoration-underline m-0" : 'm-0'}>Income</p>
+              </Link>
             </div>
             <div className="col">
-              <button className="fw-semibold medium__font button__no-style" onClick={() => setType('expense')}>
-                <p className={type === 'expense' ? "text-decoration-underline" : ''}>Expense</p>
-              </button>
+              <Link className="fw-semibold medium__font button__no-style text-decoration-none text-dark input__height d-block pt-2" onClick={() => setType('expense')}>
+                <p className={type === 'expense' ? "text-decoration-underline m-0" : 'm-0'}>Expense</p>
+              </Link>
             </div>
           </div>
         </div>

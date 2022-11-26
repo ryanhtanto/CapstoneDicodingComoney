@@ -44,6 +44,11 @@ main {
   background-color: #013496;
 }
 
+.news-source {
+  position: absolute;
+  background-color: #F3A100;
+}
+
 .navbar__logo {
   width: 113px;
 }
