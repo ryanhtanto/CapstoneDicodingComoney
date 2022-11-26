@@ -51,7 +51,7 @@ const TransactionForm = ({ transactionType, transactionData }) => {
 
   const deleteCategory = () => {
     if (selectedCategory !== null) {
-      newCategoryIdb.deleteCategory(categoryId);
+      newCategoryIdb.deleteCategory(Number(categoryId));
       setSelectedCategory(null);
       Swal.fire({
         icon: "success",
@@ -101,8 +101,6 @@ const TransactionForm = ({ transactionType, transactionData }) => {
     }
   };
 
-  console.log(selectedCategory);
-
   return (
     <>
       <form className="my-5" onSubmit={onSubmit}>
@@ -117,13 +115,14 @@ const TransactionForm = ({ transactionType, transactionData }) => {
                   className="form-select"
                   aria-label="Default select example"
                   onChange={(e) => {
-                    setSelectedCategory(e.target.value);
-                    setCategoryId(e.target.key);
+                    const data = e.target.value.split("^");
+                    setSelectedCategory(data[0]);
+                    setCategoryId(data[1]);
                   }}
                 >
                   <option value>{selectedCategory === null ? (locale === "en" ? "Choose Category" : "Pilih Kategori") : selectedCategory}</option>
                   {categories?.map((category) => (
-                    <option value={category.data} key={category.id}>
+                    <option value={`${category.data}^${category.id}`} key={category.id}>
                       {category.data}
                     </option>
                   ))}
