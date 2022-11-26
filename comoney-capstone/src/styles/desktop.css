@@ -1,27 +1,50 @@
 /* navbar */
 @media only screen and (min-width: 1024px) {
-.dashboard__card {
-	border-radius: 10px;
-	padding: 15px 20px !important;
+	.dashboard__card {
+		border-radius: 10px;
+		padding: 15px 20px !important;
+	}
+
+	.card-content {
+		display: flex;
+		gap: 20px;
+	}
+
+	.card__income-expense {
+		flex-grow: 1;
+	}
 }
 
-.card-content {
-	display: flex;
-	gap: 20px;
-}
-
-.card__income-expense {
-	flex-grow: 1;
-}
-}
 /* end navbar */
 
 /* news */
-.cursor-p{
+.news-description {
+	overflow: hidden;
+	display: -webkit-box;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}
+
+.news-source {
+	position: absolute;
+	background-color: #FFC045;
+	font-size: 14px;
+}
+
+.news-link {
+	background-color: #FFC045;
+}
+
+.news-container {
+	min-height: 250px;
+}
+
+.cursor-p {
 	cursor: pointer;
 }
 
-.news-detail-image{
+.news-detail-image {
 	width: 50%;
 	height: auto;
 }
@@ -31,22 +54,27 @@
 	height: 250px;
 	object-fit: cover;
 }
+
 /* end of news */
 
 /* savings money */
-.bg-saving-color{
+.bg-saving-color {
 	background-color: #F2F2F2;
 	border-radius: 10px;
 }
-.saving-image{
+
+.saving-image {
 	width: 35%;
 	height: auto;
 }
-.saving-image-item{
+
+.saving-image-item {
 	width: 100%;
 }
-.savings-planning{
+
+.savings-planning {
 	background-color: #D3D3D3;
 	border-radius: 10px;
 }
+
 /* end of saving money */

@@ -8,8 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import DetailPage from "./pages/DetailPage";
 import Footer from "./components/Footer";
 import AddSavingPlan from "./pages/AddSavingPlan";
-import NewsDetail from "./pages/NewsDetail";
-import NewsListPage from "./pages/NewsListpage";
+import News from "./pages/News";
 import SavingPlanner from "./pages/SavingPlanner";
 import UserContext from "./context/UserContext";
 import LocaleContext from "./context/LocaleContext";
@@ -97,8 +96,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/add/transaction" element={<AddTransaction />} />
               <Route path="/edit/transaction/:id" element={<EditTransaction />} />
-              <Route path="/news" element={<NewsListPage />} />
-              <Route path="/news/detail" element={<NewsDetail />} />
+              <Route path="/news" element={<News />} />
               <Route path="/detail/:id" element={<DetailPage />} />
               <Route path="/saving-planner" element={<SavingPlanner />} />
               <Route path="/add-saving-plan" element={<AddSavingPlan />} />
