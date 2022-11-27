@@ -78,3 +78,19 @@
 }
 
 /* end of saving money */
+
+/* Detail Page */
+.button__no-style {
+	background-color: unset;
+	border: unset;
+}
+
+/* End Detail Page */
+
+/* Transaction Form */
+.prev-category {
+	background-color: #FFC045;
+	width: fit-content;
+}
+
+/* End Transaction Form */

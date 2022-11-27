@@ -46,7 +46,14 @@ const EditTransaction = ({ transactiontype }) => {
                   <p>{locale === "en" ? "Fill your detail expense below" : "Isi detail pengeluaran Anda di bawah ini"}</p>
                 </>
             }
-            <TransactionForm transactionData={transaction} />
+            <TransactionForm
+              transactionType={transaction.type}
+              transactionName={transaction.name}
+              transactionAmount={transaction.amount}
+              transactionDescription={transaction.description}
+              transactionCategory={transaction.category}
+              transactionId={transaction.id}
+            />
           </div>
         </div>
       </section>

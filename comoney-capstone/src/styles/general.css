@@ -44,11 +44,6 @@ main {
   background-color: #013496;
 }
 
-.news-source {
-  position: absolute;
-  background-color: #F3A100;
-}
-
 .navbar__logo {
   width: 113px;
 }
@@ -130,11 +125,3 @@ main {
 }
 
 /* end Footer */
-
-/* Detail Page */
-.button__no-style {
-  background-color: unset;
-  border: unset;
-}
-
-/* End Detail Page */

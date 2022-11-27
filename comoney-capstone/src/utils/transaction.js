@@ -65,9 +65,8 @@ const getThisMonthTransactions = async (accessToken) => {
   return data;
 }
 
-const addTransaction = async (transaction, accessToken) => {
+const addTransaction = async (transaction, accessToken, id = +new Date()) => {
   try {
-    const id = +new Date();
     await setDoc(doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`), {
       id,
       date: getFullDate(),
