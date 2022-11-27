@@ -11,7 +11,6 @@ const CategoryModal = ({ transactionType }) => {
   const { user } = React.useContext(UserContext);
 
   const onSubmit = async (e) => {
-    console.log(categoryName, user.uid, transactionType)
     e.preventDefault();
     Swal.showLoading();
     const data = await addCategory(categoryName, user.uid, transactionType);
@@ -22,6 +21,7 @@ const CategoryModal = ({ transactionType }) => {
         showConfirmButton: false,
         timer: 1000,
       });
+      window.location.reload();
     } else {
       Swal.fire({
         icon: "error",

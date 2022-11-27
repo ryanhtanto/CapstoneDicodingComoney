@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { deleteTransaction, getTransaction } from "../utils/transaction";
 import LocaleContext from '../context/LocaleContext';
+import Swal from "sweetalert2";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -24,9 +25,26 @@ const DetailPage = () => {
     getData();
   }, [user, id]);
 
-  const onDelete = async (id) => {
-    await deleteTransaction(id, user.uid);
-    navigate('/');
+  const onDelete = (id) => {
+    Swal.fire({
+      title: 'Delete This Transaction?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#013496',
+      cancelButtonColor: '#DC3545',
+      confirmButtonText: 'Delete'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteTransaction(id, user.uid);
+        Swal.fire({
+          icon: "success",
+          title: "Delete Transaction Success",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        navigate('/');
+      }
+    })
   }
 
   if (loading !== true) {

@@ -16,7 +16,7 @@ function Dashboard() {
       <section className="list__transaction">
         <div className="row mt-4 transaction__header">
           <div className="col-sm-12 col-md-8 mt-2">
-            <h2 className='fw-bold'>{locale === "en" ? "Latest Transaction" : "Transaksi Terbaru"}</h2>
+            <h2 className='fw-bold'>{locale === "en" ? "Daily Transaction" : "Transaksi Harian"}</h2>
             <p className="small__font">{locale === "en" ? "Click category name to see the detail" : "Klik nama kategori untuk melihat detail transaksi"}</p>
           </div>
           <div className="col-sm-12 col-md-4 mt-2">
@@ -25,8 +25,8 @@ function Dashboard() {
         </div>
         <ListTransaction dateSelected={date} />
       </section>
-      <Link to={`/add/transaction`}>
-        <button aria-label="add savings" id="addButton" className="addButton">
+      <Link to={`/add/income`}>
+        <button aria-label="add transaction" id="addButton" className="addButton">
           <FiPlus />
         </button>
       </Link>

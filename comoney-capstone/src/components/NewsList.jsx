@@ -13,7 +13,7 @@ const NewsList = () => {
     const getNewses = async () => {
       setLoading(true)
       try {
-        let response = await axios.get(CONFIG.NEWS_URL + CONFIG.API_KEY + CONFIG.MANY_NEWS);
+        let response = await axios.get(CONFIG.NEWS_URL + CONFIG.NEWS_API_KEY + CONFIG.MANY_NEWS);
         setNewses(response.data.articles)
         console.log(newses)
         setLoading(false)
@@ -21,6 +21,7 @@ const NewsList = () => {
         setLoading(true)
       }
     }
+    console.log(1)
     getNewses();
   }, [])
 
