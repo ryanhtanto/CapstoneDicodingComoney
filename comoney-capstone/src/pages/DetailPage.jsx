@@ -36,11 +36,12 @@ const DetailPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteTransaction(id, user.uid);
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        Swal.fire({
+          icon: "success",
+          title: "Delete Transaction Success",
+          showConfirmButton: false,
+          timer: 1000,
+        });
         navigate('/');
       }
     })

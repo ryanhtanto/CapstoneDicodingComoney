@@ -94,7 +94,7 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/add/transaction" element={<AddTransaction />} />
+              <Route path="/add/:type" element={<AddTransaction />} />
               <Route path="/edit/transaction/:id" element={<EditTransaction />} />
               <Route path="/news" element={<News />} />
               <Route path="/detail/:id" element={<DetailPage />} />

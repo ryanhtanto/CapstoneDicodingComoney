@@ -27,10 +27,9 @@ main {
   align-items: center;
   justify-content: center;
   background-color: #013496;
-
-  position: absolute;
-  bottom: 16px;
-  right: 7vw;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
   border-radius: 50%;
   border: 0;
 

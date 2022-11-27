@@ -90,6 +90,7 @@
 /* Transaction Form */
 .prev-category {
 	background-color: #FFC045;
+	transition: all 10s;
 	width: fit-content;
 }
 

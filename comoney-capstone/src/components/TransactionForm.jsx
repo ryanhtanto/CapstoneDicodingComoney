@@ -4,37 +4,44 @@ import CategoryModal from "./CategoryModal";
 import useInput from "../hooks/UseInput";
 import { FiTrash2 } from "react-icons/fi";
 import LocaleContext from "../context/LocaleContext";
-import { addTransaction } from "../utils/transaction";
 import UserContext from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { deleteCategory, getExpenseCategories, getIncomeCategories } from "../utils/category";
 
-const TransactionForm = ({ transactionType, transactionName, transactionAmount, transactionDescription, transactionCategory, transactionId }) => {
-  const [name, setName] = useInput(transactionName || "");
-  const [amount, setAmount] = useInput(transactionAmount || "");
-  const [description, setDescription] = useInput(transactionDescription || "");
-
-  const [selectedCategory, setSelectedCategory] = React.useState(transactionCategory || null);
+const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) => {
+  const [useDefaultValue, setUseDefaultValue] = React.useState(onEditHandler ? true : false);
+  const [name, setName, setDefaultName] = useInput("");
+  const [amount, setAmount, setDefaultAmount] = useInput("");
+  const [description, setDescription, setDefaultDescription] = useInput();
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categories, setCategories] = React.useState([]);
   const [categoryId, setCategoryId] = React.useState("");
 
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     async function getData() {
       let data;
-      if (transactionType === "income") {
+      if (type === "income") {
         data = await getIncomeCategories(user.uid);
       } else {
         data = await getExpenseCategories(user.uid);
       }
       setCategories(data || []);
+      console.log(10000)
     }
     getData();
-  }, [transactionType, user]);
+  }, [type, user, selectedCategory]);
+
+  React.useEffect(() => {
+    if (previousValue) {
+      setDefaultName(previousValue.name);
+      setDefaultAmount(previousValue.amount);
+      setDefaultDescription(previousValue.description);
+      setSelectedCategory(previousValue.category)
+    }
+  }, [])
 
   const onDeleteCategory = async () => {
     if (selectedCategory !== null) {
@@ -45,6 +52,7 @@ const TransactionForm = ({ transactionType, transactionName, transactionAmount, 
         showConfirmButton: false,
         timer: 1000,
       });
+      setSelectedCategory(null)
     } else {
       Swal.fire({
         icon: "error",
@@ -55,39 +63,8 @@ const TransactionForm = ({ transactionType, transactionName, transactionAmount, 
     }
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    Swal.showLoading();
-    const data = await addTransaction(
-      {
-        name,
-        amount,
-        type: transactionType,
-        category: selectedCategory,
-        description,
-      },
-      user.uid
-    );
-
-    if (data.success) {
-      Swal.fire({
-        icon: "success",
-        title: "Transaction Saved",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-      navigate("/");
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: data.message,
-        showConfirmButton: false,
-        timer: 1000,
-      });
-    }
-  };
-
   const setCategoryData = (e) => {
+    setUseDefaultValue(false);
     if (e.target.value === null) {
       return;
     }
@@ -97,11 +74,23 @@ const TransactionForm = ({ transactionType, transactionName, transactionAmount, 
     setCategoryId(data[1]);
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (onAddHandler) {
+      await onAddHandler({ name, amount, description, selectedCategory, type });
+      return;
+    }
+
+    if (onEditHandler) {
+      await onEditHandler({ name, amount, description, selectedCategory, type });
+      return;
+    }
+
+  }
+
   return (
     <>
-      <form className="my-5" onSubmit={onSubmit}>
-        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName} required></input>
-        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} required></input>
+      <form className="my-5" onSubmit={(e) => onSubmit(e)}>
         <div className="text-center my-4">
           <div className="row">
             <div className="col-sm-12 col-lg-8">
@@ -120,9 +109,7 @@ const TransactionForm = ({ transactionType, transactionName, transactionAmount, 
                     ))
                   }
                 </select>
-                {
-                  transactionCategory ? <p className="text-start p-2 rounded prev-category">Previous Value : {transactionCategory}</p> : null
-                }
+                <p className={useDefaultValue ? "rounded prev-category py-1 px-3 mb-2" : "d-none"}>Previous Category : {selectedCategory}</p>
               </div>
             </div>
 
@@ -138,13 +125,17 @@ const TransactionForm = ({ transactionType, transactionName, transactionAmount, 
             </div>
           </div>
         </div>
+        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName} required></input>
+        <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} required></input>
 
         <textarea className="form-control mb-4" placeholder={locale === "en" ? "Description" : "Deskripsi"} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
-          {locale === "en" ? "Add" : "Tambah"}
+          {
+            onAddHandler ? locale === "en" ? "Add" : "Tambah" : locale === "en" ? "Save" : "Simpan"
+          }
         </button>
       </form>
-      <CategoryModal transactionType={transactionType} />
+      <CategoryModal transactionType={type} />
     </>
   );
 };
