@@ -7,11 +7,11 @@ import LocaleContext from '../context/LocaleContext';
 
 function CardInformation() {
   const { user } = React.useContext(UserContext);
-  const [incomeDaily, setIncomeDaily] = React.useState(0);
-  const [expenseDaily, setExpenseDaily] = React.useState(0);
-  const [incomeMonthly, setIncomeMonthly] = React.useState(0);
-  const [expenseMonthly, setExpenseMonthly] = React.useState(0);
-  const [currentBalance, setCurrentBalance] = React.useState(0);
+  const [incomeDaily, setIncomeDaily] = React.useState(null);
+  const [expenseDaily, setExpenseDaily] = React.useState(null);
+  const [incomeMonthly, setIncomeMonthly] = React.useState(null);
+  const [expenseMonthly, setExpenseMonthly] = React.useState(null);
+  const [currentBalance, setCurrentBalance] = React.useState(null);
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
@@ -108,7 +108,9 @@ function CardInformation() {
     getMonthlyIncome();
     getDailyExpense();
     getMonthlyExpense();
-    getCurrentBalance();
+    setTimeout(() => {
+      getCurrentBalance();
+    }, 3000)
   }, [user]);
 
   return (
@@ -118,7 +120,7 @@ function CardInformation() {
         <div className="card-content">
           <article className="card__balance py-3 d-flex align-items-center px-4 mt-3">
             <BsWallet2 />
-            <div className="balance__container ms-4">
+            <div className="balance__container ms-4 placeholder-glow">
               <h3 className="fw-bold small__font">{locale === "en" ? "Current Balance" : "Saldo Saat Ini"}</h3>
               <p className="small__font">Rp {currentBalance}</p>
             </div>

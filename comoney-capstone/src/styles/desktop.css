@@ -95,3 +95,10 @@
 }
 
 /* End Transaction Form */
+
+/* List Transactions */
+.list__transaction {
+	min-height: 300px;
+}
+
+/* End List Transactions */

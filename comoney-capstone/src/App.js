@@ -12,7 +12,7 @@ import News from "./pages/News";
 import SavingPlanner from "./pages/SavingPlanner";
 import UserContext from "./context/UserContext";
 import LocaleContext from "./context/LocaleContext";
-import { getActiveUser } from "./utils/authentication-user";
+import { getActiveUser } from "./utils/authentication";
 import EditSavingPlan from "./pages/EditSavingPlan";
 import AddTransaction from "./pages/AddTransaction";
 
