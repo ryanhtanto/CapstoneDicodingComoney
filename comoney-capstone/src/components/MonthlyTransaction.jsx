@@ -21,7 +21,6 @@ function MonthlyTransaction() {
       } else {
         setTransactions(await getThisMonthTransactions(user.uid));
       }
-
       setLoading(false)
     }
     getData();

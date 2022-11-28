@@ -21,8 +21,8 @@ function DailyTransaction() {
       } else {
         setTransactions(await getTodayTransactions(user.uid));
       }
+      setLoading(false);
     }
-    setLoading(false)
     getData();
   }, [date, user]);
 
