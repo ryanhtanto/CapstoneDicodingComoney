@@ -23,7 +23,7 @@ function SavingPlanner() {
   return (
     <section>
       <div className="container">
-        <div className="row bg-saving-color p-4 mt-5 mb-5 w-75 mx-auto">
+        <div className="row bg-saving-color mt-5 mb-5 mx-auto">
           <div className="col-sm-6 px-4">
             <div className="d-flex">
               <img src={images} alt="icon-savings" className="saving-image" />
@@ -36,7 +36,7 @@ function SavingPlanner() {
             </p>
           </div>
         </div>
-        <div className="row mt-5 mb-5 w-75 mx-auto">
+        <div className="row mt-5 mb-5 mx-auto">
           <SavingPlan />
         </div>
         <Link to={`/add-saving-plan`}>

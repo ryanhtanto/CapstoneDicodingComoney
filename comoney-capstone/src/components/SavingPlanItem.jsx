@@ -11,13 +11,12 @@ function SavingPlanItem({ saving, onDelete }) {
   const targetDate = new Date(saving.data.targetDate);
  
   const Difference_In_Month = targetDate.getMonth() - nowDate.getMonth() + 12 * (targetDate.getFullYear() - nowDate.getFullYear());
-
-  // const goalsDate = new Date(saving.data.targetDate);
   const month = targetDate.toLocaleString('default', { month: 'long' });
   const year = targetDate.getFullYear()
 
   const [rupias, setRupias] = React.useState([]);
   const [roundedAmount, setRoundedAmount] = React.useState([]);
+  const [isOneMonth, setIsOneMonth] = React.useState(false);
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(function () {
@@ -51,6 +50,11 @@ function SavingPlanItem({ saving, onDelete }) {
       }
       rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
       setRoundedAmount(rupiah);
+      if(Difference_In_Month === 1){
+        setIsOneMonth(true)
+      }else{
+        setIsOneMonth(false)
+      }
     }
     formatRupias();
     spendPerMonth();
@@ -72,6 +76,7 @@ function SavingPlanItem({ saving, onDelete }) {
           <h6 className="mt-2">
             <FiCheckSquare />
             <span className="mx-2">{locale === "en" ? 'Save' : 'Tabung'} Rp {roundedAmount} / {locale === 'en' ? 'month' : 'bulan'}</span>
+            { isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold ">{locale === "en" ? 'Left on month' : 'Tersisa satu bulan'}</p> : '' }
           </h6>
           <Link to={`/edit-saving-plan/${saving.id}`}>
             <EditSavingButton />

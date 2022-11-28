@@ -3,7 +3,6 @@ import SavingPlanItem from "./SavingPlanItem";
 import LocaleContext from "../context/LocaleContext";
 import { getAllSavings, deleteSavings } from '../utils/savings';
 import UserContext from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function SavingPlan() {
@@ -11,7 +10,6 @@ function SavingPlan() {
   const [loading, setLoading] = useState(true);
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
-  const navigate = useNavigate();
   React.useEffect(function () {
     async function getData() {
       const valueFromDb = await getAllSavings(user.uid);
@@ -37,7 +35,6 @@ function SavingPlan() {
         timer: 2000
       })
       setSavings(valueFromDb);
-      navigate('/saving-planner');
       window.location.reload();
     } else {
       Swal.fire({
