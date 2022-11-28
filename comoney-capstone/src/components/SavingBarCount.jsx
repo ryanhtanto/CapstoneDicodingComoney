@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import UserContext from "../context/UserContext";
+import React, { useState } from 'react';
+import UserContext from '../context/UserContext';
 import { getAllSavings } from '../utils/savings';
-import LocaleContext from "../context/LocaleContext";
+import LocaleContext from '../context/LocaleContext';
 
 function SavingBarCount() {
   const [target, setTarget] = useState();
@@ -10,28 +10,28 @@ function SavingBarCount() {
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
 
-  React.useEffect(function () {
+  React.useEffect(() => {
     async function getData() {
       const valueFromDb = await getAllSavings(user.uid);
-      if(valueFromDb){
+      if (valueFromDb) {
         let totalAmount = 0;
         valueFromDb.forEach((doc) => {
           totalAmount += parseFloat(doc.data.amount);
-          let number_string = totalAmount.toString().replace(/[^,\d]/g, "");
-          let split = number_string.split(",");
-          let sisa = split[0].length % 3;
+          const numberString = totalAmount.toString().replace(/[^,\d]/g, '');
+          const split = numberString.split(',');
+          const sisa = split[0].length % 3;
           let rupiah = split[0].substring(0, sisa);
-          let ribuan = split[0].substring(sisa).match(/\d{3}/gi);
+          const ribuan = split[0].substring(sisa).match(/\d{3}/gi);
 
           if (ribuan) {
-            let separator = sisa ? "." : "";
-            rupiah += separator + ribuan.join(".");
+            const separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
           }
-          rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+          rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
           setTotal(rupiah);
           setTarget(valueFromDb.length);
           setLoading(false);
-        })
+        });
       } else {
         setLoading(true);
       }
@@ -43,19 +43,31 @@ function SavingBarCount() {
     return (
       <div className="mx-4 my-auto">
         <p className="fw-bold mb-0">
-          {locale === "en" ? "You have " : "Kamu mempunyai "} {target} {locale === "en" ? "savings target!" : "target tabungan!"}
+          {locale === 'en' ? 'You have ' : 'Kamu mempunyai '}
+          {' '}
+          {target}
+          {' '}
+          {locale === 'en' ? 'savings target!' : 'target tabungan!'}
         </p>
-        <p>Total Rp {total}</p>
-      </div>
-    );
-  } else {
-    return (
-      <div className="mx-4 my-auto">
-        <p className="fw-bold mb-0"> {locale === "en" ? "You don't have savings target!" : "Anda tidak memiliki target tabungan!"}</p>
-        <p> {locale === "en" ? "Go on! Make your target" : "Ayo! Buat target Anda"}</p>
+        <p>
+          Total Rp
+          {total}
+        </p>
       </div>
     );
   }
+  return (
+    <div className="mx-4 my-auto">
+      <p className="fw-bold mb-0">
+        {' '}
+        {locale === 'en' ? "You don't have savings target!" : 'Anda tidak memiliki target tabungan!'}
+      </p>
+      <p>
+        {' '}
+        {locale === 'en' ? 'Go on! Make your target' : 'Ayo! Buat target Anda'}
+      </p>
+    </div>
+  );
 }
 
 export default SavingBarCount;

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const NewsItemLoading = () => {
+function NewsItemLoading() {
   const news = [];
   for (let i = 0; i < 5; i++) {
     news.push(
@@ -12,25 +12,26 @@ const NewsItemLoading = () => {
             </div>
             <div className="col-lg-8 col-md-7 col-sm-12 p-4">
               <h2 className="placeholder-glow">
-                <span className="placeholder col-9 placeholder-lg rounded"></span>
+                <span className="placeholder col-9 placeholder-lg rounded" />
               </h2>
               <p className="text-muted placeholder-glow">
-                <span className="placeholder col-6 placeholder-lg rounded"></span>
+                <span className="placeholder col-6 placeholder-lg rounded" />
               </p>
               <h2 className="text-muted placeholder-glow">
-                <span className="placeholder col-6 placeholder-lg rounded"></span>
+                <span className="placeholder col-6 placeholder-lg rounded" />
               </h2>
             </div>
           </div>
         </div>
-      </div>
-    )
+      </div>,
+    );
   }
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {news}
+      { news }
     </>
   );
-};
+}
 
 export default NewsItemLoading;

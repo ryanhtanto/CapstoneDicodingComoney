@@ -1,12 +1,12 @@
-import React from "react";
-import { FiArrowLeft } from "react-icons/fi";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import UserContext from "../context/UserContext";
-import { deleteTransaction, getTransaction } from "../utils/transaction";
-import LocaleContext from "../context/LocaleContext";
-import Swal from "sweetalert2";
+import React from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import UserContext from '../context/UserContext';
+import { deleteTransaction, getTransaction } from '../utils/transaction';
+import LocaleContext from '../context/LocaleContext';
 
-const DetailPage = () => {
+function DetailPage() {
   const { id } = useParams();
   const { user } = React.useContext(UserContext);
   const [transaction, setTransaction] = React.useState(null);
@@ -16,33 +16,32 @@ const DetailPage = () => {
 
   React.useEffect(() => {
     const getData = async () => {
-      const transaction = await getTransaction(user.uid, id);
-      console.log(transaction);
-      setTransaction(transaction);
+      const data = await getTransaction(user.uid, id);
+      setTransaction(data);
       setLoading(false);
     };
 
     getData();
   }, [user, id]);
 
-  const onDelete = (id) => {
+  const onDelete = (idCategory) => {
     Swal.fire({
-      title: "Delete This Transaction?",
-      icon: "warning",
+      title: 'Delete This Transaction?',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#013496",
-      cancelButtonColor: "#DC3545",
-      confirmButtonText: "Delete",
+      confirmButtonColor: '#013496',
+      cancelButtonColor: '#DC3545',
+      confirmButtonText: 'Delete',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteTransaction(id, user.uid);
+        await deleteTransaction(idCategory, user.uid);
         Swal.fire({
-          icon: "success",
-          title: "Delete Transaction Success",
+          icon: 'success',
+          title: 'Delete Transaction Success',
           showConfirmButton: false,
           timer: 1000,
         });
-        navigate("/");
+        navigate('/');
       }
     });
   };
@@ -53,34 +52,37 @@ const DetailPage = () => {
         <div className="container">
           <div className="my-4">
             <h4>
-              <Link className="text-black text-decoration-none pedingBack" to={"/"}>
+              <Link className="text-black text-decoration-none pedingBack" to="/">
                 <FiArrowLeft className="warna fs-2" />
-                {locale === "en" ? "Back to Dashboard" : "Kembali ke Dasbor"}
+                {locale === 'en' ? 'Back to Dashboard' : 'Kembali ke Dasbor'}
               </Link>
             </h4>
           </div>
 
           <div className="content">
-            <h4 className="fw-bold">{locale === "en" ? "Detail Transaction" : "Detail Transaksi"}</h4>
+            <h4 className="fw-bold">{locale === 'en' ? 'Detail Transaction' : 'Detail Transaksi'}</h4>
 
             <div className="my-4">
-              <h5>{locale === "en" ? "Date" : "Tanggal"}</h5>
+              <h5>{locale === 'en' ? 'Date' : 'Tanggal'}</h5>
               <p>{transaction.date}</p>
             </div>
             <div className="my-4">
-              <h5>{locale === "en" ? "Name" : "Nama"}</h5>
+              <h5>{locale === 'en' ? 'Name' : 'Nama'}</h5>
               <p>{transaction.name}</p>
             </div>
             <div className="my-4">
-              <h5>{locale === "en" ? "Amount" : "Nominal"}</h5>
-              <p>Rp. {transaction.amount}</p>
+              <h5>{locale === 'en' ? 'Amount' : 'Nominal'}</h5>
+              <p>
+                Rp.
+                {transaction.amount}
+              </p>
             </div>
             <div className="my-4">
-              <h5>{locale === "en" ? "Category" : "Kategori"}</h5>
+              <h5>{locale === 'en' ? 'Category' : 'Kategori'}</h5>
               <p>{transaction.category}</p>
             </div>
             <div className="my-4">
-              <h5>{locale === "en" ? "Description" : "Deskripsi"}</h5>
+              <h5>{locale === 'en' ? 'Description' : 'Deskripsi'}</h5>
               <p>{transaction.description}</p>
             </div>
             <button type="submit" className="btn btn-primary input__height form-control btn-color my-4" onClick={() => navigate(`/edit/transaction/${id}`)}>
@@ -94,6 +96,6 @@ const DetailPage = () => {
       </section>
     );
   }
-};
+}
 
 export default DetailPage;

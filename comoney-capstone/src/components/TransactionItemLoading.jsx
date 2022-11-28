@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function TransactionItemLoading() {
   const transaction = [];
@@ -10,15 +10,16 @@ function TransactionItemLoading() {
           <p className="fw-bold ms-2 small__font text-dark placeholder rounded">Default Name</p>
         </div>
         <p className="fw-bold small__font placeholder rounded">Default Amount</p>
-      </li>
-    )
+      </li>,
+    );
   }
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {transaction}
+      { transaction }
     </>
-  )
+  );
 }
 
 export default TransactionItemLoading;
