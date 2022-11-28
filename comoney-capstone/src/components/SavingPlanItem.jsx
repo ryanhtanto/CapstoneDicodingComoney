@@ -76,7 +76,7 @@ function SavingPlanItem({ saving, onDelete }) {
           <h6 className="mt-2">
             <FiCheckSquare />
             <span className="mx-2">{locale === "en" ? 'Save' : 'Tabung'} Rp {roundedAmount} / {locale === 'en' ? 'month' : 'bulan'}</span>
-            { isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold ">{locale === "en" ? 'Left on month' : 'Tersisa satu bulan'}</p> : '' }
+            { isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold ">{locale === "en" ? 'Left one month!' : 'Tersisa satu bulan!'}</p> : '' }
           </h6>
           <Link to={`/edit-saving-plan/${saving.id}`}>
             <EditSavingButton />
