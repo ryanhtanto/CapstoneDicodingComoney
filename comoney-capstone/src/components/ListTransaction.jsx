@@ -1,12 +1,8 @@
 import React from "react";
+import { getFullDate } from "../utils/date-formatter";
 import TransactionItem from "./TransactionItem";
 
 function ListTransaction({ transactions }) {
-  if (!transactions.length) {
-    console.log(1)
-    return <h2 className="medium__font text-center mt-5 fw-bold">Empty Transactions</h2>
-  }
-
   return (
     <ul className="m-0 p-0">
       {
