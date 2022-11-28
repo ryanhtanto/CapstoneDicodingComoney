@@ -12,7 +12,7 @@ const NewsItemLoading = ({ title, publishedAt, description, image, url, source }
                 <FcLink className="mx-1" />
                 {source}
               </span>
-              <img src={image} className="news-img rounded-start lazyload" alt={title} />
+              <img data-src={image} className="news-img rounded-start lazyload" alt={title} />
             </div>
             <div className="col-lg-8 col-md-7 col-sm-12 p-4">
               <h2 className="fw-bold medium__font">

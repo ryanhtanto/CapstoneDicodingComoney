@@ -4,7 +4,7 @@ const NewsItemLoading = () => {
   const news = [];
   for (let i = 0; i < 5; i++) {
     news.push(
-      <div className="card my-4">
+      <div className="card my-4" key={i}>
         <div className="cary-body p-0">
           <div className="row news-container">
             <div className="col-lg-4 col-md-5 col-sm-12">
