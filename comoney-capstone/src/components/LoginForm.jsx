@@ -1,7 +1,7 @@
 import React from 'react';
 import useInput from '../hooks/UseInput';
 import userContext from '../context/UserContext';
-import { login } from '../utils/authentication';
+import { login } from '../utils/authentication-user';
 import Swal from 'sweetalert2';
 
 function LoginForm() {

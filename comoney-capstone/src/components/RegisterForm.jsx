@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../context/UserContext';
 import useInput from '../hooks/UseInput';
-import { register } from '../utils/authentication';
+import { register } from '../utils/authentication-user';
 
 function RegisterForm() {
 	const [name, setName] = useInput('');

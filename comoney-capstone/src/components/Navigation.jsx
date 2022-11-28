@@ -3,7 +3,7 @@ import logo from "../assets/logo-light.svg";
 import { FiLogOut } from "react-icons/fi";
 import { BsTranslate } from "react-icons/bs";
 import UserContext from "../context/UserContext";
-import { logout } from "../utils/authentication";
+import { logout } from "../utils/authentication-user";
 import LocaleContext from "../context/LocaleContext";
 import { Link } from "react-router-dom";
 
