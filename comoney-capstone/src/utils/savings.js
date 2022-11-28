@@ -6,7 +6,6 @@ const db = getFirestore(app);
 const addSavingsMoney = async (savingsName, amount, targetDate, accessToken) => {
   try {
     const id = +new Date();
-    console.log(id);
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;

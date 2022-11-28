@@ -9,15 +9,12 @@ import LocaleContext from "../context/LocaleContext";
 function SavingPlanItem({ saving, onDelete }) {
   const nowDate = new Date(saving.data.currentDate);
   const targetDate = new Date(saving.data.targetDate);
-  const Difference_In_Month = (targetDate.getFullYear() - nowDate.getFullYear()) * 12;
+ 
+  const Difference_In_Month = targetDate.getMonth() - nowDate.getMonth() + 12 * (targetDate.getFullYear() - nowDate.getFullYear());
 
-  // const Difference_In_Time = targetDate.getTime() - nowDate.getTime();
-  // const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-  // const Difference_In_Month = Difference_In_Days;
-
-  const goalsDate = new Date(saving.data.targetDate);
-  const month = goalsDate.toLocaleString('default', { month: 'long' });
-  const year = goalsDate.getFullYear()
+  // const goalsDate = new Date(saving.data.targetDate);
+  const month = targetDate.toLocaleString('default', { month: 'long' });
+  const year = targetDate.getFullYear()
 
   const [rupias, setRupias] = React.useState([]);
   const [roundedAmount, setRoundedAmount] = React.useState([]);
@@ -28,8 +25,8 @@ function SavingPlanItem({ saving, onDelete }) {
       let number_string = saving.data.amount.replace(/[^,\d]/g, "").toString();
       let split = number_string.split(",");
       let sisa = split[0].length % 3;
-      let rupiah = split[0].substr(0, sisa);
-      let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+      let rupiah = split[0].substring(0, sisa);
+      let ribuan = split[0].substring(sisa).match(/\d{3}/gi);
       if (ribuan) {
         let separator = sisa ? "." : "";
         rupiah += separator + ribuan.join(".");
@@ -38,39 +35,22 @@ function SavingPlanItem({ saving, onDelete }) {
       setRupias(rupiah);
     }
     async function spendPerMonth() {
-      console.log(Difference_In_Month)
       let spend = 0
-      if(Difference_In_Month !== 0){
-        spend = saving.data.amount / Difference_In_Month;
-        const rounded = Math.round(spend);
-        let number_string = rounded.toString();
-        let split = number_string.split(",");
-        let sisa = split[0].length % 3;
-        let rupiah = split[0].substr(0, sisa);
-        let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+      spend = saving.data.amount / Difference_In_Month;
+     
+      const rounded = Math.round(spend);
+      let number_string = rounded.toString();
+      let split = number_string.split(",");
+      let sisa = split[0].length % 3;
+      let rupiah = split[0].substring(0, sisa);
+      let ribuan = split[0].substring(sisa).match(/\d{3}/gi);
 
-        if (ribuan) {
-          let separator = sisa ? "." : "";
-          rupiah += separator + ribuan.join(".");
-        }
-        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-        setRoundedAmount(rupiah);
-      }else{
-        spend = saving.data.amount
-        const rounded = Math.round(spend);
-        let number_string = rounded.toString();
-        let split = number_string.split(",");
-        let sisa = split[0].length % 3;
-        let rupiah = split[0].substr(0, sisa);
-        let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-        if (ribuan) {
-          let separator = sisa ? "." : "";
-          rupiah += separator + ribuan.join(".");
-        }
-        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-        setRoundedAmount(rupiah);
+      if (ribuan) {
+        let separator = sisa ? "." : "";
+        rupiah += separator + ribuan.join(".");
       }
+      rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+      setRoundedAmount(rupiah);
     }
     formatRupias();
     spendPerMonth();
