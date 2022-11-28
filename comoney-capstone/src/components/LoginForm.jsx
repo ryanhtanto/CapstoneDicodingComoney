@@ -1,12 +1,12 @@
-import React from "react";
-import useInput from "../hooks/UseInput";
-import userContext from "../context/UserContext";
-import { login } from "../utils/authentication-user";
-import Swal from "sweetalert2";
+import React from 'react';
+import Swal from 'sweetalert2';
+import useInput from '../hooks/UseInput';
+import userContext from '../context/UserContext';
+import { login } from '../utils/authentication-user';
 
 function LoginForm() {
-  const [email, setEmail] = useInput("");
-  const [password, setPassword] = useInput("");
+  const [email, setEmail] = useInput('');
+  const [password, setPassword] = useInput('');
   const { setUser } = React.useContext(userContext);
 
   const onSubmit = async (event) => {
@@ -15,14 +15,19 @@ function LoginForm() {
     const data = await login(email, password);
     if (data.success) {
       Swal.fire({
-        icon: "success",
-        title: "Login Success",
+        icon: 'success',
+        title: 'Login Success',
         showConfirmButton: false,
         timer: 1000,
       });
       setUser(data.user || null);
     } else {
-      alert(data.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 
@@ -41,7 +46,8 @@ function LoginForm() {
       </div>
       <div className="form-group mt-4">
         <p className="text-center font-color">
-          Don't have an account?{" "}
+          Dont have an account?
+          {' '}
           <a href="/register" className="linkedAuth fw-bold peding">
             Sign Up
           </a>

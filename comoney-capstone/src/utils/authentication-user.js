@@ -4,16 +4,16 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  updateProfile
-} from "firebase/auth";
+  updateProfile,
+} from 'firebase/auth';
 import app from '../global/firebase-config';
-const auth = getAuth(app);
 
+const auth = getAuth(app);
 
 const getStatusAuthenticated = () => {
   const state = localStorage.getItem('authenticated');
   return state;
-}
+};
 
 const login = async (email, password) => {
   try {
@@ -25,8 +25,8 @@ const login = async (email, password) => {
   } catch (error) {
     return {
       success: false,
-      message: "Wrong Email / Password"
-    }
+      message: 'Wrong Email / Password',
+    };
   }
 };
 
@@ -47,27 +47,25 @@ const register = async (email, password, name) => {
   } catch (error) {
     return {
       success: false,
-      message: `Failed Create Account ${error.message}`
-    }
+      message: `Failed Create Account ${error.message}`,
+    };
   }
 };
 
-const getActiveUser = () => {
-  return new Promise((resolve, reject) => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        resolve(user);
-      } else {
-        reject()
-      }
-    });
-  })
-};
+const getActiveUser = () => new Promise((resolve, reject) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      resolve(user);
+    } else {
+      reject();
+    }
+  });
+});
 
 export {
   login,
   logout,
   register,
   getActiveUser,
-  getStatusAuthenticated
+  getStatusAuthenticated,
 };

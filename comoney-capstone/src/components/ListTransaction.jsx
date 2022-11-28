@@ -1,20 +1,24 @@
-import React from "react";
-import { getFullDate } from "../utils/date-formatter";
-import TransactionItem from "./TransactionItem";
+import React from 'react';
+import TransactionItem from './TransactionItem';
 
 function ListTransaction({ transactions }) {
+  if (!transactions.length) {
+    return <h2 className="medium__font text-center mt-5 fw-bold">Empty Transactions</h2>;
+  }
+
   return (
     <ul className="m-0 p-0">
       {
-        transactions.length ?
-          transactions.map((transaction) => {
-            return <TransactionItem
+        transactions.length
+          ? transactions.map((transaction) => (
+            <TransactionItem
               id={transaction.id}
               key={transaction.id}
               type={transaction.type}
               category={transaction.category}
-              amount={transaction.amount} />
-          }) : null
+              amount={transaction.amount}
+            />
+          )) : null
       }
     </ul>
   );

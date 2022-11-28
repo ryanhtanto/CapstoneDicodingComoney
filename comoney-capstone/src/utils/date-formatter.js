@@ -5,7 +5,7 @@ const getFullDate = () => {
   const year = unformattedDate.getFullYear();
 
   return `${year}-${month}-${day}`;
-}
+};
 
 const getMonthYear = () => {
   const unformattedDate = new Date();
@@ -13,7 +13,7 @@ const getMonthYear = () => {
   const year = unformattedDate.getFullYear();
 
   return `${year}-${month}`;
-}
+};
 
 const showFormattedDate = (date) => {
   const options = {

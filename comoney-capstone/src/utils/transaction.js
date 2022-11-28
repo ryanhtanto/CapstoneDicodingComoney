@@ -1,4 +1,3 @@
-import { getFullDate, getMonthYear } from "./date-formatter";
 import {
   collection,
   deleteDoc,
@@ -8,8 +7,9 @@ import {
   getFirestore,
   query,
   setDoc,
-  where
-} from "firebase/firestore";
+  where,
+} from 'firebase/firestore';
+import { getFullDate, getMonthYear } from './date-formatter';
 import app from '../global/firebase-config';
 
 const thisDay = getFullDate();
@@ -20,13 +20,13 @@ const getAllTransactions = async (accessToken) => {
   const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
-  let data = [];
-  docsSnap.forEach((doc) => {
-    data.push(doc.data());
-  })
+  const data = [];
+  docsSnap.forEach((docItem) => {
+    data.push(docItem.data());
+  });
 
   return data;
-}
+};
 
 const getTransaction = async (accessToken, id) => {
   const docRef = doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`);
@@ -34,19 +34,18 @@ const getTransaction = async (accessToken, id) => {
 
   if (docSnap.exists()) {
     return docSnap.data();
-  } else {
-    alert("No such document!");
   }
-}
+  alert('No such document!');
+};
 
 const getTodayTransactions = async (accessToken, dateSelected = thisDay) => {
-  const todayQuery = query(collection(db, 'financials', `${accessToken}`, 'transactions'), where("date", "==", dateSelected));
+  const todayQuery = query(collection(db, 'financials', `${accessToken}`, 'transactions'), where('date', '==', dateSelected));
   const querySnapshot = await getDocs(todayQuery);
 
-  let data = [];
-  querySnapshot.forEach((doc) => {
-    data.push(doc.data());
-  })
+  const data = [];
+  querySnapshot.forEach((docItem) => {
+    data.push(docItem.data());
+  });
 
   return data;
 };
@@ -55,15 +54,15 @@ const getThisMonthTransactions = async (accessToken, monthSelected = thisMonth) 
   const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
-  let data = [];
-  docsSnap.forEach((doc) => {
-    if (doc.data().date.slice(0, 7) === monthSelected) {
-      data.push(doc.data());
+  const data = [];
+  docsSnap.forEach((docItem) => {
+    if (docItem.data().date.slice(0, 7) === monthSelected) {
+      data.push(docItem.data());
     }
-  })
+  });
 
   return data;
-}
+};
 
 const putTransaction = async (transaction, accessToken, id = +new Date()) => {
   try {
@@ -78,18 +77,18 @@ const putTransaction = async (transaction, accessToken, id = +new Date()) => {
     });
     return {
       success: true,
-    }
+    };
   } catch (error) {
     return {
       success: false,
-      message: `Failed Add Transaction ${error.message}`
-    }
+      message: `Failed Add Transaction ${error.message}`,
+    };
   }
 };
 
 const deleteTransaction = async (id, accessToken) => {
-  await deleteDoc(doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`))
-}
+  await deleteDoc(doc(db, 'financials', `${accessToken}`, 'transactions', `${id}`));
+};
 
 export {
   putTransaction,
@@ -97,5 +96,5 @@ export {
   getTodayTransactions,
   getTransaction,
   getThisMonthTransactions,
-  getAllTransactions
+  getAllTransactions,
 };
