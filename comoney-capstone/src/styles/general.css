@@ -152,3 +152,30 @@ main {
 }
 
 /* end of saving plan */
+
+/* button spacing */
+
+.peding{
+  padding: 13px 9px 13px 9px;
+}
+
+.pedingSaving{
+  padding: 9px 13px 9px 13px;
+}
+
+.pedingNav{
+  height: 44px;
+  width: 44px;
+}
+
+.pedingItem{
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 0px 10px 0px !important;
+}
+
+.pedingBack{
+  padding: 9px 0px 9px 0px;
+}
+
+/* end of button spacing */

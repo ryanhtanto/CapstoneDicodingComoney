@@ -78,9 +78,9 @@ function EditSavingsForm(getId) {
 
         return (
                 <form className="my-5" onSubmit={onSubmit}>
-                        <input type="text" className="form-control my-4" placeholder="Name" aria-label="Name" value={savingsName || selectedSaving.name} onChange={setSavingsName} />
-                        <input type="number" className="form-control my-4" placeholder="Amount target" aria-label="Amount target" value={amount || selectedSaving.amount} onChange={setAmount} />
-                        <input className="form-control my-4" type="month" value={targetDate || selectedSaving.targetDate} onChange={setTargetDate} />
+                        <input type="text" className="form-control my-4 input__height" placeholder="Name" aria-label="Name" value={savingsName || selectedSaving.name} onChange={setSavingsName} />
+                        <input type="number" className="form-control my-4 input__height" placeholder="Amount target" aria-label="Amount target" value={amount || selectedSaving.amount} onChange={setAmount} />
+                        <input className="form-control my-4 input__height" type="month" value={targetDate || selectedSaving.targetDate} onChange={setTargetDate} />
                         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">{locale === "en" ? "Edit your Savings" : "Edit Tabungan Anda"}</button>
                 </form>
         );

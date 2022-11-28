@@ -56,9 +56,9 @@ function AddSavingForm() {
 
         return (
                 <form className="my-5" onSubmit={onSubmit}>
-                        <input type="text" className="form-control my-4" placeholder={locale === "en" ? "Savings Name" : "Nama Tabungan"} aria-label={locale === "en" ? "Savings Name" : "Nama Tabungan"} value={savingsName} onChange={setSavingsName} />
-                        <input type="number" className="form-control my-4" placeholder={locale === "en" ? "Amount Target" : "Jumlah Target"} aria-label={locale === "en" ? "Amount Target" : "Jumlah Target"} value={amount} onChange={setAmount} />
-                        <input type="month" className="form-control my-4" value={targetDate} onChange={setTargetDate} />
+                        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Savings Name" : "Nama Tabungan"} aria-label={locale === "en" ? "Savings Name" : "Nama Tabungan"} value={savingsName} onChange={setSavingsName} />
+                        <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount Target" : "Jumlah Target"} aria-label={locale === "en" ? "Amount Target" : "Jumlah Target"} value={amount} onChange={setAmount} />
+                        <input type="month" className="form-control my-4 input__height" value={targetDate} onChange={setTargetDate} />
                         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">{locale === "en" ? "Add New Savings" : "Tambahkan Tabungan Baru"}</button>
                 </form>
         );

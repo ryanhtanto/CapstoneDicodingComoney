@@ -1,13 +1,13 @@
-import React from 'react';
-import CardInformation from '../components/CardInformation';
-import ListTransaction from '../components/ListTransaction';
-import useInput from '../hooks/UseInput';
-import { FiPlus } from 'react-icons/fi';
+import React from "react";
+import CardInformation from "../components/CardInformation";
+import ListTransaction from "../components/ListTransaction";
+import useInput from "../hooks/UseInput";
+import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import LocaleContext from '../context/LocaleContext';
-import UserContext from '../context/UserContext';
-import { getThisMonthTransactions, getTodayTransactions } from '../utils/transaction';
-import { getFullDate, getMonthYear } from '../utils/date-formatter';
+import LocaleContext from "../context/LocaleContext";
+import UserContext from "../context/UserContext";
+import { getThisMonthTransactions, getTodayTransactions } from "../utils/transaction";
+import { getFullDate, getMonthYear } from "../utils/date-formatter";
 
 function Dashboard() {
   const [date, setDate] = useInput(null);
@@ -29,11 +29,11 @@ function Dashboard() {
       if (month !== null) {
         setMonthlyTransaction(await getThisMonthTransactions(user.uid, month));
       } else {
-        setMonthlyTransaction(await getThisMonthTransactions(user.uid))
+        setMonthlyTransaction(await getThisMonthTransactions(user.uid));
       }
 
-      setLoading(false)
-    }
+      setLoading(false);
+    };
     getData();
   }, [date, month, user]);
 
@@ -47,11 +47,11 @@ function Dashboard() {
       <section className="list__transaction">
         <div className="row mt-4 transaction__header">
           <div className="col-sm-12 col-md-8 mt-2">
-            <h2 className='fw-bold'>{locale === "en" ? "Daily Transaction" : "Transaksi Harian"}</h2>
+            <h2 className="fw-bold">{locale === "en" ? "Daily Transaction" : "Transaksi Harian"}</h2>
             <p className="small__font">{locale === "en" ? "Click category name to see the detail" : "Klik nama kategori untuk melihat detail transaksi"}</p>
           </div>
           <div className="col-sm-12 col-md-4 mt-2">
-            <input className='form-control' type="date" onChange={setDate} />
+            <input className="form-control input__height" type="date" onChange={setDate} />
           </div>
         </div>
         <div className="transaction__content">
@@ -62,11 +62,11 @@ function Dashboard() {
       <section className="list__transaction">
         <div className="row mt-4 transaction__header">
           <div className="col-sm-12 col-md-8 mt-2">
-            <h2 className='fw-bold'>{locale === "en" ? "Monthly Transaction" : "Transaksi Bulanan"}</h2>
+            <h2 className="fw-bold">{locale === "en" ? "Monthly Transaction" : "Transaksi Bulanan"}</h2>
             <p className="small__font">{locale === "en" ? "Click category name to see the detail" : "Klik nama kategori untuk melihat detail transaksi"}</p>
           </div>
           <div className="col-sm-12 col-md-4 mt-2">
-            <input className='form-control' type="month" onChange={setMonth} />
+            <input className="form-control input__height" type="month" onChange={setMonth} />
           </div>
         </div>
         <div className="transaction__content">
@@ -79,7 +79,7 @@ function Dashboard() {
           <FiPlus />
         </button>
       </Link>
-    </div >
+    </div>
   );
 }
 

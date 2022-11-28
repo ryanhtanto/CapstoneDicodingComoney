@@ -155,7 +155,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
                   <option value="">Select Category</option>
                   {
                     categories?.map((category) => (
-                      <option value={`${category.categoryName}^@#${category.id}`} key={category.id}>
+                      <option value={`${category.categoryName}^@#${category.id}`} key={category.id} className="peding">
                         {category.categoryName}
                       </option>
                     ))
@@ -181,7 +181,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
         <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} ></input>
 
         <textarea className="form-control mb-4" placeholder={locale === "en" ? "Description" : "Deskripsi"} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
-        <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
+        <button type="submit" className="btn btn-primary input__height form-control btn-color">
           {
             onAddHandler ? locale === "en" ? "Add" : "Tambah" : locale === "en" ? "Save" : "Simpan"
           }

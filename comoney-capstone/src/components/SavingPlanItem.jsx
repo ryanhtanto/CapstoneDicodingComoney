@@ -9,10 +9,10 @@ import LocaleContext from "../context/LocaleContext";
 function SavingPlanItem({ saving, onDelete }) {
   const nowDate = new Date(saving.data.currentDate);
   const targetDate = new Date(saving.data.targetDate);
- 
+
   const Difference_In_Month = targetDate.getMonth() - nowDate.getMonth() + 12 * (targetDate.getFullYear() - nowDate.getFullYear());
-  const month = targetDate.toLocaleString('default', { month: 'long' });
-  const year = targetDate.getFullYear()
+  const month = targetDate.toLocaleString("default", { month: "long" });
+  const year = targetDate.getFullYear();
 
   const [rupias, setRupias] = React.useState([]);
   const [roundedAmount, setRoundedAmount] = React.useState([]);
@@ -34,9 +34,9 @@ function SavingPlanItem({ saving, onDelete }) {
       setRupias(rupiah);
     }
     async function spendPerMonth() {
-      let spend = 0
+      let spend = 0;
       spend = saving.data.amount / Difference_In_Month;
-     
+
       const rounded = Math.round(spend);
       let number_string = rounded.toString();
       let split = number_string.split(",");
@@ -50,10 +50,10 @@ function SavingPlanItem({ saving, onDelete }) {
       }
       rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
       setRoundedAmount(rupiah);
-      if(Difference_In_Month === 1){
-        setIsOneMonth(true)
-      }else{
-        setIsOneMonth(false)
+      if (Difference_In_Month === 1) {
+        setIsOneMonth(true);
+      } else {
+        setIsOneMonth(false);
       }
     }
     formatRupias();
@@ -71,12 +71,16 @@ function SavingPlanItem({ saving, onDelete }) {
           <span className="savings-planning p-2">Rp {rupias}</span>
           <h6 className="mt-2">
             <FiCalendar />
-            <span className="mx-2">Target: {month}, {year}</span>
+            <span className="mx-2">
+              Target: {month}, {year}
+            </span>
           </h6>
           <h6 className="mt-2">
             <FiCheckSquare />
-            <span className="mx-2">{locale === "en" ? 'Save' : 'Tabung'} Rp {roundedAmount} / {locale === 'en' ? 'month' : 'bulan'}</span>
-            { isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold ">{locale === "en" ? 'One month left!' : 'Tersisa satu bulan!'}</p> : '' }
+            <span className="mx-2">
+              {locale === "en" ? "Save" : "Tabung"} Rp {roundedAmount} / {locale === "en" ? "month" : "bulan"}
+            </span>
+            {isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold ">{locale === "en" ? "One month left!" : "Tersisa satu bulan!"}</p> : ""}
           </h6>
           <Link to={`/edit-saving-plan/${saving.id}`}>
             <EditSavingButton />

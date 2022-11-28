@@ -21,7 +21,7 @@ const EditTransaction = ({ transactiontype }) => {
       const transaction = await getTransaction(user.uid, id);
       setTransaction(transaction);
       setLoading(false);
-    }
+    };
     getData();
   }, [user, id]);
 
@@ -35,7 +35,8 @@ const EditTransaction = ({ transactiontype }) => {
         category: transaction.selectedCategory,
         description: transaction.description,
       },
-      user.uid, id
+      user.uid,
+      id
     );
 
     if (data.success) {
@@ -45,7 +46,7 @@ const EditTransaction = ({ transactiontype }) => {
         showConfirmButton: false,
         timer: 1000,
       });
-      navigate('/')
+      navigate("/");
     } else {
       Swal.fire({
         icon: "error",
@@ -56,37 +57,34 @@ const EditTransaction = ({ transactiontype }) => {
     }
   };
 
-  console.log(transaction)
+  console.log(transaction);
 
   if (loading !== true) {
     return (
       <section>
         <div className="container">
-          <div className="container">
-            <div className="my-4">
-              <h4>
-                <Link className="text-black text-decoration-none" to={`/detail/${id}`}><FiArrowLeft className="warna fs-2" />{locale === "en" ? "Back to Detail" : "Kembali ke Detail"}</Link>
-              </h4>
-            </div>
+          <div className="my-4">
+            <h4>
+              <Link className="text-black text-decoration-none pedingBack" to={`/detail/${id}`}>
+                <FiArrowLeft className="warna fs-2" />
+                {locale === "en" ? "Back to Detail" : "Kembali ke Detail"}
+              </Link>
+            </h4>
           </div>
+
           <div className="content">
-            {
-              transactiontype === 'income' ?
-                <>
-                  <h4 className="fw-bold medium__font">{locale === "en" ? "Edit your income, here" : "Ubah pemasukan Anda, di sini"}</h4>
-                  <p>{locale === "en" ? "Fill your detail income below" : "Isi detail pemasukan Anda di bawah ini"}</p>
-                </>
-                :
-                <>
-                  <h4 className="fw-bold medium__font">{locale === "en" ? "Edit your expense, here" : "Ubah pengeluaran Anda, di sini"}</h4>
-                  <p>{locale === "en" ? "Fill your detail expense below" : "Isi detail pengeluaran Anda di bawah ini"}</p>
-                </>
-            }
-            <TransactionForm
-              type={transaction.type}
-              onEditHandler={editTransaction}
-              previousValue={transaction}
-            />
+            {transactiontype === "income" ? (
+              <>
+                <h4 className="fw-bold medium__font">{locale === "en" ? "Edit your income, here" : "Ubah pemasukan Anda, di sini"}</h4>
+                <p>{locale === "en" ? "Fill your detail income below" : "Isi detail pemasukan Anda di bawah ini"}</p>
+              </>
+            ) : (
+              <>
+                <h4 className="fw-bold medium__font">{locale === "en" ? "Edit your expense, here" : "Ubah pengeluaran Anda, di sini"}</h4>
+                <p>{locale === "en" ? "Fill your detail expense below" : "Isi detail pengeluaran Anda di bawah ini"}</p>
+              </>
+            )}
+            <TransactionForm type={transaction.type} onEditHandler={editTransaction} previousValue={transaction} />
           </div>
         </div>
       </section>

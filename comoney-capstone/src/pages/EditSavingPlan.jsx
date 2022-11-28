@@ -1,11 +1,11 @@
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link } from "react-router-dom";
 import EditSavingsForm from "../components/EditSavingsForm";
 import LocaleContext from "../context/LocaleContext";
 
 const EditSavingPlan = () => {
-  const { id }  = useParams()
+  const { id } = useParams();
   const { locale } = React.useContext(LocaleContext);
 
   return (
@@ -13,7 +13,7 @@ const EditSavingPlan = () => {
       <div className="container">
         <div className="my-4">
           <h4>
-            <Link to={`/saving-planner`} className="text-black text-decoration-none">
+            <Link to={`/saving-planner`} className="text-black text-decoration-none pedingBack">
               <FiArrowLeft className="warna fs-2" />
               {locale === "en" ? "Back to Savings Planner" : "Kembali ke Perencana Tabungan"}
             </Link>

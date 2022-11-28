@@ -7,6 +7,8 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import './styles/general.css';
 import './styles/mobile.css';
 import './styles/desktop.css';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

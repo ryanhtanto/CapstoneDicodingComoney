@@ -3,7 +3,7 @@ import { FiArrowLeft } from "react-icons/fi";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { deleteTransaction, getTransaction } from "../utils/transaction";
-import LocaleContext from '../context/LocaleContext';
+import LocaleContext from "../context/LocaleContext";
 import Swal from "sweetalert2";
 
 const DetailPage = () => {
@@ -17,22 +17,22 @@ const DetailPage = () => {
   React.useEffect(() => {
     const getData = async () => {
       const transaction = await getTransaction(user.uid, id);
-      console.log(transaction)
+      console.log(transaction);
       setTransaction(transaction);
       setLoading(false);
-    }
+    };
 
     getData();
   }, [user, id]);
 
   const onDelete = (id) => {
     Swal.fire({
-      title: 'Delete This Transaction?',
-      icon: 'warning',
+      title: "Delete This Transaction?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#013496',
-      cancelButtonColor: '#DC3545',
-      confirmButtonText: 'Delete'
+      confirmButtonColor: "#013496",
+      cancelButtonColor: "#DC3545",
+      confirmButtonText: "Delete",
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteTransaction(id, user.uid);
@@ -42,10 +42,10 @@ const DetailPage = () => {
           showConfirmButton: false,
           timer: 1000,
         });
-        navigate('/');
+        navigate("/");
       }
-    })
-  }
+    });
+  };
 
   if (loading !== true) {
     return (
@@ -53,7 +53,10 @@ const DetailPage = () => {
         <div className="container">
           <div className="my-4">
             <h4>
-              <Link className="text-black text-decoration-none" to={'/'}><FiArrowLeft className="warna fs-2" />{locale === "en" ? "Back to Dashboard" : "Kembali ke Dasbor"}</Link>
+              <Link className="text-black text-decoration-none pedingBack" to={"/"}>
+                <FiArrowLeft className="warna fs-2" />
+                {locale === "en" ? "Back to Dashboard" : "Kembali ke Dasbor"}
+              </Link>
             </h4>
           </div>
 
@@ -80,13 +83,17 @@ const DetailPage = () => {
               <h5>{locale === "en" ? "Description" : "Deskripsi"}</h5>
               <p>{transaction.description}</p>
             </div>
-            <button type="submit" className="btn btn-primary btn-lg form-control btn-color my-4" onClick={() => navigate(`/edit/transaction/${id}`)}>Edit</button>
-            <button type="submit" className="btn btn-primary btn-lg form-control btn-color mb-4" onClick={() => onDelete(transaction.id)}>Delete</button>
+            <button type="submit" className="btn btn-primary input__height form-control btn-color my-4" onClick={() => navigate(`/edit/transaction/${id}`)}>
+              Edit
+            </button>
+            <button type="submit" className="btn btn-primary input__height form-control btn-color mb-4" onClick={() => onDelete(transaction.id)}>
+              Delete
+            </button>
           </div>
         </div>
       </section>
-    )
+    );
   }
-}
+};
 
-export default DetailPage
+export default DetailPage;

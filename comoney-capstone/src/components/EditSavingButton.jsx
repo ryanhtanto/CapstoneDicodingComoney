@@ -6,7 +6,7 @@ function EditSavingButton() {
         const { locale } = React.useContext(LocaleContext);
 
         return (
-                <button type="button" className="btn btn-warning" title={locale === 'en' ? 'Edit' : 'Sunting'}>
+                <button type="button" className="btn btn-warning pedingSaving" title={locale === 'en' ? 'Edit' : 'Sunting'}>
                         <FiEdit />
                 </button>
         )

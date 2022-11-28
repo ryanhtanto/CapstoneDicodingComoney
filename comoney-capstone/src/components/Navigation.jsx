@@ -22,7 +22,7 @@ function Navigation({ toggleLocale }) {
         <a className="navbar-brand" href="/" title={locale === 'en' ? 'Back to Dashboard' : 'Kembali ke Dasbor'}>
           <img className="navbar__logo" src={logo} alt="logo comoney" />
         </a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler pedingSaving" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
@@ -43,12 +43,12 @@ function Navigation({ toggleLocale }) {
               </Link>
             </li>
             <li className="nav-item me-2">
-              <button className="navbar__button d-flex align-items-center" title={locale === 'en' ? 'Log Out' : 'Keluar'} type="submit" onClick={onLogout}>
+              <button className="navbar__button d-flex align-items-center pedingNav" title={locale === 'en' ? 'Log Out' : 'Keluar'} type="submit" onClick={onLogout}>
                 <FiLogOut />
               </button>
             </li>
             <li className="nav-item me-2">
-              <button className="navbar__button d-flex align-items-center" title={locale === 'en' ? 'Switch Language' : 'Ganti Bahasa'} onClick={toggleLocale}>
+              <button className="navbar__button d-flex align-items-center pedingNav" title={locale === 'en' ? 'Switch Language' : 'Ganti Bahasa'} onClick={toggleLocale}>
                 <BsTranslate />
               </button>
             </li>

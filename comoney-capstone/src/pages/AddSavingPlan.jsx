@@ -12,7 +12,7 @@ const AddSavingPlan = () => {
       <div className="container">
         <div className="my-4">
           <h4>
-            <Link to={`/saving-planner`} className="text-black text-decoration-none">
+            <Link to={`/saving-planner`} className="text-black text-decoration-none pedingBack">
               <FiArrowLeft className="warna fs-2" />
               {locale === "en" ? "Back to Savings Planner" : "Kembali ke Perencana Tabungan"}
             </Link>

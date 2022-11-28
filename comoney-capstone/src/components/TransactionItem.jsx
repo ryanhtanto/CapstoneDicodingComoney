@@ -9,7 +9,7 @@ function TransactionItem({ type, category, amount, id }) {
         <li className="d-flex justify-content-between align-items-center mb-3">
           <div className="d-flex mb-2 align-items-center">
             {type === 'income' ? <BsFillArrowDownCircleFill className="text-dark" /> : <BsFillArrowUpCircleFill className="text-dark" />}
-            <p className="fw-bold ms-2 small__font text-dark">{category}</p>
+            <p className="fw-bold ms-2 small__font text-dark px-2 pedingItem">{category}</p>
           </div>
           {type === 'income' ?
             <p className="fw-bold green small__font">Rp {amount}</p> :
