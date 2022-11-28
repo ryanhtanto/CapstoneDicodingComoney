@@ -6,7 +6,6 @@ const db = getFirestore(app);
 const addCategory = async (categoryName, accessToken, type) => {
   try {
     const id = +new Date();
-    console.log(10000)
     await setDoc(doc(db, 'financials', `${accessToken}`, 'categories', `${id}`), {
       id,
       type,

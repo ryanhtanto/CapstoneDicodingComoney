@@ -5,7 +5,7 @@ import LocaleContext from "../context/LocaleContext";
 import UserContext from "../context/UserContext";
 import Swal from "sweetalert2";
 
-const CategoryModal = ({ transactionType }) => {
+const CategoryModal = ({ transactionType, setSelectedCategory }) => {
   const [categoryName, setCategoryName] = useInput("");
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
@@ -13,6 +13,7 @@ const CategoryModal = ({ transactionType }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     Swal.showLoading();
+    setSelectedCategory('kaka');
     const data = await addCategory(categoryName, user.uid, transactionType);
     if (data.success) {
       Swal.fire({
@@ -21,13 +22,12 @@ const CategoryModal = ({ transactionType }) => {
         showConfirmButton: false,
         timer: 1000,
       });
-      window.location.reload();
     } else {
       Swal.fire({
         icon: "error",
         title: data.message,
         showConfirmButton: false,
-        timer: 20000,
+        timer: 1500,
       });
     }
   };

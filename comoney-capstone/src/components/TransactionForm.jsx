@@ -6,16 +6,18 @@ import { FiTrash2 } from "react-icons/fi";
 import LocaleContext from "../context/LocaleContext";
 import UserContext from "../context/UserContext";
 import Swal from "sweetalert2";
-import { deleteCategory, getExpenseCategories, getIncomeCategories } from "../utils/category";
+import { addCategory, deleteCategory, getExpenseCategories, getIncomeCategories } from "../utils/category";
 
 const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) => {
   const [useDefaultValue, setUseDefaultValue] = React.useState(onEditHandler ? true : false);
+  const [refresh, setRefresh] = React.useState(true);
   const [name, setName, setDefaultName] = useInput("");
   const [amount, setAmount, setDefaultAmount] = useInput("");
   const [description, setDescription, setDefaultDescription] = useInput();
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categories, setCategories] = React.useState([]);
   const [categoryId, setCategoryId] = React.useState("");
+  console.log(selectedCategory)
 
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
@@ -29,10 +31,9 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
         data = await getExpenseCategories(user.uid);
       }
       setCategories(data || []);
-      console.log(10000)
     }
     getData();
-  }, [type, user, selectedCategory]);
+  }, [type, user, selectedCategory, refresh]);
 
   React.useEffect(() => {
     if (previousValue) {
@@ -43,8 +44,14 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
     }
   }, [])
 
+  React.useEffect(() => {
+    if (!useDefaultValue) {
+      setSelectedCategory(null);
+    }
+  }, [type])
+
   const onDeleteCategory = async () => {
-    if (selectedCategory !== null) {
+    if (selectedCategory) {
       await deleteCategory(categoryId, user.uid);
       Swal.fire({
         icon: "success",
@@ -52,7 +59,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
         showConfirmButton: false,
         timer: 1000,
       });
-      setSelectedCategory(null)
+      setSelectedCategory(null);
     } else {
       Swal.fire({
         icon: "error",
@@ -63,9 +70,48 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
     }
   };
 
+  const onAddCategory = async () => {
+    const { value: category } = await Swal.fire({
+      title: 'Add New Category',
+      input: 'text',
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to write something!'
+        }
+      }
+    });
+
+    if (category) {
+      Swal.showLoading();
+      const data = await addCategory(category, user.uid, type);
+      if (data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Add Category Success",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        if (refresh) {
+          setRefresh(false);
+        } else {
+          setRefresh(true);
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+  }
+
   const setCategoryData = (e) => {
     setUseDefaultValue(false);
-    if (e.target.value === null) {
+    if (!e.target.value) {
+      setSelectedCategory(null);
       return;
     }
 
@@ -76,27 +122,33 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (onAddHandler) {
+    if (onAddHandler && name && amount && selectedCategory) {
       await onAddHandler({ name, amount, description, selectedCategory, type });
       return;
     }
 
-    if (onEditHandler) {
+    if (onEditHandler && name && amount && selectedCategory) {
       await onEditHandler({ name, amount, description, selectedCategory, type });
       return;
     }
 
+    Swal.fire({
+      icon: "error",
+      title: "You Need To Fill All Required Form",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
   return (
     <>
       <form className="my-5" onSubmit={(e) => onSubmit(e)}>
-        <div className="text-center my-4">
+        <div className="text-center">
           <div className="row">
             <div className="col-sm-12 col-lg-8">
               <div className="dropdown">
                 <select
-                  className="form-select input__height mb-2 disabled"
+                  className="form-select input__height disabled"
                   aria-label="Default select example"
                   onChange={(e) => setCategoryData(e)}
                 >
@@ -114,7 +166,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
             </div>
 
             <div className="col-sm-8 col-lg-3 mb-2">
-              <button type="button" className="btn btn-primary form-control btn-color input__height mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" title={locale === "en" ? "Add New Category" : "Tambah Kategori Baru"}>
+              <button type="button" className="btn btn-primary form-control btn-color input__height mb-2" onClick={() => onAddCategory()} title={locale === "en" ? "Add New Category" : "Tambah Kategori Baru"}>
                 <FiPlusSquare /> New Category
               </button>
             </div>
@@ -125,8 +177,8 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
             </div>
           </div>
         </div>
-        <input type="text" className="form-control my-4 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName} required></input>
-        <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} required></input>
+        <input type="text" className="form-control mb-4 mt-2 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName} ></input>
+        <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} ></input>
 
         <textarea className="form-control mb-4" placeholder={locale === "en" ? "Description" : "Deskripsi"} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
         <button type="submit" className="btn btn-primary btn-lg form-control btn-color">
@@ -135,7 +187,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
           }
         </button>
       </form>
-      <CategoryModal transactionType={type} />
+      <CategoryModal transactionType={type} setSelectedCategory={setSelectedCategory} />
     </>
   );
 };

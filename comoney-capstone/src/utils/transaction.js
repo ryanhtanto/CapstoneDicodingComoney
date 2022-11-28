@@ -1,4 +1,4 @@
-import { getFullDate } from "./date-formatter";
+import { getFullDate, getMonthYear } from "./date-formatter";
 import {
   collection,
   deleteDoc,
@@ -12,11 +12,11 @@ import {
 } from "firebase/firestore";
 import app from '../global/firebase-config';
 
-const dateToday = getFullDate();
+const thisDay = getFullDate();
+const thisMonth = getMonthYear();
 const db = getFirestore(app);
 
 const getAllTransactions = async (accessToken) => {
-  console.log(accessToken);
   const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
@@ -39,7 +39,7 @@ const getTransaction = async (accessToken, id) => {
   }
 }
 
-const getTodayTransactions = async (accessToken, dateSelected = dateToday) => {
+const getTodayTransactions = async (accessToken, dateSelected = thisDay) => {
   const todayQuery = query(collection(db, 'financials', `${accessToken}`, 'transactions'), where("date", "==", dateSelected));
   const querySnapshot = await getDocs(todayQuery);
 
@@ -51,13 +51,13 @@ const getTodayTransactions = async (accessToken, dateSelected = dateToday) => {
   return data;
 };
 
-const getThisMonthTransactions = async (accessToken) => {
+const getThisMonthTransactions = async (accessToken, monthSelected = thisMonth) => {
   const docsRef = collection(db, 'financials', `${accessToken}`, 'transactions');
   const docsSnap = await getDocs(docsRef);
 
   let data = [];
   docsSnap.forEach((doc) => {
-    if (doc.data().date.slice(0, 7) === dateToday.slice(0, 7)) {
+    if (doc.data().date.slice(0, 7) === monthSelected) {
       data.push(doc.data());
     }
   })
