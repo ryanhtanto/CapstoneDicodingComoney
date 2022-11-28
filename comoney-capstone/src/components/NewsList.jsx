@@ -13,7 +13,7 @@ const NewsList = () => {
     const getNewses = async () => {
       setLoading(true)
       try {
-        let response = await axios.get(CONFIG.NEWS_URL + CONFIG.NEWS_API_KEY + CONFIG.MANY_NEWS);
+        let response = await axios.get("https://gnews.io/api/v4/search?q=money&token=ceed8ce1d8fd00e55ea5e3bf1280122e&lang=en");
         setNewses(response.data.articles)
         console.log(newses)
         setLoading(false)
@@ -37,7 +37,7 @@ const NewsList = () => {
         key={news.url}
         title={news.title}
         description={news.description}
-        image={news.urlToImage}
+        image={news.image}
         publishedAt={showFormattedDate(news.publishedAt)}
         source={news.source.name}
         url={news.url} />
