@@ -17,7 +17,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categories, setCategories] = React.useState([]);
   const [categoryId, setCategoryId] = React.useState("");
-  console.log(selectedCategory)
+  console.log(selectedCategory);
 
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
@@ -40,15 +40,15 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
       setDefaultName(previousValue.name);
       setDefaultAmount(previousValue.amount);
       setDefaultDescription(previousValue.description);
-      setSelectedCategory(previousValue.category)
+      setSelectedCategory(previousValue.category);
     }
-  }, [])
+  }, []);
 
   React.useEffect(() => {
     if (!useDefaultValue) {
       setSelectedCategory(null);
     }
-  }, [type])
+  }, [type]);
 
   const onDeleteCategory = async () => {
     if (selectedCategory) {
@@ -72,14 +72,14 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
 
   const onAddCategory = async () => {
     const { value: category } = await Swal.fire({
-      title: 'Add New Category',
-      input: 'text',
+      title: "Add New Category",
+      input: "text",
       showCancelButton: true,
       inputValidator: (value) => {
         if (!value) {
-          return 'You need to write something!'
+          return "You need to write something!";
         }
-      }
+      },
     });
 
     if (category) {
@@ -106,7 +106,7 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
         });
       }
     }
-  }
+  };
 
   const setCategoryData = (e) => {
     setUseDefaultValue(false);
@@ -138,28 +138,25 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
       showConfirmButton: false,
       timer: 1500,
     });
-  }
+  };
 
   return (
     <>
       <form className="my-5" onSubmit={(e) => onSubmit(e)}>
+        <input type="text" className="form-control mb-4 mt-2 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName}></input>
+        <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount}></input>
+
         <div className="text-center">
           <div className="row">
             <div className="col-sm-12 col-lg-8">
               <div className="dropdown">
-                <select
-                  className="form-select input__height disabled"
-                  aria-label="Default select example"
-                  onChange={(e) => setCategoryData(e)}
-                >
+                <select className="form-select input__height disabled" aria-label="Default select example" onChange={(e) => setCategoryData(e)}>
                   <option value="">Select Category</option>
-                  {
-                    categories?.map((category) => (
-                      <option value={`${category.categoryName}^@#${category.id}`} key={category.id} className="peding">
-                        {category.categoryName}
-                      </option>
-                    ))
-                  }
+                  {categories?.map((category) => (
+                    <option value={`${category.categoryName}^@#${category.id}`} key={category.id} className="peding">
+                      {category.categoryName}
+                    </option>
+                  ))}
                 </select>
                 <p className={useDefaultValue ? "rounded prev-category py-1 px-3 mb-2" : "d-none"}>Previous Category : {selectedCategory}</p>
               </div>
@@ -177,14 +174,10 @@ const TransactionForm = ({ type, onAddHandler, onEditHandler, previousValue }) =
             </div>
           </div>
         </div>
-        <input type="text" className="form-control mb-4 mt-2 input__height" placeholder={locale === "en" ? "Name" : "Nama"} aria-label={locale === "en" ? "Name" : "Nama"} value={name} onChange={setName} ></input>
-        <input type="number" className="form-control my-4 input__height" placeholder={locale === "en" ? "Amount" : "Jumlah"} aria-label={locale === "en" ? "Amount" : "Jumlah"} value={amount} onChange={setAmount} ></input>
 
         <textarea className="form-control mb-4" placeholder={locale === "en" ? "Description" : "Deskripsi"} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: "120px" }}></textarea>
         <button type="submit" className="btn btn-primary input__height form-control btn-color">
-          {
-            onAddHandler ? locale === "en" ? "Add" : "Tambah" : locale === "en" ? "Save" : "Simpan"
-          }
+          {onAddHandler ? (locale === "en" ? "Add" : "Tambah") : locale === "en" ? "Save" : "Simpan"}
         </button>
       </form>
       <CategoryModal transactionType={type} setSelectedCategory={setSelectedCategory} />
