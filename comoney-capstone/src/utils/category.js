@@ -34,7 +34,7 @@ const getIncomeCategories = async (accessToken) => {
 
   const data = [];
   querySnapshot.forEach((docItem) => {
-    docItem.push(docItem.data());
+    data.push(docItem.data());
   });
 
   return data;

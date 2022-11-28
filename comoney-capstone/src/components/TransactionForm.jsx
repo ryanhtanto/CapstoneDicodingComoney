@@ -21,7 +21,6 @@ function TransactionForm({
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categories, setCategories] = React.useState([]);
   const [categoryId, setCategoryId] = React.useState('');
-  console.log(selectedCategory);
 
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
