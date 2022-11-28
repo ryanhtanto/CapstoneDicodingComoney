@@ -125,10 +125,30 @@ main {
 
 /* end Footer */
 
+/* Swal */
+.swal2-title {
+  font-size: 20px !important;
+}
+
+.swal2-input {
+  font-size: 16px;
+}
+
+.swal2-confirm {
+  background-color: #013496 !important;
+}
+
+.swal2-cancel {
+  background-color: #DC3545 !important;
+}
+
+/* End Swal */
+
 /* saving plan */
-.reminderOneMonth{
+.reminderOneMonth {
   background-color: #fff06b;
   padding: 5px;
   border-radius: 10px;
 }
+
 /* end of saving plan */
