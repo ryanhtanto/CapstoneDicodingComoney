@@ -10,36 +10,39 @@ import LocaleContext from '../context/LocaleContext';
 function SavingPlanner() {
   const [quotes, setQuotes] = React.useState([]);
   const { locale } = React.useContext(LocaleContext);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     async function getQuotes() {
-      const current = Math.floor(Math.random() * 1000);
-      const response = await axios.get('https://type.fit/api/quotes');
-      setQuotes(response.data[current]);
+      const response = await axios.get('https://api.api-ninjas.com/v1/quotes?category=money', {
+        headers: {
+          'X-Api-Key': '23BDtggAeCK4iKtwod18LQ==y3mSSV3gUoa0l8GJ',
+        },
+      });
+      setQuotes(response.data[0]);
+      setLoading(false);
     }
-
     getQuotes();
   }, []);
+
   return (
     <section>
       <div className="container">
         <div className="row bg-saving-color mt-5 mb-5 mx-auto">
-          <div className="col-sm-6 px-4">
+          <div className="col-lg-6 col-sm-12 p-3">
             <div className="d-flex">
-              <img src={images} alt="icon-savings" className="saving-image" />
+              <div className="saving-image__wrapper">
+                <img src={images} alt="icon-savings" className="saving-image" />
+              </div>
               <SavingBarCount />
             </div>
           </div>
-          <div className="col-sm-6 px-4 my-auto">
-            <p className="text-center mx-auto">
-              {quotes.text}
-              {' '}
-              -
-              {' '}
-              <b>{quotes.author}</b>
-            </p>
+          <div className="col-lg-6 col-sm-12 px-4 my-auto">
+            <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}>{quotes.quote}</p>
+            <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}><b>{quotes.author}</b></p>
           </div>
         </div>
+
         <div className="row mt-5 mb-5 mx-auto">
           <SavingPlan />
         </div>

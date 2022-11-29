@@ -54,7 +54,7 @@ function SavingPlan() {
     ));
   }
   return (
-    <h4 className="text-center fw-bold">
+    <h4 className="text-center fw-bold medium__font">
       {' '}
       {locale === 'en' ? "You don't have savings item" : 'Anda tidak memiliki item tabungan'}
     </h4>
