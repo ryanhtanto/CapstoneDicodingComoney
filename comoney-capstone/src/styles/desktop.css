@@ -64,8 +64,11 @@
 }
 
 .saving-image {
-	width: 35%;
-	height: auto;
+	width: 100%;
+}
+
+.saving-image__wrapper {
+	max-width: 230px;
 }
 
 .saving-image-item {

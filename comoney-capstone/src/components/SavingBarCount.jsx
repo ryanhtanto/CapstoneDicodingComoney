@@ -4,8 +4,8 @@ import { getAllSavings } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
 
 function SavingBarCount() {
-  const [target, setTarget] = useState();
-  const [total, setTotal] = useState();
+  const [target, setTarget] = useState('');
+  const [total, setTotal] = useState('');
   const [loading, setLoading] = useState(true);
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
@@ -30,19 +30,26 @@ function SavingBarCount() {
           rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
           setTotal(rupiah);
           setTarget(valueFromDb.length);
-          setLoading(false);
         });
-      } else {
-        setLoading(true);
       }
+      setLoading(false);
     }
     getData();
   }, []);
 
-  if (loading === false) {
+  if (loading) {
+    return (
+      <div className="mx-4 my-auto placeholder-glow w-100">
+        <p className="fw-bold mb-1 w-100 placeholder rounded">Placeholder</p>
+        <p className="placeholder rounded w-50">Placeholder</p>
+      </div>
+    );
+  }
+
+  if (total && target) {
     return (
       <div className="mx-4 my-auto">
-        <p className="fw-bold mb-0">
+        <p className="fw-bold mb-1">
           {locale === 'en' ? 'You have ' : 'Kamu mempunyai '}
           {' '}
           {target}
@@ -56,9 +63,10 @@ function SavingBarCount() {
       </div>
     );
   }
+
   return (
     <div className="mx-4 my-auto">
-      <p className="fw-bold mb-0">
+      <p className="fw-bold mb-1">
         {' '}
         {locale === 'en' ? "You don't have savings target!" : 'Anda tidak memiliki target tabungan!'}
       </p>

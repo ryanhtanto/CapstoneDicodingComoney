@@ -65,7 +65,7 @@ function SavingPlanItem({ saving, onDelete }) {
     <div className="card">
       <div className="d-flex">
         <div className="my-auto">
-          <img src={savings} alt="icon-saving-item" className="saving-image-item" />
+          <img src={savings} alt="icon-saving-item" className="saving-image-item ms-4" />
         </div>
         <div className="card-body">
           <h6 className="card-title fw-bold">{saving.data.savingsName}</h6>
