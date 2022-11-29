@@ -7,7 +7,7 @@ function TransactionItemLoading() {
       <li key={i} className="d-flex justify-content-between align-items-center mb-3 placeholder-glow">
         <div className="d-flex mb-2 align-items-center placeholder-glow">
           <div className="placeholder rounded ">Icon</div>
-          <p className="fw-bold ms-2 small__font text-dark placeholder rounded">Default Name</p>
+          <p className="fw-bold ms-2 small__font text-dark placeholder rounded m-2">Default Name</p>
         </div>
         <p className="fw-bold small__font placeholder rounded">Default Amount</p>
       </li>,

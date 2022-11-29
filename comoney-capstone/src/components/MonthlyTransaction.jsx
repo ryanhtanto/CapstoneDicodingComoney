@@ -38,7 +38,7 @@ function MonthlyTransaction() {
         </div>
       </div>
       <div className="transaction__content">
-        <p className="transaction__date px-3 py-2 mb-3 mt-4 small__font">{date === null ? getMonthYear() : date}</p>
+        <p className="transaction__date px-3 py-2 mb-3 mt-4 small__font rounded">{date === null ? getMonthYear() : date}</p>
         {
           loading ? <TransactionItemLoading /> : <ListTransaction transactions={transactions} />
         }
