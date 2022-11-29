@@ -19,6 +19,8 @@
         "react/react-in-jsx-scope": "off",
         "consistent-return": "off",
         "react/prop-types": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-underscore-dangle": "off",
+        "prefer-regex-literals": "off"
     }
 }
