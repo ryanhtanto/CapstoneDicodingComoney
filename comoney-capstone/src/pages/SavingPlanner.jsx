@@ -48,7 +48,6 @@ function SavingPlanner() {
 
         <div className="row mt-5 mb-5 mx-auto">
           {loading ? <SavingPlanItemLoading /> : <SavingPlan />}
-          {/* <SavingPlanItemLoading /> */}
         </div>
         <Link to="/add-saving-plan">
           <button type="button" aria-label="add savings" id="addButton" className="addButton" title={locale === 'en' ? 'Add Saving Plan' : 'Tambah Rencana Tabungan'}>
