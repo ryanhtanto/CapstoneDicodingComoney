@@ -1,9 +1,12 @@
 import React from 'react';
 import TransactionItem from './TransactionItem';
+import LocaleContext from '../context/LocaleContext';
 
 function ListTransaction({ transactions }) {
+  const { locale } = React.useContext(LocaleContext);
+
   if (!transactions.length) {
-    return <h2 className="medium__font text-center mt-5 fw-bold">Empty Transactions</h2>;
+    return <h2 className="medium__font text-center mt-5 fw-bold">{locale === 'en' ? 'Empty Transactions' : 'Tidak ada Transaksi'}</h2>;
   }
 
   return (
