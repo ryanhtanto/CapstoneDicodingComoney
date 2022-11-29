@@ -12,6 +12,7 @@ function CardInformation() {
   const [incomeMonthly, setIncomeMonthly] = React.useState(0);
   const [expenseMonthly, setExpenseMonthly] = React.useState(0);
   const [currentBalance, setCurrentBalance] = React.useState(0);
+  const [loading, setLoading] = React.useState(true);
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
@@ -104,29 +105,32 @@ function CardInformation() {
       setCurrentBalance(income - expense);
     };
 
-    getDailyIncome();
-    getMonthlyIncome();
-    getDailyExpense();
-    getMonthlyExpense();
-    getCurrentBalance();
+    const getData = async () => {
+      await getDailyIncome();
+      await getMonthlyIncome();
+      await getDailyExpense();
+      await getMonthlyExpense();
+      await getCurrentBalance();
+      setLoading(false);
+    };
+
+    getData();
   }, [user]);
 
   return (
     <section className="card mt-4 dashboard__card">
-      <div className="card-body">
-        <h2 className="col-sm-12 fw-bold">
-          {locale === 'en' ? 'Welcome back' : 'Selamat datang kembali'}
-          {' '}
+      <div className="card-body placeholder-glow">
+        <h2 className={loading ? 'placeholder rounded' : 'col-sm-12 fw-bold'}>
+          {locale === 'en' ? 'Welcome back ' : 'Selamat datang kembali '}
           {user.displayName}
-          {' '}
-          <img src={waveHand} alt="wave hand emoji" />
+          <img className="ms-2" src={waveHand} alt="wave hand emoji" />
         </h2>
         <div className="card-content">
           <article className="card__balance py-3 d-flex align-items-center px-4 mt-3">
             <BsWallet2 />
             <div className="balance__container ms-4">
               <h3 className="fw-bold small__font">{locale === 'en' ? 'Current Balance' : 'Saldo Saat Ini'}</h3>
-              <p className="small__font">
+              <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
                 Rp
                 {' '}
                 {currentBalance}
@@ -141,10 +145,10 @@ function CardInformation() {
               <BsGraphUp className="graph-up" />
               <div className="income__container ms-4">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Income' : 'Pemasukan'}</h3>
-                <p className="small__font">
+                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
                   Rp
                   {' '}
-                  {incomeDaily}
+                  { incomeDaily }
                 </p>
               </div>
             </div>
@@ -152,7 +156,7 @@ function CardInformation() {
               <BsGraphDown className="graph-down" />
               <div className="expense__container ms-4">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Expense' : 'Pengeluaran'}</h3>
-                <p className="small__font">
+                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
                   Rp
                   {' '}
                   {expenseDaily}
@@ -168,7 +172,7 @@ function CardInformation() {
               <BsGraphUp className="graph-up" />
               <div className="income__container ms-4">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Income' : 'Pemasukan'}</h3>
-                <p className="small__font">
+                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
                   Rp
                   {' '}
                   {incomeMonthly}
@@ -179,7 +183,7 @@ function CardInformation() {
               <BsGraphDown className="graph-down" />
               <div className="expense__container ms-4">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Expense' : 'Pengeluaran'}</h3>
-                <p className="small__font">
+                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
                   Rp
                   {' '}
                   {expenseMonthly}

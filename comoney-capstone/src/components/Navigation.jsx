@@ -2,6 +2,7 @@ import React from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { BsTranslate } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import logo from '../assets/logo-light.svg';
 import UserContext from '../context/UserContext';
 import { logout } from '../utils/authentication-user';
@@ -12,8 +13,17 @@ function Navigation({ toggleLocale }) {
   const { locale } = React.useContext(LocaleContext);
 
   const onLogout = () => {
-    logout(user.accessToken);
-    setUser(null);
+    Swal.fire({
+      title: 'Are You Sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        logout(user.accessToken);
+        setUser(null);
+      }
+    });
   };
 
   return (

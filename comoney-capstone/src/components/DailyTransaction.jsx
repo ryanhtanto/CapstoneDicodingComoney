@@ -38,7 +38,7 @@ function DailyTransaction() {
         </div>
       </div>
       <div className="transaction__content">
-        <p className="transaction__date px-3 py-2 mb-3 mt-4 small__font">{date === null ? getFullDate() : date}</p>
+        <p className="transaction__date px-3 py-2 mb-3 mt-4 small__font rounded">{date === null ? getFullDate() : date}</p>
         {
           loading ? <TransactionItemLoading /> : <ListTransaction transactions={transactions} />
         }
