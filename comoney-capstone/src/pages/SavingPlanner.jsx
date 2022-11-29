@@ -6,6 +6,7 @@ import images from '../assets/books.png';
 import SavingPlan from '../components/SavingPlan';
 import SavingBarCount from '../components/SavingBarCount';
 import LocaleContext from '../context/LocaleContext';
+import SavingPlanItemLoading from '../components/SavingPlanItemLoading';
 
 function SavingPlanner() {
   const [quotes, setQuotes] = React.useState([]);
@@ -39,12 +40,15 @@ function SavingPlanner() {
           </div>
           <div className="col-lg-6 col-sm-12 px-4 my-auto">
             <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}>{quotes.quote}</p>
-            <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}><b>{quotes.author}</b></p>
+            <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}>
+              <b>{quotes.author}</b>
+            </p>
           </div>
         </div>
 
         <div className="row mt-5 mb-5 mx-auto">
-          <SavingPlan />
+          {loading ? <SavingPlanItemLoading /> : <SavingPlan />}
+          {/* <SavingPlanItemLoading /> */}
         </div>
         <Link to="/add-saving-plan">
           <button type="button" aria-label="add savings" id="addButton" className="addButton" title={locale === 'en' ? 'Add Saving Plan' : 'Tambah Rencana Tabungan'}>

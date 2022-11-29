@@ -48,14 +48,14 @@ function SavingPlan() {
 
   if (loading === false) {
     return savings.map((saving) => (
-      <div className="col-sm-6 mb-3" key={saving.id}>
+      <div className="col-sm-12 col-md-6 mb-3" key={saving.id}>
         <SavingPlanItem saving={saving} onDelete={() => onDeleteHandler(saving.id)} />
       </div>
     ));
   }
+
   return (
     <h4 className="text-center fw-bold medium__font">
-      {' '}
       {locale === 'en' ? "You don't have savings item" : 'Anda tidak memiliki item tabungan'}
     </h4>
   );
