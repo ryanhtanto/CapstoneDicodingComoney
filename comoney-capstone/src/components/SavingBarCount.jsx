@@ -11,7 +11,7 @@ function SavingBarCount() {
   const { user } = React.useContext(UserContext);
 
   React.useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       const valueFromDb = await getAllSavings(user.uid);
       if (valueFromDb) {
         let totalAmount = 0;
@@ -33,7 +33,7 @@ function SavingBarCount() {
         });
       }
       setLoading(false);
-    }
+    };
     getData();
   }, []);
 
