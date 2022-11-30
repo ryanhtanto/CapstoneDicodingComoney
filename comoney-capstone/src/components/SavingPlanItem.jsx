@@ -63,48 +63,48 @@ function SavingPlanItem({ saving, onDelete }) {
 
   return (
     <div className="card">
-      <div className="d-flex">
-        <div className="my-auto">
-          <img src={savings} alt="icon-saving-item" className="saving-image-item ms-4" />
-        </div>
-        <div className="card-body">
-          <h6 className="card-title fw-bold">{saving.data.savingsName}</h6>
-          <span className="savings-planning p-2">
+      <div className="saving-image__wrapper">
+        <img src={savings} alt="icon-saving-item" className="saving-image-item ms-4" />
+      </div>
+      <div className="card-body">
+        <h6 className="card-title fw-bold">{saving.data.savingsName}</h6>
+        <span className="savings-planning p-2">
+          Rp
+          {' '}
+          {rupias}
+        </span>
+        <h6 className="mt-2">
+          <FiCalendar />
+          <span className="mx-2">
+            Target:
+            {' '}
+            {month}
+            ,
+            {' '}
+            {year}
+          </span>
+        </h6>
+        <h6 className="mt-2">
+          <FiCheckSquare />
+          <span className="mx-2">
+            {locale === 'en' ? 'Save' : 'Tabung'}
+            {' '}
             Rp
             {' '}
-            {rupias}
+            {roundedAmount}
+            {' '}
+            /
+            {' '}
+            {locale === 'en' ? 'month' : 'bulan'}
           </span>
-          <h6 className="mt-2">
-            <FiCalendar />
-            <span className="mx-2">
-              Target:
-              {' '}
-              {month}
-              ,
-              {' '}
-              {year}
-            </span>
-          </h6>
-          <h6 className="mt-2">
-            <FiCheckSquare />
-            <span className="mx-2">
-              {locale === 'en' ? 'Save' : 'Tabung'}
-              {' '}
-              Rp
-              {' '}
-              {roundedAmount}
-              {' '}
-              /
-              {' '}
-              {locale === 'en' ? 'month' : 'bulan'}
-            </span>
-            {isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold ">{locale === 'en' ? 'One month left!' : 'Tersisa satu bulan!'}</p> : ''}
-          </h6>
-          <Link to={`/edit-saving-plan/${saving.id}`}>
-            <EditSavingButton />
-          </Link>
-          <DeleteSavings id={saving.id} onDelete={onDelete} />
-        </div>
+          {isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold rounded p-2">{locale === 'en' ? 'One month left!' : 'Tersisa satu bulan!'}</p> : ''}
+        </h6>
+      </div>
+      <div className="card-footer">
+        <Link to={`/edit-saving-plan/${saving.id}`}>
+          <EditSavingButton />
+        </Link>
+        <DeleteSavings id={saving.id} onDelete={onDelete} />
       </div>
     </div>
   );

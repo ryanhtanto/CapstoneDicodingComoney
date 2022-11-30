@@ -5,7 +5,7 @@ function SavingPlanItemLoading() {
   const savingPlan = [];
   for (let i = 0; i < 2; i++) {
     savingPlan.push(
-      <div className="col-sm-12 col-md-6 mb-3 ">
+      <div key={i} className="col-sm-12 col-md-6 mb-3 ">
         <div className="card ">
           <div className="d-flex placeholder-glow">
             <div className="my-auto">

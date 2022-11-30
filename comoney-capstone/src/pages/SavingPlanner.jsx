@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
-import axios from 'axios';
 import images from '../assets/books.png';
 import SavingPlan from '../components/SavingPlan';
 import SavingBarCount from '../components/SavingBarCount';
 import LocaleContext from '../context/LocaleContext';
 import SavingPlanItemLoading from '../components/SavingPlanItemLoading';
+import getQuotes from '../utils/quotes';
 
 function SavingPlanner() {
   const [quotes, setQuotes] = React.useState([]);
@@ -14,16 +14,12 @@ function SavingPlanner() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    async function getQuotes() {
-      const response = await axios.get('https://api.api-ninjas.com/v1/quotes?category=money', {
-        headers: {
-          'X-Api-Key': '23BDtggAeCK4iKtwod18LQ==y3mSSV3gUoa0l8GJ',
-        },
-      });
-      setQuotes(response.data[0]);
+    async function getData() {
+      const data = await getQuotes();
+      setQuotes(data);
       setLoading(false);
     }
-    getQuotes();
+    getData();
   }, []);
 
   return (
@@ -39,10 +35,21 @@ function SavingPlanner() {
             </div>
           </div>
           <div className="col-lg-6 col-sm-12 px-4 my-auto">
-            <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}>{quotes.quote}</p>
-            <p className={loading ? 'placeholder rounded w-100' : 'text-center mx-auto'}>
-              <b>{quotes.author}</b>
-            </p>
+            {loading ? (
+              <h4 className="placeholder-glow text-center">
+                <span className="placeholder placeholder rounded w-100" />
+                <span className="placeholder placeholder rounded w-75" />
+                <span className="placeholder placeholder rounded w-50 mt-2" />
+              </h4>
+            )
+              : (
+                <>
+                  <p className="text-center mx-auto">{quotes.quote}</p>
+                  <p className="text-center mx-auto">
+                    <b>{quotes.author}</b>
+                  </p>
+                </>
+              )}
           </div>
         </div>
 
