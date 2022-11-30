@@ -39,10 +39,10 @@ function SavingBarCount() {
 
   if (loading) {
     return (
-      <div className="mx-4 my-auto placeholder-glow w-100">
-        <p className="fw-bold mb-1 w-100 placeholder rounded">Placeholder</p>
-        <p className="placeholder rounded w-50">Placeholder</p>
-      </div>
+      <h4 className="mx-4 my-auto placeholder-glow w-100">
+        <span className="w-75 placeholder placeholder-lg rounded" />
+        <span className="placeholder rounded placeholder-lg w-50" />
+      </h4>
     );
   }
 

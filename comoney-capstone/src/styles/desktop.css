@@ -67,6 +67,10 @@
 	width: 100%;
 }
 
+.image-saving__wrapper {
+	max-width: 100px;
+}
+
 .saving-image__wrapper {
 	max-width: 230px;
 }
