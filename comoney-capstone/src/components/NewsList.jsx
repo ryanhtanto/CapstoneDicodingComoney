@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import NewsItem from './Newsitem';
 import { showFormattedDate } from '../utils/date-formatter';
 import NewsItemLoading from './NewsItemLoading';
+import getNews from '../utils/news';
 
 function NewsList() {
   const [newses, setNewses] = React.useState([]);
@@ -12,8 +12,8 @@ function NewsList() {
     const getNewses = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://gnews.io/api/v4/search?q=money&token=ceed8ce1d8fd00e55ea5e3bf1280122e&lang=en');
-        setNewses(response.data.articles);
+        const data = await getNews();
+        setNewses(data.articles);
         setLoading(false);
       } catch (e) {
         setLoading(true);
