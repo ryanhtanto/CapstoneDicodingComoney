@@ -62,49 +62,49 @@ function SavingPlanItem({ saving, onDelete }) {
   }, []);
 
   return (
-    <div className="card">
-      <div className="saving-image__wrapper">
-        <img src={savings} alt="icon-saving-item" className="saving-image-item ms-4" />
-      </div>
-      <div className="card-body">
-        <h6 className="card-title fw-bold">{saving.data.savingsName}</h6>
-        <span className="savings-planning p-2">
-          Rp
-          {' '}
-          {rupias}
-        </span>
-        <h6 className="mt-2">
-          <FiCalendar />
-          <span className="mx-2">
-            Target:
-            {' '}
-            {month}
-            ,
-            {' '}
-            {year}
-          </span>
-        </h6>
-        <h6 className="mt-2">
-          <FiCheckSquare />
-          <span className="mx-2">
-            {locale === 'en' ? 'Save' : 'Tabung'}
-            {' '}
-            Rp
-            {' '}
-            {roundedAmount}
-            {' '}
-            /
-            {' '}
-            {locale === 'en' ? 'month' : 'bulan'}
-          </span>
-          {isOneMonth === true ? <p className="mb-0 mt-1 reminderOneMonth fw-bold rounded p-2">{locale === 'en' ? 'One month left!' : 'Tersisa satu bulan!'}</p> : ''}
-        </h6>
-      </div>
-      <div className="card-footer">
-        <Link to={`/edit-saving-plan/${saving.id}`}>
-          <EditSavingButton />
-        </Link>
-        <DeleteSavings id={saving.id} onDelete={onDelete} />
+    <div className="col-md-12 col-lg-6 mb-3">
+      <div className="card">
+        <div className="card-body d-flex">
+          <div className="saving-image__wrapper my-auto">
+            <img src={savings} alt="icon-saving-item" className="saving-image-item pe-2" />
+          </div>
+          <div className="saving-item__wrapper w-100">
+            <h2 className="card-title fw-bold small__font mb-4">{saving.data.savingsName}</h2>
+            <p className="savings-planning py-2 px-3 mb-2">
+              Rp
+              {' '}
+              {rupias}
+            </p>
+            <p className="mb-2">
+              <FiCalendar className="me-2 mb-1" />
+              Target:
+              {' '}
+              {month}
+              ,
+              {' '}
+              {year}
+            </p>
+            <p>
+              <FiCheckSquare className="me-2 mb-1" />
+              {locale === 'en' ? 'Save' : 'Tabung'}
+              {' '}
+              Rp
+              {' '}
+              {roundedAmount}
+              {' '}
+              /
+              {' '}
+              {locale === 'en' ? 'month' : 'bulan'}
+            </p>
+          </div>
+        </div>
+        <div className="card-footer">
+          <Link to={`/edit-saving-plan/${saving.id}`}>
+            <EditSavingButton />
+          </Link>
+          <DeleteSavings id={saving.id} onDelete={onDelete} />
+          {isOneMonth === true ? <p className="reminderOneMonth fw-bold rounded p-2">{locale === 'en' ? 'One month left!' : 'Tersisa satu bulan!'}</p> : ''}
+        </div>
       </div>
     </div>
   );

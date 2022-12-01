@@ -8,7 +8,7 @@ function NewsItemLoading() {
         <div className="cary-body p-0">
           <div className="row news-container">
             <div className="col-lg-4 col-md-5 col-sm-12">
-              <div className="news-img placeholder rounded-start" alt="news-thumbnail" />
+              <div className="news-img placeholder rounded-start" />
             </div>
             <div className="col-lg-8 col-md-7 col-sm-12 p-4">
               <h2 className="placeholder-glow">

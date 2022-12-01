@@ -20,6 +20,10 @@ main {
   height: 44px;
 }
 
+.h-100 {
+  height: 100%;
+}
+
 .addButton {
   width: 55px;
   height: 55px;
@@ -147,6 +151,8 @@ main {
 /* saving plan */
 .reminderOneMonth {
   background-color: #fff06b;
+  width: fit-content;
+  display: inline;
 }
 
 /* end of saving plan */

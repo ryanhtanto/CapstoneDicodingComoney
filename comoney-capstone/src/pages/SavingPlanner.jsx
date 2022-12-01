@@ -5,7 +5,6 @@ import images from '../assets/books.png';
 import SavingPlan from '../components/SavingPlan';
 import SavingBarCount from '../components/SavingBarCount';
 import LocaleContext from '../context/LocaleContext';
-import SavingPlanItemLoading from '../components/SavingPlanItemLoading';
 import getQuotes from '../utils/quotes';
 
 function SavingPlanner() {
@@ -54,7 +53,7 @@ function SavingPlanner() {
         </div>
 
         <div className="row mt-5 mb-5 mx-auto">
-          {loading ? <SavingPlanItemLoading /> : <SavingPlan />}
+          <SavingPlan />
         </div>
         <Link to="/add-saving-plan">
           <button type="button" aria-label="add savings" id="addButton" className="addButton" title={locale === 'en' ? 'Add Saving Plan' : 'Tambah Rencana Tabungan'}>
