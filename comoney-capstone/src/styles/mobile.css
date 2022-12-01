@@ -60,13 +60,6 @@
     display: none;
   }
 }
-/* 
-@media only screen and (max-width: 767px) {
-  .saving-image {
-    width: 150px !important;
-  }
-} */
-
 
 /* Transaction Form */
 @media only screen and (max-width: 991px) {

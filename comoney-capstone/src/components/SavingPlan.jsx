@@ -4,6 +4,7 @@ import SavingPlanItem from './SavingPlanItem';
 import LocaleContext from '../context/LocaleContext';
 import { getAllSavings, deleteSavings } from '../utils/savings';
 import UserContext from '../context/UserContext';
+import SavingPlanItemLoading from './SavingPlanItemLoading';
 
 function SavingPlan() {
   const [savings, setSavings] = useState(null);
@@ -46,7 +47,9 @@ function SavingPlan() {
   };
 
   if (loading) {
-    return;
+    return (
+      <SavingPlanItemLoading />
+    );
   }
 
   if (savings === null) {
@@ -58,11 +61,12 @@ function SavingPlan() {
   }
 
   if (savings !== null) {
-    return savings.map((saving) => (
-      <div className="col-sm-12 col-md-6 mb-3 card-group" key={saving.id}>
-        <SavingPlanItem saving={saving} onDelete={() => onDeleteHandler(saving.id)} />
-      </div>
-    ));
+    return (
+      savings.map((saving) => (
+        // eslint-disable-next-line max-len
+        <SavingPlanItem key={saving.id} saving={saving} onDelete={() => onDeleteHandler(saving.id)} />
+      ))
+    );
   }
 }
 

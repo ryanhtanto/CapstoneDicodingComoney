@@ -81,7 +81,8 @@
 
 .savings-planning {
 	background-color: #D3D3D3;
-	border-radius: 10px;
+	border-radius: 7px;
+	width: fit-content;
 }
 
 /* end of saving money */

@@ -1,43 +1,46 @@
-/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 
 function SavingPlanItemLoading() {
   const savingPlan = [];
   for (let i = 0; i < 2; i++) {
     savingPlan.push(
-      <div key={i} className="col-sm-12 col-md-6 mb-3 ">
-        <div className="card ">
-          <div className="d-flex placeholder-glow">
-            <div className="my-auto">
-              <p className="placeholder rounded mb-0 mx-4 peding">Placeholder</p>
+      <div className="col-md-12 col-lg-6 mb-3" key={i}>
+        <div className="card">
+          <div className="card-body d-flex">
+            <p className="placeholder-glow saving-image-item w-25 pe-3 my-5">
+              <span className="placeholder rounded w-100 px-2 h-100" />
+            </p>
+            <div className="saving-item__wrapper w-100">
+              <h2 className="card-title mb-3">
+                <span className="placeholder rounded col-3" />
+              </h2>
+              <h2 className="placeholder-glow mb-0">
+                <span className="placeholder rounded col-3" />
+              </h2>
+              <p className="placeholder-glow mb-0">
+                <span className="placeholder rounded col-9" />
+              </p>
+              <p className="placeholder-glow mb-4">
+                <span className="placeholder rounded col-9" />
+              </p>
             </div>
-            <div className="card-body">
-              <h6 className="card-title fw-bold">
-                <p className="placeholder rounded mb-0">Placeholder</p>
-              </h6>
-              <p className="placeholder rounded mb-0">Rp 3000000000</p>
-              <h6 className="mt-2">
-                <p className="placeholder rounded mb-0">00</p>
-                <span className="mx-2">
-                  <p className="placeholder rounded mb-0">Target: Janyary 2023</p>
-                </span>
-              </h6>
-              <h6 className="mt-2">
-                <p className="placeholder rounded mb-0">00</p>
-                <span className="mx-2">
-                  <p className="placeholder rounded mb-0">Tabung Rp 10.661 / bulan</p>
-                </span>
-              </h6>
-              <p className="placeholder rounded mb-0 pedingSaving">but</p>
-              <p className="placeholder rounded ms-2 mb-0 pedingSaving">but</p>
-            </div>
+          </div>
+          <div className="card-footer placeholder-glow">
+            <button type="button" className="btn btn-secondary disabled placeholder me-2 input__height px-4" />
+            <button type="button" className="btn btn-secondary disabled placeholder input__height px-4" />
           </div>
         </div>
       </div>,
     );
   }
 
-  return <>{savingPlan}</>;
+  return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      { savingPlan }
+    </>
+  );
 }
 
 export default SavingPlanItemLoading;
