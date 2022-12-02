@@ -38,10 +38,12 @@ function EditTransaction({ transactiontype }) {
       id,
     );
 
+    const successSaveTrans = locale === 'en' ? 'Transaction Saved' : 'Transaksi Tersimpan';
+
     if (data.success) {
       Swal.fire({
         icon: 'success',
-        title: 'Transaction Saved',
+        title: successSaveTrans,
         showConfirmButton: false,
         timer: 1000,
       });

@@ -24,20 +24,26 @@ function DetailPage() {
     getData();
   }, [user, id]);
 
+  const successDelTrans = locale === 'en' ? 'Delete Transaction Success' : 'Berhasil Menghapus Transaksi';
+  const askDelTrans = locale === 'en' ? 'Delete This Transaction?' : 'Hapus Transaksi ini?';
+  const deleteTrans = locale === 'en' ? 'Delete' : 'Hapus';
+  const cancelTrans = locale === 'en' ? 'Cancel' : 'Batalkan';
+
   const onDelete = (idCategory) => {
     Swal.fire({
-      title: 'Delete This Transaction?',
+      title: askDelTrans,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#013496',
       cancelButtonColor: '#DC3545',
-      confirmButtonText: 'Delete',
+      confirmButtonText: deleteTrans,
+      cancelButtonText: cancelTrans,
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteTransaction(idCategory, user.uid);
         Swal.fire({
           icon: 'success',
-          title: 'Delete Transaction Success',
+          title: successDelTrans,
           showConfirmButton: false,
           timer: 1000,
         });
@@ -86,10 +92,10 @@ function DetailPage() {
               <p>{transaction.description}</p>
             </div>
             <button type="submit" className="btn btn-primary input__height form-control btn-color my-4" onClick={() => navigate(`/edit/transaction/${id}`)}>
-              Edit
+              {locale === 'en' ? 'Edit' : 'Sunting'}
             </button>
             <button type="submit" className="btn btn-primary input__height form-control btn-color mb-4" onClick={() => onDelete(transaction.id)}>
-              Delete
+              {locale === 'en' ? 'Delete' : 'Hapus'}
             </button>
           </div>
         </div>

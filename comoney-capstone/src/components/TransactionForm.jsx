@@ -53,12 +53,15 @@ function TransactionForm({
     }
   }, [type]);
 
+  const successDeleteCat = locale === 'en' ? 'Delete Category Success' : 'Berhasil Menghapus Kategori';
+  const failedDeleteCat = locale === 'en' ? 'Select Category First' : 'Pilih Kategori Terlebih Dahulu';
+
   const onDeleteCategory = async () => {
     if (selectedCategory) {
       await deleteCategory(categoryId, user.uid);
       Swal.fire({
         icon: 'success',
-        title: 'Delete Category Success',
+        title: successDeleteCat,
         showConfirmButton: false,
         timer: 1000,
       });
@@ -66,7 +69,7 @@ function TransactionForm({
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Select Category First',
+        title: failedDeleteCat,
         showConfirmButton: false,
         timer: 1000,
       });
@@ -139,9 +142,11 @@ function TransactionForm({
       return;
     }
 
+    const failedAddingTrans = locale === 'en' ? 'You Need To Fill All Required Form' : 'Anda Perlu Mengisi Semua Formulir yang Diperlukan';
+
     Swal.fire({
       icon: 'error',
-      title: 'You Need To Fill All Required Form',
+      title: failedAddingTrans,
       showConfirmButton: false,
       timer: 1500,
     });
@@ -176,7 +181,7 @@ function TransactionForm({
               <button type="button" className="btn btn-primary form-control btn-color input__height mb-2" onClick={() => onAddCategory()} title={locale === 'en' ? 'Add New Category' : 'Tambah Kategori Baru'}>
                 <FiPlusSquare />
                 {' '}
-                New Category
+                {locale === 'en' ? 'New Category' : 'Kategori Baru'}
               </button>
             </div>
             <div className="col-sm-4 col-lg-1">

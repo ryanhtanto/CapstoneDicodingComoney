@@ -25,10 +25,12 @@ function AddTransaction() {
       user.uid,
     );
 
+    const SuccessAddingTrans = locale === 'en' ? 'Success Add Transaction' : 'Sukses Menambah Transaksi';
+
     if (data.success) {
       Swal.fire({
         icon: 'success',
-        title: 'Success Add Transaction',
+        title: SuccessAddingTrans,
         showConfirmButton: false,
         timer: 1000,
       });

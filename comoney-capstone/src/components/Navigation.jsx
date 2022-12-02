@@ -12,12 +12,17 @@ function Navigation({ toggleLocale }) {
   const { user, setUser } = React.useContext(UserContext);
   const { locale } = React.useContext(LocaleContext);
 
+  const confirmLogOut = locale === 'en' ? 'Log Out' : 'Keluar';
+  const cancelLogOut = locale === 'en' ? 'Cancel' : 'Batal';
+  const askLogOut = locale === 'en' ? 'Are You Sure?' : 'Apakah Anda Yakin?';
+
   const onLogout = () => {
     Swal.fire({
-      title: 'Are You Sure?',
+      title: askLogOut,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Delete',
+      confirmButtonText: confirmLogOut,
+      cancelButtonText: cancelLogOut,
     }).then(async (result) => {
       if (result.isConfirmed) {
         logout(user.accessToken);
@@ -49,7 +54,7 @@ function Navigation({ toggleLocale }) {
             </li>
             <li className="nav-item me-2">
               <Link to="/saving-planner" className="nav-link">
-                {locale === 'en' ? 'Savings Planner' : 'Perencana Tabungan'}
+                {locale === 'en' ? 'Savings Planner' : 'Rencana Tabungan'}
               </Link>
             </li>
             <li className="nav-item me-2">

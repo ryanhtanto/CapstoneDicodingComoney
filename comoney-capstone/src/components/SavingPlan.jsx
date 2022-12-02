@@ -23,6 +23,8 @@ function SavingPlan() {
     getData();
   }, []);
 
+  const successDelSavePlan = locale === 'en' ? 'Delete Saving Plan Success' : 'Berhasil Menghapus Rencana Tabungan';
+
   const onDeleteHandler = async (id) => {
     const deleteHandler = await deleteSavings(id, user.uid);
     const valueFromDb = await getAllSavings(user.uid);
@@ -30,7 +32,7 @@ function SavingPlan() {
     if (deleteHandler.success) {
       Swal.fire({
         icon: 'success',
-        title: 'Delete Saving Plan Success',
+        title: successDelSavePlan,
         showConfirmButton: false,
         timer: 2000,
       });
