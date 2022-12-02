@@ -50,12 +50,12 @@ function AddTransaction() {
           <div className="row">
             <div className="col">
               <Link to="/add/income" className="fw-semibold medium__font button__no-style text-decoration-none text-dark input__height d-block pt-2">
-                <p className={type === 'income' ? 'text-decoration-underline m-0' : 'm-0'}>Income</p>
+                <p className={type === 'income' ? 'text-decoration-underline m-0' : 'm-0'}>{locale === 'en' ? 'Income' : 'Pemasukan'}</p>
               </Link>
             </div>
             <div className="col">
               <Link to="/add/expense" className="fw-semibold medium__font button__no-style text-decoration-none text-dark input__height d-block pt-2">
-                <p className={type === 'expense' ? 'text-decoration-underline m-0' : 'm-0'}>Expense</p>
+                <p className={type === 'expense' ? 'text-decoration-underline m-0' : 'm-0'}>{locale === 'en' ? 'Expense' : 'Pengeluaran'}</p>
               </Link>
             </div>
           </div>
