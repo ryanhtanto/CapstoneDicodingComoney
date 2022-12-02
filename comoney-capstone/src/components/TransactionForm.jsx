@@ -7,7 +7,7 @@ import useInput from '../hooks/UseInput';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
 import {
-  addCategory, deleteCategory, getExpenseCategories, getIncomeCategories,
+  addCategory, deleteCategory, getCategoryByName, getExpenseCategories, getIncomeCategories,
 } from '../utils/category';
 
 function TransactionForm({
@@ -90,6 +90,18 @@ function TransactionForm({
 
     if (category) {
       Swal.showLoading();
+      const searchData = await getCategoryByName(category, user.uid);
+
+      if (searchData.length) {
+        Swal.fire({
+          icon: 'error',
+          title: `${locale === 'en' ? 'Category Already Exist' : 'Kategori Sudah Ada'}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return;
+      }
+
       const data = await addCategory(category, user.uid, type);
       if (data.success) {
         Swal.fire({

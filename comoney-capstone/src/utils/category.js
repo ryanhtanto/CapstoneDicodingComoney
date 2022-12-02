@@ -5,6 +5,21 @@ import app from '../global/firebase-config';
 
 const db = getFirestore(app);
 
+const getCategoryByName = async (name, accessToken) => {
+  try {
+    const categoryExpenseQuery = query(collection(db, 'financials', `${accessToken}`, 'categories'), where('categoryName', '==', name));
+    const querySnapshot = await getDocs(categoryExpenseQuery);
+
+    const data = [];
+    querySnapshot.forEach((docItem) => {
+      data.push(docItem.data());
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const addCategory = async (categoryName, accessToken, type) => {
   try {
     const id = +new Date();
@@ -53,5 +68,5 @@ const getExpenseCategories = async (accessToken) => {
 };
 
 export {
-  addCategory, deleteCategory, getIncomeCategories, getExpenseCategories,
+  addCategory, deleteCategory, getIncomeCategories, getExpenseCategories, getCategoryByName,
 };
