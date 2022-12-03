@@ -14,10 +14,6 @@ function AddSavingForm() {
   const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
 
-  const failedAddSavePlan = locale === 'en' ? 'Please fill all your information' : 'Silakan isi semua informasi Anda';
-  const successdAddSavePlan = locale === 'en' ? 'Add Saving Plan Success' : 'Berhasil Menambahkan Rencana Tabungan';
-  const targetAddSavePlan = locale === 'en' ? 'Your target date is before current date' : 'Tanggal target Anda sebelum tanggal saat ini';
-
   const onSubmit = async (event) => {
     event.preventDefault();
     const getTrueTargetDate = new Date();
@@ -26,7 +22,7 @@ function AddSavingForm() {
     if (savingsName === '' || amount === '' || savingsName === 0 || amount === 0) {
       Swal.fire({
         icon: 'warning',
-        title: failedAddSavePlan,
+        title: `${locale === 'en' ? 'Please fill all your information' : 'Silakan isi semua informasi Anda'}`,
         showConfirmButton: false,
         timer: 1000,
       });
@@ -40,7 +36,7 @@ function AddSavingForm() {
       if (savingsDetail.success) {
         Swal.fire({
           icon: 'success',
-          title: successdAddSavePlan,
+          title: `${locale === 'en' ? 'Add Saving Plan Success' : 'Berhasil Menambahkan Rencana Tabungan'}`,
           showConfirmButton: false,
           timer: 1000,
         });
@@ -49,7 +45,7 @@ function AddSavingForm() {
     } else {
       Swal.fire({
         icon: 'error',
-        title: targetAddSavePlan,
+        title: `${locale === 'en' ? 'Your target date is before current date' : 'Tanggal target Anda sebelum tanggal saat ini'}`,
         showConfirmButton: false,
         timer: 2000,
       });

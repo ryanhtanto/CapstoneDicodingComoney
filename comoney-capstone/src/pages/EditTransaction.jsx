@@ -2,7 +2,7 @@ import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import TransactionForm from '../components/TransactionForm';
+import EditTransactionForm from '../components/EditTransactionForm';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
 import { getTransaction, putTransaction } from '../utils/transaction';
@@ -35,15 +35,13 @@ function EditTransaction({ transactiontype }) {
         description: transactionItem.description,
       },
       user.uid,
-      id,
+      Number(id),
     );
-
-    const successSaveTrans = locale === 'en' ? 'Transaction Saved' : 'Transaksi Tersimpan';
 
     if (data.success) {
       Swal.fire({
         icon: 'success',
-        title: successSaveTrans,
+        title: `${locale === 'en' ? 'Transaction Saved' : 'Transaksi Tersimpan'}`,
         showConfirmButton: false,
         timer: 1000,
       });
@@ -83,7 +81,7 @@ function EditTransaction({ transactiontype }) {
                 <p>{locale === 'en' ? 'Fill your detail expense below' : 'Isi detail pengeluaran Anda di bawah ini'}</p>
               </>
             )}
-            <TransactionForm
+            <EditTransactionForm
               type={transaction.type}
               onEditHandler={editTransaction}
               previousValue={transaction}
