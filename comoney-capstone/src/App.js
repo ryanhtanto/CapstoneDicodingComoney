@@ -18,6 +18,7 @@ import EditSavingPlan from './pages/EditSavingPlan';
 import AddTransaction from './pages/AddTransaction';
 import AboutCoMoneyPage from './pages/AboutCoMoneyPage';
 import AboutUsPage from './pages/AboutUsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -102,6 +103,7 @@ function App() {
             <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />
             <Route path="/about-comoney" element={<AboutCoMoneyPage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
+            <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
