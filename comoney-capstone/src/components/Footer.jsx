@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiMail, FiPhoneCall } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo2.svg';
 import LocaleContext from '../context/LocaleContext';
 
 function Footer() {
