@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import { FcCalendar, FcLink } from 'react-icons/fc';
 
@@ -17,7 +18,7 @@ function NewsItemLoading({
           </div>
           <div className="col-lg-8 col-md-7 col-sm-12 p-4">
             <h2 className="fw-bold medium__font">
-              <p className="text-decoration-none text-dark cursor-p" target="blank" href={url}>
+              <p>
                 {title}
               </p>
             </h2>
@@ -28,7 +29,7 @@ function NewsItemLoading({
               </small>
             </p>
             <p className="news-description">{description}</p>
-            <a className="news-link text-decoration-none text-dark cursor-p rounded peding" target="blank" rel="noopener" href={url}>
+            <a className="news-link text-decoration-none text-dark cursor-p rounded peding" target="_blank" rel="noopener" href={url}>
               Read More
             </a>
           </div>

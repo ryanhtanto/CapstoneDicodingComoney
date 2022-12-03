@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsGraphDown, BsGraphUp, BsWallet2 } from 'react-icons/bs';
-import waveHand from '../assets/wavehand.png';
+import waveHand from '../assets/images/wavehand.png';
 import UserContext from '../context/UserContext';
 import { getAllTransactions, getThisMonthTransactions, getTodayTransactions } from '../utils/transaction';
 import LocaleContext from '../context/LocaleContext';

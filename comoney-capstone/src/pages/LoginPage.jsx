@@ -1,5 +1,5 @@
 import React from 'react';
-import images from '../assets/images/login.jpeg';
+import images from '../assets/images/people-with-graph.jpeg';
 import LoginForm from '../components/LoginForm';
 
 function LoginPage() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import images from '../assets/images/register.png';
+import images from '../assets/images/paper-with-list.png';
 import RegisterForm from '../components/RegisterForm';
 
 function RegisterPage() {

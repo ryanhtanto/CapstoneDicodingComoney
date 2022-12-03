@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
-import images from '../assets/books.png';
+import savingCard from '../assets/images/graph-monitor.png';
 import SavingPlan from '../components/SavingPlan';
 import SavingBarCount from '../components/SavingBarCount';
 import LocaleContext from '../context/LocaleContext';
@@ -24,16 +24,18 @@ function SavingPlanner() {
   return (
     <section>
       <div className="container">
-        <div className="row bg-saving-color mt-5 mb-5 mx-auto">
-          <div className="col-lg-6 col-sm-12 p-3">
-            <div className="d-flex">
-              <div className="saving-image__wrapper">
-                <img src={images} alt="icon-savings" className="saving-image" />
+        <div className="row bg-saving-color my-5 mx-2">
+          <div className="col-lg-6 col-sm-12 p-4 my-auto">
+            <div className="row">
+              <div className="saving-image__wrapper my-auto mx-auto col-lg-4 col-md-5 col-sm-12">
+                <img src={savingCard} alt="icon-savings" className="saving-image" />
               </div>
-              <SavingBarCount />
+              <div className="col-lg-8 col-md-7 col-sm-12 my-auto">
+                <SavingBarCount />
+              </div>
             </div>
           </div>
-          <div className="col-lg-6 col-sm-12 px-4 my-auto">
+          <div className="col-lg-6 col-sm-12 p-4 my-auto">
             {loading ? (
               <h4 className="placeholder-glow text-center">
                 <span className="placeholder placeholder rounded w-100" />

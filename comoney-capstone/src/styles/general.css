@@ -130,6 +130,14 @@ main {
 /* end Footer */
 
 /* Swal */
+.swal2-loading {
+  background-color: unset;
+}
+
+.swal2-loader {
+  border-color: #013496 rgba(0,0,0,0) #013496 rgba(0,0,0,0) !important;
+}
+
 .swal2-title {
   font-size: 20px !important;
 }
