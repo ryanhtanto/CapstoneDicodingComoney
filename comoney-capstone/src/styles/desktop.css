@@ -130,3 +130,27 @@
 	background-color: #FFC045;
 }
 /* End Saving Count */
+
+/* About */
+.about-company__image {
+	max-height: 300px;
+}
+
+.about__title {
+	background-color: #FFC045;
+	width: fit-content;
+}
+
+.about-underline__title {
+	border-bottom: 5px solid #FFC045;
+	width: fit-content;
+}
+
+.bg-grey {
+	background-color: #f7f7f7;
+}
+
+.feature__image {
+	max-height: 170px;
+}
+/* End About */
