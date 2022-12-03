@@ -12,17 +12,13 @@ function Navigation({ toggleLocale }) {
   const { user, setUser } = React.useContext(UserContext);
   const { locale } = React.useContext(LocaleContext);
 
-  const confirmLogOut = locale === 'en' ? 'Log Out' : 'Keluar';
-  const cancelLogOut = locale === 'en' ? 'Cancel' : 'Batal';
-  const askLogOut = locale === 'en' ? 'Are You Sure?' : 'Apakah Anda Yakin?';
-
   const onLogout = () => {
     Swal.fire({
-      title: askLogOut,
+      title: `${locale === 'en' ? 'Are You Sure?' : 'Apakah Anda Yakin?'}`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: confirmLogOut,
-      cancelButtonText: cancelLogOut,
+      confirmButtonText: `${locale === 'en' ? 'Log Out' : 'Keluar'}`,
+      cancelButtonText: `${locale === 'en' ? 'Cancel' : 'Batal'}`,
     }).then(async (result) => {
       if (result.isConfirmed) {
         logout(user.accessToken);

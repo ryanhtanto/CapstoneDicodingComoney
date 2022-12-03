@@ -1,12 +1,13 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import useInput from '../hooks/UseInput';
 import { editSavingsMoney, getSavings } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
 
-function EditSavingsForm(getId) {
+function EditSavingsForm({ getId }) {
   const [selectedSaving, setSelectedSaving] = React.useState('');
   const [savingsName, setSavingsName, setDefaultName] = useInput('');
   const [amount, setAmount, setDefaultAmount] = useInput('');
@@ -17,9 +18,7 @@ function EditSavingsForm(getId) {
 
   React.useEffect(() => {
     async function selectedSavings() {
-      const parseId = JSON.stringify(getId);
-      const jsonParse = JSON.parse(parseId);
-      const detail = await getSavings(user.uid, parseFloat(jsonParse.getId));
+      const detail = await getSavings(user.uid, parseFloat(getId));
       setSelectedSaving({
         name: detail.data.savingsName,
         amount: detail.data.amount,
@@ -38,14 +37,12 @@ function EditSavingsForm(getId) {
     if (savingsName === '' || amount === '' || savingsName === 0 || amount === 0) {
       Swal.fire({
         icon: 'warning',
-        title: 'Please fill all your information',
+        title: `${locale === 'en' ? 'You Need To Fill All Required Form' : 'Anda Perlu Mengisi Semua Formulir yang Diperlukan'}`,
         showConfirmButton: false,
         timer: 1000,
       });
     } else {
-      const parseId = JSON.stringify(getId);
-      const jsonParse = JSON.parse(parseId);
-      const detail = await getSavings(user.uid, parseFloat(jsonParse.getId));
+      const detail = await getSavings(user.uid, parseFloat(getId));
       const parseCurrentDate = detail.data.currentDate.substring(0, 7);
       if (parseCurrentDate < targetDate) {
         const edit = await editSavingsMoney(
@@ -59,7 +56,7 @@ function EditSavingsForm(getId) {
         if (edit.success) {
           Swal.fire({
             icon: 'success',
-            title: 'Edit Saving Plan Success',
+            title: `${locale === 'en' ? 'Saving Plan Saved' : 'Rencana Tabungan Tersimpan'}`,
             showConfirmButton: false,
             timer: 1000,
           });
@@ -68,7 +65,7 @@ function EditSavingsForm(getId) {
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Your target date is before current date',
+          title: `${locale === 'en' ? 'Target Date Must Be Greater Than This Month' : 'Tanggal Target Harus Lebih Besar Dari Bulan Ini'}`,
           showConfirmButton: false,
           timer: 2000,
         });
@@ -85,5 +82,9 @@ function EditSavingsForm(getId) {
     </form>
   );
 }
+
+EditSavingsForm.propTypes = {
+  getId: PropTypes.string.isRequired,
+};
 
 export default EditSavingsForm;

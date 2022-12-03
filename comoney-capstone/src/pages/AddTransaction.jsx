@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import TransactionForm from '../components/TransactionForm';
+import AddTransactionForm from '../components/AddTransactionForm';
 import LocaleContext from '../context/LocaleContext';
 import { putTransaction } from '../utils/transaction';
 import UserContext from '../context/UserContext';
@@ -25,12 +25,10 @@ function AddTransaction() {
       user.uid,
     );
 
-    const SuccessAddingTrans = locale === 'en' ? 'Success Add Transaction' : 'Sukses Menambah Transaksi';
-
     if (data.success) {
       Swal.fire({
         icon: 'success',
-        title: SuccessAddingTrans,
+        title: `${locale === 'en' ? 'Success Add Transaction' : 'Sukses Menambah Transaksi'}`,
         showConfirmButton: false,
         timer: 1000,
       });
@@ -78,7 +76,7 @@ function AddTransaction() {
                 </>
               )
           }
-          <TransactionForm onAddHandler={addTransaction} type={type} />
+          <AddTransactionForm onAddHandler={addTransaction} type={type} />
         </div>
       </div>
     </section>
