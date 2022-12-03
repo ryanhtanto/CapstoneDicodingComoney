@@ -61,18 +61,15 @@
 .bg-saving-color {
 	background-color: #F2F2F2;
 	border-radius: 10px;
+	min-height: 200px;
 }
 
 .saving-image {
 	width: 100%;
 }
 
-.image-saving__wrapper {
-	max-width: 100px;
-}
-
 .saving-image__wrapper {
-	width: 230px;
+	max-width: 230px;
 }
 
 .saving-image-item {
@@ -127,3 +124,9 @@
   }
 }
 /* End Not Found */
+
+/* Saving Count */
+.saving-count__wrapper {
+	background-color: #FFC045;
+}
+/* End Saving Count */
