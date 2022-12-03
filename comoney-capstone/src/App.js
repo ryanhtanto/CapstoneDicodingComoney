@@ -16,9 +16,9 @@ import LocaleContext from './context/LocaleContext';
 import { getActiveUser } from './utils/authentication-user';
 import EditSavingPlan from './pages/EditSavingPlan';
 import AddTransaction from './pages/AddTransaction';
-import AboutPage from './pages/AboutPage';
 import AboutUsPage from './pages/AboutUsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import AboutCoMoneyPage from './pages/AboutComoneyPage';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -101,9 +101,9 @@ function App() {
             <Route path="/saving-planner" element={<SavingPlanner />} />
             <Route path="/add-saving-plan" element={<AddSavingPlan />} />
             <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />
-            <Route path="/about-comoney" element={<AboutPage />} />
-            <Route path="/about-us" element={<AboutUsPage />} />
-            <Route path="/*:syala" element={<NotFoundPage />} />
+            <Route path="/about/comoney" element={<AboutCoMoneyPage />} />
+            <Route path="/about/teams" element={<AboutUsPage />} />
+            <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />

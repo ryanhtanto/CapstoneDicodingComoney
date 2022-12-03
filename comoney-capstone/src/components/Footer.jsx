@@ -23,12 +23,12 @@ function Footer() {
               <div>
                 <h2 className="fw-bold small__font">{locale === 'en' ? 'About' : 'Tentang'}</h2>
                 <p>
-                  <Link to="/about-comoney" className="pedingFoot text-decoration-none text-black small__font d-block">
+                  <Link to="/about/comoney" className="pedingFoot text-decoration-none text-black small__font d-block">
                     {locale === 'en' ? 'About CoMoney' : 'Tentang CoMoney'}
                   </Link>
                 </p>
                 <p>
-                  <Link to="/about-us" className="pedingFoot text-decoration-none text-black small__font d-block">
+                  <Link to="/about/teams" className="pedingFoot text-decoration-none text-black small__font d-block">
                     {locale === 'en' ? 'Our Team' : 'Tim Kami'}
                   </Link>
                 </p>
