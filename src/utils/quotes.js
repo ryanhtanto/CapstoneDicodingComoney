@@ -3,6 +3,9 @@ import { QUOTES_API } from '../global/api-config';
 
 const getQuotes = async () => {
   const response = await axios.get(QUOTES_API.BASE_URL, {
+    params: {
+      category: 'money',
+    },
     headers: {
       'X-Api-Key': QUOTES_API.KEY,
     },
