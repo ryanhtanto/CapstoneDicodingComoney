@@ -120,7 +120,7 @@ function CardInformation() {
   return (
     <section className="card mt-4 dashboard__card">
       <div className="card-body placeholder-glow">
-        <h2 className={loading ? 'placeholder rounded' : 'col-sm-12 fw-bold'}>
+        <h2 className="col-sm-12 fw-bold">
           {locale === 'en' ? 'Welcome back ' : 'Selamat datang kembali '}
           {user.displayName}
           <img className="ms-2" src={waveHand} alt="wave hand emoji" />

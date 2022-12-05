@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
 import useInput from '../hooks/UseInput';
 import { register } from '../utils/authentication-user';
@@ -10,6 +11,7 @@ function RegisterForm() {
   const [email, setEmail] = useInput('');
   const [password, setPassword] = useInput('');
   const [repeatPassword, setRepeatPassword] = useInput('');
+  const { locale } = React.useContext(LocaleContext);
   const { setUser } = React.useContext(UserContext);
   const navigate = useNavigate();
 
@@ -30,13 +32,19 @@ function RegisterForm() {
       } else {
         Swal.fire({
           icon: 'error',
-          title: data.message,
+          title: `${locale === 'en' ? 'Register Failed' : 'Pendaftaran Gagal'}`,
+          text: `${data.message}`,
           showConfirmButton: false,
           timer: 1500,
         });
       }
     } else {
-      alert('Password dan Repeat Password Tidak Sama');
+      Swal.fire({
+        icon: 'warning',
+        title: `${locale === 'en' ? 'Password and Repeat Password Different' : 'Kata Kunci dan Konfirmasi Kata Kunci Berbeda'}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -49,22 +57,22 @@ function RegisterForm() {
         <input type="email" className="form-control input__height" id="email" placeholder="Email" value={email} onChange={setEmail} />
       </div>
       <div className="form-group mt-4">
-        <input type="password" className="form-control input__height" id="password" placeholder="Password" value={password} onChange={setPassword} />
+        <input type="password" className="form-control input__height" id="password" placeholder={locale === 'en' ? 'Password' : 'Kata Kunci'} value={password} onChange={setPassword} />
       </div>
       <div className="form-group mt-4">
-        <input type="password" className="form-control input__height" id="confirmPassword" placeholder="Confirm Password" value={repeatPassword} onChange={setRepeatPassword} />
+        <input type="password" className="form-control input__height" id="confirmPassword" placeholder={locale === 'en' ? 'Confirm Password' : 'Konfirmasi Kata Kunci'} value={repeatPassword} onChange={setRepeatPassword} />
       </div>
       <div className="form-group mt-4">
         <button type="submit" className="btn btn-primary btn-color col-12 text-white input__height">
-          Sign Up
+          {locale === 'en' ? 'Sign Up' : 'Daftar'}
         </button>
       </div>
       <div className="form-group mt-4">
         <p className="text-center font-color">
-          Already have an account?
+          {locale === 'en' ? 'Already have an account?' : 'Sudah mempunyai akun?'}
           {' '}
           <a href="/" className="linkedAuth fw-bold peding">
-            Log In
+            {locale === 'en' ? 'Log In' : 'Masuk'}
           </a>
         </p>
       </div>
