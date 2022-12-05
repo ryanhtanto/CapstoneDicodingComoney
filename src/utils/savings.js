@@ -5,21 +5,16 @@ import app from '../global/firebase-config';
 
 const db = getFirestore(app);
 
-const addSavingsMoney = async (savingsName, amount, targetDate, accessToken) => {
+const addSavingsMoney = async (savingsName, amount, targetDate, accessToken, startDate) => {
   try {
     const id = +new Date();
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const currentDate = `${year}-${month}-${day}`;
     await setDoc(doc(db, 'financials', `${accessToken}`, 'savings', `${id}`), {
       id,
       data: {
         savingsName,
         amount,
         targetDate,
-        currentDate,
+        startDate,
       },
     });
     return {
@@ -74,7 +69,7 @@ const editSavingsMoney = async (
   savingsName,
   amount,
   targetDate,
-  currentDate,
+  startDate,
   accessToken,
 ) => {
   const id = savingsID;
@@ -86,7 +81,7 @@ const editSavingsMoney = async (
         savingsName,
         amount,
         targetDate,
-        currentDate,
+        startDate,
       },
     });
     return {

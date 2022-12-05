@@ -21,6 +21,9 @@ function SavingPlanItemLoading() {
               <p className="placeholder-glow mb-0">
                 <span className="placeholder rounded col-9" />
               </p>
+              <p className="placeholder-glow mb-0">
+                <span className="placeholder rounded col-9" />
+              </p>
               <p className="placeholder-glow mb-4">
                 <span className="placeholder rounded col-9" />
               </p>

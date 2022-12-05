@@ -5,23 +5,25 @@ import savings from '../assets/images/saving-item.png';
 import DeleteSavings from './DeleteSavings';
 import EditSavingButton from './EditSavingButton';
 import LocaleContext from '../context/LocaleContext';
+import { getMonthYear } from '../utils/date-formatter';
+// import { getMonthYear } from '../utils/date-formatter';
 
 function SavingPlanItem({ saving, onDelete }) {
-  const nowDate = new Date(saving.data.currentDate);
-  const targetDate = new Date(saving.data.targetDate);
-
-  // eslint-disable-next-line max-len
-  const differenceInMonth = targetDate.getMonth() - nowDate.getMonth() + 12 * (targetDate.getFullYear() - nowDate.getFullYear());
-  const month = targetDate.toLocaleString('default', { month: 'long' });
-  const year = targetDate.getFullYear();
-
   const [rupias, setRupias] = React.useState([]);
   const [roundedAmount, setRoundedAmount] = React.useState([]);
-  const [isOneMonth, setIsOneMonth] = React.useState(false);
+  const [savingMessage, setSavingMessage] = React.useState(null);
+  const [progressInMonth, setProgressInMonth] = React.useState(0);
   const { locale } = React.useContext(LocaleContext);
+  const targetMonth = saving.data.targetDate.slice(5, 7);
+  const startMonth = saving.data.startDate.slice(5, 7);
+  const targetYear = saving.data.targetDate.slice(0, 4);
+  const startYear = saving.data.startDate.slice(0, 4);
+  const differenceInMonth = (targetMonth - startMonth) + 1 + (12 * (targetYear - startYear));
+  const tahunIni = getMonthYear().slice(0, 4);
+  const bulanIni = getMonthYear().slice(5, 7);
 
   React.useEffect(() => {
-    async function formatRupias() {
+    const formatRupias = async () => {
       const numberString = saving.data.amount.replace(/[^,\d]/g, '').toString();
       const split = numberString.split(',');
       const sisa = split[0].length % 3;
@@ -33,8 +35,36 @@ function SavingPlanItem({ saving, onDelete }) {
       }
       rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
       setRupias(rupiah);
-    }
-    async function spendPerMonth() {
+    };
+    const savingProgressInMonth = async () => {
+      if (`${tahunIni}-${bulanIni}` === `${startYear}-${startMonth}`) {
+        setProgressInMonth(1);
+        return;
+      }
+
+      if (`${tahunIni}-${bulanIni}` === `${targetYear}-${targetMonth}`) {
+        setProgressInMonth(differenceInMonth);
+        setSavingMessage(`${locale === 'en' ? 'Last Month' : 'Bulan Terakhir'}`);
+        return;
+      }
+
+      if (`${tahunIni}-${bulanIni}` > `${targetYear}-${targetMonth}`) {
+        setSavingMessage(`${locale === 'en' ? 'Saving Plan Have Been Completed' : 'Rencana Tabungan Telah Selesai'}`);
+        setProgressInMonth(-1);
+        return;
+      }
+
+      if (`${tahunIni}-${bulanIni}` > `${startYear}-${startMonth}`) {
+        const progressCount = (targetMonth - bulanIni) + 1 + (12 * (targetYear - tahunIni));
+        setProgressInMonth(progressCount);
+        return;
+      }
+
+      if (`${tahunIni}-${bulanIni}` < `${startYear}-${startMonth}`) {
+        setSavingMessage(`${locale === 'en' ? 'Saving Plan Has Not Been Started' : 'Rencana Tabungan Belum Dimulai'}`);
+      }
+    };
+    const spendPerMonth = async () => {
       let spend = 0;
       spend = saving.data.amount / differenceInMonth;
 
@@ -51,14 +81,11 @@ function SavingPlanItem({ saving, onDelete }) {
       }
       rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
       setRoundedAmount(rupiah);
-      if (differenceInMonth === 1) {
-        setIsOneMonth(true);
-      } else {
-        setIsOneMonth(false);
-      }
-    }
+    };
+
     formatRupias();
     spendPerMonth();
+    savingProgressInMonth();
   }, []);
 
   return (
@@ -77,12 +104,21 @@ function SavingPlanItem({ saving, onDelete }) {
             </p>
             <p className="mb-2">
               <FiCalendar className="me-2 mb-1" />
-              Target:
+              Start:
               {' '}
-              {month}
+              {startMonth}
               ,
               {' '}
-              {year}
+              {startYear}
+            </p>
+            <p className="mb-2">
+              <FiCalendar className="me-2 mb-1" />
+              Target:
+              {' '}
+              {targetMonth}
+              ,
+              {' '}
+              {targetYear}
             </p>
             <p>
               <FiCheckSquare className="me-2 mb-1" />
@@ -99,11 +135,22 @@ function SavingPlanItem({ saving, onDelete }) {
           </div>
         </div>
         <div className="card-footer">
-          <Link to={`/edit-saving-plan/${saving.id}`}>
-            <EditSavingButton />
-          </Link>
+          {progressInMonth !== -1 ? (
+            <Link to={`/edit-saving-plan/${saving.id}`}>
+              <EditSavingButton />
+            </Link>
+          ) : ''}
           <DeleteSavings id={saving.id} onDelete={onDelete} />
-          {isOneMonth === true ? <p className="reminderOneMonth fw-bold rounded p-2">{locale === 'en' ? 'One month left!' : 'Tersisa satu bulan!'}</p> : ''}
+          {savingMessage !== null ? <p className="reminderOneMonth fw-bold rounded p-2">{savingMessage}</p> : ''}
+          {progressInMonth !== 0 && progressInMonth !== -1 ? (
+            <p className="d-inline">
+              {progressInMonth}
+              {' '}
+              /
+              {' '}
+              {differenceInMonth}
+            </p>
+          ) : ''}
         </div>
       </div>
     </div>
