@@ -131,7 +131,7 @@ main {
 
 /* Swal */
 .swal2-loading {
-  background-color: unset;
+  width: fit-content;
 }
 
 .swal2-loader {

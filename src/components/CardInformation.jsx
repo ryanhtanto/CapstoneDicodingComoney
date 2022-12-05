@@ -130,7 +130,7 @@ function CardInformation() {
             <BsWallet2 />
             <div className="balance__container ms-4">
               <h3 className="fw-bold small__font">{locale === 'en' ? 'Current Balance' : 'Saldo Saat Ini'}</h3>
-              <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
+              <p className={loading ? 'placeholder rounded mt-1' : 'small__font mt-1'}>
                 Rp
                 {' '}
                 {currentBalance}
@@ -145,7 +145,7 @@ function CardInformation() {
               <BsGraphUp className="graph-up" />
               <div className="income__container ms-4">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Income' : 'Pemasukan'}</h3>
-                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
+                <p className={loading ? 'placeholder rounded w-100 mt-1' : 'small__font mt-1'}>
                   Rp
                   {' '}
                   { incomeDaily }
@@ -154,9 +154,9 @@ function CardInformation() {
             </div>
             <div className="expense d-flex align-items-center">
               <BsGraphDown className="graph-down" />
-              <div className="expense__container ms-4">
+              <div className="expense__container ms-4 mt-1">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Expense' : 'Pengeluaran'}</h3>
-                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
+                <p className={loading ? 'placeholder rounded w-100 mt-1' : 'small__font mt-1'}>
                   Rp
                   {' '}
                   {expenseDaily}
@@ -170,9 +170,9 @@ function CardInformation() {
             </div>
             <div className="income d-flex align-items-center">
               <BsGraphUp className="graph-up" />
-              <div className="income__container ms-4">
+              <div className="income__container ms-4 mt-1">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Income' : 'Pemasukan'}</h3>
-                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
+                <p className={loading ? 'placeholder rounded w-100 mt-1' : 'small__font mt-1'}>
                   Rp
                   {' '}
                   {incomeMonthly}
@@ -181,9 +181,9 @@ function CardInformation() {
             </div>
             <div className="expense d-flex align-items-center">
               <BsGraphDown className="graph-down" />
-              <div className="expense__container ms-4">
+              <div className="expense__container ms-4 mt-1">
                 <h3 className="fw-bold small__font">{locale === 'en' ? 'Expense' : 'Pengeluaran'}</h3>
-                <p className={loading ? 'placeholder rounded w-100' : 'small__font'}>
+                <p className={loading ? 'placeholder rounded w-100 mt-1' : 'small__font mt-1'}>
                   Rp
                   {' '}
                   {expenseMonthly}
