@@ -189,3 +189,7 @@
 	color: #2b2b2b;
 }
 /* End Teams */
+
+.transaction__content {
+	min-height: 400px;
+}

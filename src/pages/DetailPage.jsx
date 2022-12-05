@@ -53,7 +53,7 @@ function DetailPage() {
         <div className="container">
           <div className="my-4">
             <h4>
-              <Link className="text-black text-decoration-none pedingBack" to="/">
+              <Link className="text-black text-decoration-none pedingBack medium__font" to="/">
                 <FiArrowLeft className="warna fs-2" />
                 {locale === 'en' ? 'Back to Dashboard' : 'Kembali ke Dasbor'}
               </Link>
@@ -61,7 +61,7 @@ function DetailPage() {
           </div>
 
           <div className="content">
-            <h4 className="fw-bold">{locale === 'en' ? 'Detail Transaction' : 'Detail Transaksi'}</h4>
+            <h4 className="fw-bold medium__font">{locale === 'en' ? 'Detail Transaction' : 'Detail Transaksi'}</h4>
 
             <div className="my-4">
               <h5>{locale === 'en' ? 'Date' : 'Tanggal'}</h5>
@@ -84,7 +84,7 @@ function DetailPage() {
             </div>
             <div className="my-4">
               <h5>{locale === 'en' ? 'Description' : 'Deskripsi'}</h5>
-              <p>{transaction.description}</p>
+              <p>{transaction.description !== '' ? transaction.description : 'Empty'}</p>
             </div>
             <button type="submit" className="btn btn-primary input__height form-control btn-color my-4" onClick={() => navigate(`/edit/transaction/${id}`)}>
               {locale === 'en' ? 'Edit' : 'Sunting'}

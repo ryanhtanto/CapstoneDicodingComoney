@@ -25,7 +25,7 @@ const login = async (email, password) => {
   } catch (error) {
     return {
       success: false,
-      message: 'Wrong Email / Password',
+      message: error,
     };
   }
 };
@@ -47,7 +47,7 @@ const register = async (email, password, name) => {
   } catch (error) {
     return {
       success: false,
-      message: `Failed Create Account ${error.message}`,
+      message: error.message,
     };
   }
 };

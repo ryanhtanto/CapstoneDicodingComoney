@@ -131,7 +131,7 @@ main {
 
 /* Swal */
 .swal2-loading {
-  background-color: unset;
+  width: fit-content;
 }
 
 .swal2-loader {
@@ -195,3 +195,17 @@ main {
 }
 
 /* end of button spacing */
+
+.button__locale {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background-color: unset;
+  position: absolute;
+  right: 50px;
+  top: 50px;
+}
+
+.button-animate:active {
+  transform: scale(1.10);
+}

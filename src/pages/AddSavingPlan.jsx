@@ -12,7 +12,7 @@ function AddSavingPlan() {
       <div className="container">
         <div className="my-4">
           <h4>
-            <Link to="/saving-planner" className="text-black text-decoration-none pedingBack">
+            <Link to="/saving-planner" className="text-black text-decoration-none pedingBack medium__font">
               <FiArrowLeft className="warna fs-2" />
               {locale === 'en' ? 'Back to Savings Planner' : 'Kembali ke Perencana Tabungan'}
             </Link>
@@ -20,8 +20,8 @@ function AddSavingPlan() {
         </div>
 
         <div className="content">
-          <h4 className="fw-bold">{locale === 'en' ? 'Savings money for better future' : 'Menabung untuk masa depan yang lebih baik'}</h4>
-          <p>{locale === 'en' ? 'Get your target by fill the information below' : 'Capai target Anda dengan mengisi informasi di bawah ini'}</p>
+          <h4 className="fw-bold medium__font">{locale === 'en' ? 'Savings money for better future' : 'Menabung untuk masa depan yang lebih baik'}</h4>
+          <p className="small__font">{locale === 'en' ? 'Get your target by fill the information below' : 'Capai target Anda dengan mengisi informasi di bawah ini'}</p>
           <AddSavingForm />
         </div>
       </div>

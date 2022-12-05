@@ -6,21 +6,20 @@ import DeleteSavings from './DeleteSavings';
 import EditSavingButton from './EditSavingButton';
 import LocaleContext from '../context/LocaleContext';
 import { getMonthYear } from '../utils/date-formatter';
-// import { getMonthYear } from '../utils/date-formatter';
 
 function SavingPlanItem({ saving, onDelete }) {
   const [rupias, setRupias] = React.useState([]);
   const [roundedAmount, setRoundedAmount] = React.useState([]);
   const [savingMessage, setSavingMessage] = React.useState(null);
   const [progressInMonth, setProgressInMonth] = React.useState(0);
+  const [targetMonth] = React.useState(saving.data.targetDate.slice(5, 7));
+  const [targetYear] = React.useState(saving.data.targetDate.slice(0, 4));
+  const [startMonth] = React.useState(saving.data.startDate.slice(5, 7));
+  const [startYear] = React.useState(saving.data.startDate.slice(0, 4));
+  const [thisMonth] = React.useState(getMonthYear().slice(0, 4));
+  const [thisYear] = React.useState(getMonthYear().slice(5, 7));
   const { locale } = React.useContext(LocaleContext);
-  const targetMonth = saving.data.targetDate.slice(5, 7);
-  const startMonth = saving.data.startDate.slice(5, 7);
-  const targetYear = saving.data.targetDate.slice(0, 4);
-  const startYear = saving.data.startDate.slice(0, 4);
   const differenceInMonth = (targetMonth - startMonth) + 1 + (12 * (targetYear - startYear));
-  const tahunIni = getMonthYear().slice(0, 4);
-  const bulanIni = getMonthYear().slice(5, 7);
 
   React.useEffect(() => {
     const formatRupias = async () => {
@@ -36,34 +35,7 @@ function SavingPlanItem({ saving, onDelete }) {
       rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
       setRupias(rupiah);
     };
-    const savingProgressInMonth = async () => {
-      if (`${tahunIni}-${bulanIni}` === `${startYear}-${startMonth}`) {
-        setProgressInMonth(1);
-        return;
-      }
 
-      if (`${tahunIni}-${bulanIni}` === `${targetYear}-${targetMonth}`) {
-        setProgressInMonth(differenceInMonth);
-        setSavingMessage(`${locale === 'en' ? 'Last Month' : 'Bulan Terakhir'}`);
-        return;
-      }
-
-      if (`${tahunIni}-${bulanIni}` > `${targetYear}-${targetMonth}`) {
-        setSavingMessage(`${locale === 'en' ? 'Saving Plan Have Been Completed' : 'Rencana Tabungan Telah Selesai'}`);
-        setProgressInMonth(-1);
-        return;
-      }
-
-      if (`${tahunIni}-${bulanIni}` > `${startYear}-${startMonth}`) {
-        const progressCount = (targetMonth - bulanIni) + 1 + (12 * (targetYear - tahunIni));
-        setProgressInMonth(progressCount);
-        return;
-      }
-
-      if (`${tahunIni}-${bulanIni}` < `${startYear}-${startMonth}`) {
-        setSavingMessage(`${locale === 'en' ? 'Saving Plan Has Not Been Started' : 'Rencana Tabungan Belum Dimulai'}`);
-      }
-    };
     const spendPerMonth = async () => {
       let spend = 0;
       spend = saving.data.amount / differenceInMonth;
@@ -83,8 +55,37 @@ function SavingPlanItem({ saving, onDelete }) {
       setRoundedAmount(rupiah);
     };
 
-    formatRupias();
+    const savingProgressInMonth = async () => {
+      if (`${thisYear}-${thisMonth}` === `${startYear}-${startMonth}`) {
+        setProgressInMonth(1);
+        return;
+      }
+
+      if (`${thisYear}-${thisMonth}` === `${targetYear}-${targetMonth}`) {
+        setProgressInMonth(differenceInMonth);
+        setSavingMessage(`${locale === 'en' ? 'Last Month' : 'Bulan Terakhir'}`);
+        return;
+      }
+
+      if (`${thisYear}-${thisMonth}` > `${targetYear}-${targetMonth}`) {
+        setSavingMessage(`${locale === 'en' ? 'Saving Plan Have Been Completed' : 'Rencana Tabungan Telah Selesai'}`);
+        setProgressInMonth(-1);
+        return;
+      }
+
+      if (`${thisYear}-${thisMonth}` > `${startYear}-${startMonth}`) {
+        const progressCount = (targetMonth - thisMonth) + 1 + (12 * (targetYear - thisYear));
+        setProgressInMonth(progressCount);
+        return;
+      }
+
+      if (`${thisYear}-${thisMonth}` < `${startYear}-${startMonth}`) {
+        setSavingMessage(`${locale === 'en' ? 'Saving Plan Has Not Been Started' : 'Rencana Tabungan Belum Dimulai'}`);
+      }
+    };
+
     spendPerMonth();
+    formatRupias();
     savingProgressInMonth();
   }, []);
 
