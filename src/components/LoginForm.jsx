@@ -1,6 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import useInput from '../hooks/UseInput';
+import useInput from '../hooks/useInput';
 import userContext from '../context/UserContext';
 import { login } from '../utils/authentication-user';
 import LocaleContext from '../context/LocaleContext';

@@ -3,7 +3,7 @@ import React from 'react';
 import { FiPlusSquare, FiTrash2 } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
-import useInput from '../hooks/UseInput';
+import useInput from '../hooks/useInput';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
 import {

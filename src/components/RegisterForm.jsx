@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
-import useInput from '../hooks/UseInput';
+import useInput from '../hooks/useInput';
 import { register } from '../utils/authentication-user';
 
 function RegisterForm() {

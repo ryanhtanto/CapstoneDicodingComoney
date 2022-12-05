@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import useInput from '../hooks/UseInput';
+import useInput from '../hooks/useInput';
 import { addSavingsMoney } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
@@ -84,7 +84,7 @@ function AddSavingForm() {
           </label>
         </div>
       </div>
-      <button type="submit" className="btn btn-primary btn-lg form-control btn-color">{locale === 'en' ? 'Add New Savings' : 'Tambahkan Tabungan Baru'}</button>
+      <button type="submit" className="btn btn-primary input__height form-control btn-color">{locale === 'en' ? 'Add New Savings' : 'Tambahkan Tabungan Baru'}</button>
     </form>
   );
 }

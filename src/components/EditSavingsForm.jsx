@@ -2,17 +2,15 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useInput from '../hooks/UseInput';
+import useInput from '../hooks/useInput';
 import { editSavingsMoney, getSavings } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
 
 function EditSavingsForm({ getId }) {
   const [selectedSaving, setSelectedSaving] = React.useState('');
-  const [savingsName, setSavingsName, setDefaultName] = useInput('');
-  const [amount, setAmount, setDefaultAmount] = useInput('');
-  const [targetDate, setDefaultTarget] = useInput('');
-  const [startDate, setDefaultStart] = useInput('');
+  const [savingsName, setSavingsName, setDefaultSavingName] = useInput('');
+  const [loading, setLoading] = React.useState(true);
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
@@ -26,29 +24,24 @@ function EditSavingsForm({ getId }) {
         targetDate: detail.data.targetDate,
         startDate: detail.data.startDate,
       });
-
-      setDefaultName(detail.data.savingsName);
-      setDefaultAmount(detail.data.amount);
-      setDefaultTarget(detail.data.targetDate);
-      setDefaultStart(detail.data.startDate);
+      setDefaultSavingName(detail.data.savingsName);
+      setLoading(false);
     }
     selectedSavings();
   }, []);
-  console.log(selectedSaving);
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    if (savingsName === '' || amount === '' || savingsName === 0 || amount === 0) {
+    if (savingsName === '') {
       Swal.fire({
         icon: 'warning',
-        title: `${locale === 'en' ? 'You Need To Fill All Required Form' : 'Anda Perlu Mengisi Semua Formulir yang Diperlukan'}`,
+        title: `${locale === 'en' ? 'Savings Name Cannot Be Empty' : 'Nama Rencana Tabungan Tidak Boleh Kosong'}`,
         showConfirmButton: false,
-        timer: 1000,
+        timer: 1500,
       });
     } else {
-      const detail = await getSavings(user.uid, parseFloat(getId));
       const edit = await editSavingsMoney(
-        detail.id,
+        getId,
         savingsName,
         selectedSaving.amount,
         selectedSaving.targetDate,
@@ -60,20 +53,24 @@ function EditSavingsForm({ getId }) {
           icon: 'success',
           title: `${locale === 'en' ? 'Saving Plan Saved' : 'Rencana Tabungan Tersimpan'}`,
           showConfirmButton: false,
-          timer: 1000,
+          timer: 1500,
         });
         navigate('/saving-planner');
       }
     }
   };
 
+  if (loading) {
+    return;
+  }
+
   return (
     <form className="my-5" onSubmit={onSubmit}>
-      <input type="text" className="form-control my-4 input__height" placeholder="Name" aria-label="Name" value={savingsName || selectedSaving.name} onChange={setSavingsName} />
-      <input type="number" className="form-control my-4 input__height" placeholder="Amount target" aria-label="Amount target" value={amount || selectedSaving.amount} onChange={setAmount} disabled />
-      <input className="form-control my-4 input__height" type="month" value={targetDate || selectedSaving.targetDate} disabled />
-      <input className="form-control my-4 input__height" type="month" value={startDate || selectedSaving.startDate} disabled />
-      <button type="submit" className="btn btn-primary input__height form-control btn-color">{locale === 'en' ? 'Edit your Savings' : 'Edit Tabungan Anda'}</button>
+      <input type="text" className="form-control my-4 input__height" placeholder="Name" aria-label="Name" value={savingsName} onChange={setSavingsName} />
+      <input type="number" className="form-control my-4 input__height" placeholder="Amount target" aria-label="Amount target" value={selectedSaving.amount} disabled />
+      <input className="form-control my-4 input__height" type="month" value={selectedSaving.targetDate} disabled />
+      <input className="form-control my-4 input__height" type="month" value={selectedSaving.startDate} disabled />
+      <button type="submit" className="btn btn-primary input__height form-control btn-color">{locale === 'en' ? 'Save' : 'Simpan'}</button>
     </form>
   );
 }

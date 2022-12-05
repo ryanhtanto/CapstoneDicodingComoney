@@ -1,7 +1,7 @@
 import React from 'react';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
-import useInput from '../hooks/UseInput';
+import useInput from '../hooks/useInput';
 import { getFullDate } from '../utils/date-formatter';
 import { getTodayTransactions } from '../utils/transaction';
 import ListTransaction from './ListTransaction';
