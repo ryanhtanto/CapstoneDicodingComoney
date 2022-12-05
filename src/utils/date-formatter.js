@@ -15,6 +15,21 @@ const getMonthYear = () => {
   return `${year}-${month}`;
 };
 
+const getNextMonthYear = () => {
+  const unformattedDate = new Date();
+  let month = unformattedDate.getMonth() + 1;
+  let year = unformattedDate.getFullYear();
+
+  if (month <= 11) {
+    month += 1;
+  } else {
+    year += 1;
+    month = '01';
+  }
+
+  return `${year}-${month}`;
+};
+
 const showFormattedDate = (date) => {
   const options = {
     weekday: 'long',
@@ -25,4 +40,6 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString(undefined, options);
 };
 
-export { getFullDate, showFormattedDate, getMonthYear };
+export {
+  getFullDate, showFormattedDate, getMonthYear, getNextMonthYear,
+};
