@@ -21,9 +21,9 @@ function AboutUsPage() {
               <p className="profile__universty">Universitas Multimedia Nusantara</p>
             </div>
             <div className="card-footer profile-links text-center">
-              <a href="https://www.github.com/" target="_blank" rel="noreferrer"><BsGithub /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><BsLinkedin /></a>
-              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><BsInstagram /></a>
+              <a href="https://www.github.com/vincentt14" target="_blank" rel="noreferrer"><BsGithub /></a>
+              <a href="https://www.linkedin.com/in/vincent-240775185/" target="_blank" rel="noreferrer"><BsLinkedin /></a>
+              <a href="https://www.instagram.com/_vincenttlim" target="_blank" rel="noreferrer"><BsInstagram /></a>
             </div>
           </div>
         </div>
@@ -55,9 +55,9 @@ function AboutUsPage() {
               <p className="profile__universty">Universitas Multimedia Nusantara</p>
             </div>
             <div className="card-footer profile-links text-center">
-              <a href="https://www.github.com/" target="_blank" rel="noreferrer"><BsGithub /></a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><BsLinkedin /></a>
-              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><BsInstagram /></a>
+              <a href="https://www.github.com/ryanhtanto" target="_blank" rel="noreferrer"><BsGithub /></a>
+              <a href="https://www.linkedin.com/in/ryan-hertanto-06aa531b6/" target="_blank" rel="noreferrer"><BsLinkedin /></a>
+              <a href="https://www.instagram.com/_ryanhertanto" target="_blank" rel="noreferrer"><BsInstagram /></a>
             </div>
           </div>
         </div>
