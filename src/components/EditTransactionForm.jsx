@@ -146,7 +146,7 @@ function EditTransactionForm({ type, onEditHandler, previousValue }) {
   return (
     <form className="my-5" onSubmit={(e) => onSubmit(e)}>
       <input type="text" className="form-control mb-4 mt-2 input__height" placeholder={locale === 'en' ? 'Name' : 'Nama'} aria-label={locale === 'en' ? 'Name' : 'Nama'} value={name} onChange={setName} />
-      <input type="number" className="form-control my-4 input__height" placeholder={locale === 'en' ? 'Amount' : 'Jumlah'} aria-label={locale === 'en' ? 'Amount' : 'Jumlah'} value={amount} onChange={setAmount} />
+      <input type="number" className="form-control my-4 input__height" placeholder={locale === 'en' ? 'Amount' : 'Jumlah'} aria-label={locale === 'en' ? 'Amount' : 'Jumlah'} value={amount} onChange={setAmount} min="0" />
 
       <div className="text-center">
         <div className="row">

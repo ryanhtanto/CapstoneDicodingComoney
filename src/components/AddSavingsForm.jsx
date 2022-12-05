@@ -64,7 +64,7 @@ function AddSavingForm() {
   return (
     <form className="my-5" onSubmit={onSubmit}>
       <input type="text" className="form-control my-4 input__height" placeholder={locale === 'en' ? 'Savings Name' : 'Nama Tabungan'} aria-label={locale === 'en' ? 'Savings Name' : 'Nama Tabungan'} value={savingsName} onChange={setSavingsName} />
-      <input type="number" className="form-control my-2 input__height" placeholder={locale === 'en' ? 'Amount Target' : 'Jumlah Target'} aria-label={locale === 'en' ? 'Amount Target' : 'Jumlah Target'} value={amount} onChange={setAmount} />
+      <input type="number" className="form-control my-2 input__height" placeholder={locale === 'en' ? 'Amount Target' : 'Jumlah Target'} aria-label={locale === 'en' ? 'Amount Target' : 'Jumlah Target'} value={amount} onChange={setAmount} min="0" />
       <label htmlFor="targetDate" className="w-100 mb-4">
         <p className="about__title my-2 px-2 py-1 rounded">{locale === 'en' ? 'Target Date' : 'Tanggal Target'}</p>
         <input id="targetDate" type="month" className="form-control input__height" value={targetDate} onChange={setTargetDate} />
