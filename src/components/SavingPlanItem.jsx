@@ -16,8 +16,8 @@ function SavingPlanItem({ saving, onDelete }) {
   const [targetYear] = React.useState(saving.data.targetDate.slice(0, 4));
   const [startMonth] = React.useState(saving.data.startDate.slice(5, 7));
   const [startYear] = React.useState(saving.data.startDate.slice(0, 4));
-  const [thisMonth] = React.useState(getMonthYear().slice(0, 4));
-  const [thisYear] = React.useState(getMonthYear().slice(5, 7));
+  const [thisMonth] = React.useState(getMonthYear().slice(5, 7));
+  const [thisYear] = React.useState(getMonthYear().slice(0, 4));
   const { locale } = React.useContext(LocaleContext);
   const differenceInMonth = (targetMonth - startMonth) + 1 + (12 * (targetYear - startYear));
 

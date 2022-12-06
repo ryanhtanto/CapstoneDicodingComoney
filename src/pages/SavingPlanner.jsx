@@ -5,21 +5,37 @@ import savingCard from '../assets/images/graph-monitor.png';
 import SavingPlan from '../components/SavingPlan';
 import SavingBarCount from '../components/SavingBarCount';
 import LocaleContext from '../context/LocaleContext';
-import getQuotes from '../utils/quotes';
+import { getAllSavings } from '../utils/savings';
+import UserContext from '../context/UserContext';
+import Quote from '../components/Quote';
 
 function SavingPlanner() {
-  const [quotes, setQuotes] = React.useState([]);
+  const [savings, setSavings] = React.useState([]);
+  const [refresh, setRefresh] = React.useState(true);
+  const [loading, setLoading] = React.useState(0);
   const { locale } = React.useContext(LocaleContext);
-  const [loading, setLoading] = React.useState(true);
+  const { user } = React.useContext(UserContext);
 
   React.useEffect(() => {
-    async function getData() {
-      const data = await getQuotes();
-      setQuotes(data);
+    const getData = async () => {
+      const valueFromDb = await getAllSavings(user.uid);
+      setSavings(valueFromDb);
       setLoading(false);
-    }
+      console.log(1000);
+    };
+
     getData();
-  }, []);
+  }, [refresh]);
+
+  console.log(refresh);
+
+  const refreshCallback = () => {
+    if (refresh) {
+      setRefresh(false);
+    } else {
+      setRefresh(true);
+    }
+  };
 
   return (
     <section>
@@ -31,31 +47,21 @@ function SavingPlanner() {
                 <img src={savingCard} alt="icon-savings" className="saving-image" />
               </div>
               <div className="col-lg-8 col-md-7 col-sm-12 my-auto">
-                <SavingBarCount />
+                <SavingBarCount savings={savings} />
               </div>
             </div>
           </div>
           <div className="col-lg-6 col-sm-12 p-4 my-auto">
-            {loading ? (
-              <h4 className="placeholder-glow text-center">
-                <span className="placeholder placeholder rounded w-100" />
-                <span className="placeholder placeholder rounded w-75" />
-                <span className="placeholder placeholder rounded w-50 mt-2" />
-              </h4>
-            )
-              : (
-                <>
-                  <p className="text-center mx-auto">{quotes.quote}</p>
-                  <p className="text-center mx-auto">
-                    <b>{quotes.author}</b>
-                  </p>
-                </>
-              )}
+            <Quote />
           </div>
         </div>
 
         <div className="row mt-5 mb-5 mx-auto">
-          <SavingPlan />
+          <SavingPlan
+            savings={savings}
+            refresh={refreshCallback}
+            loading={loading}
+          />
         </div>
         <Link to="/add-saving-plan">
           <button type="button" aria-label="add savings" id="addButton" className="addButton" title={locale === 'en' ? 'Add Saving Plan' : 'Tambah Rencana Tabungan'}>

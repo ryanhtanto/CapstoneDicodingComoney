@@ -2,25 +2,13 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import SavingPlanItem from './SavingPlanItem';
 import LocaleContext from '../context/LocaleContext';
-import { getAllSavings, deleteSavings } from '../utils/savings';
+import { deleteSavings } from '../utils/savings';
 import UserContext from '../context/UserContext';
 import SavingPlanItemLoading from './SavingPlanItemLoading';
 
-function SavingPlan() {
-  const [savings, setSavings] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [refresh, setRefresh] = React.useState(true);
+function SavingPlan({ savings, loading, refresh }) {
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
-
-  React.useEffect(() => {
-    const getData = async () => {
-      const valueFromDb = await getAllSavings(user.uid);
-      setSavings(valueFromDb);
-      setLoading(false);
-    };
-    getData();
-  }, [refresh]);
 
   const onDeleteHandler = async (id) => {
     Swal.showLoading();
@@ -32,12 +20,7 @@ function SavingPlan() {
         showConfirmButton: false,
         timer: 1500,
       });
-
-      if (refresh) {
-        setRefresh(false);
-        return;
-      }
-      setRefresh(true);
+      refresh();
     } else {
       Swal.fire({
         icon: 'error',
