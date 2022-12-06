@@ -74,7 +74,7 @@ function TransactionForm({ type, onAddHandler }) {
 
     if (category) {
       Swal.showLoading();
-      const searchData = await getCategoryByName(category, user.uid);
+      const searchData = await getCategoryByName(category, type, user.uid);
 
       if (searchData.length) {
         Swal.fire({
