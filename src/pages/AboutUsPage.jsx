@@ -10,7 +10,7 @@ function AboutUsPage() {
     <section className="about-us container py-5">
       <h2 className="medium__font fw-bold mx-auto about__title p-2 rounded mb-4">Meet Our Teams</h2>
 
-      <div className="profile__wrapper row row-cols-lg-3 row-cols-md-2 row-cols-1 g-5">
+      <div className="profile__wrapper row row-cols-lg-3 row-cols-md-2 row-cols-1 g-5 px-5">
         <div className="col">
           <div className="profile__item card">
             <div className="profile-image__wrapper">
