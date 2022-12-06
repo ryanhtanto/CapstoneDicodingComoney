@@ -66,7 +66,12 @@ function App() {
   }), [locale]);
 
   if (loading) {
-    return;
+    return (
+      <div className="loading__container d-flex justify-content-center flex-column align-items-center">
+        <span className="loading__animation mb-4" />
+        <p className="fw-bold medium__font">Loading</p>
+      </div>
+    );
   }
 
   if (user === null) {
