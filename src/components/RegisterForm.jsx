@@ -15,6 +15,11 @@ function RegisterForm() {
   const { setUser } = React.useContext(UserContext);
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const element = document.querySelector('nav');
+    element.classList.add('d-none');
+  }, []);
+
   const onSubmit = async (event) => {
     event.preventDefault();
     if (password === repeatPassword) {

@@ -11,6 +11,11 @@ function LoginForm() {
   const { setUser } = React.useContext(userContext);
   const { locale } = React.useContext(LocaleContext);
 
+  React.useEffect(() => {
+    const element = document.querySelector('nav');
+    element.classList.add('d-none');
+  }, []);
+
   const onSubmit = async (event) => {
     event.preventDefault();
     Swal.showLoading();
