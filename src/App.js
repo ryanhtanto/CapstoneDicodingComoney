@@ -78,11 +78,16 @@ function App() {
     return (
       <UserContext.Provider value={userContextValue}>
         <LocaleContext.Provider value={localeContextValue}>
+          <header>
+            <Navigation toggleLocale={toggleLocale} />
+          </header>
           <main>
             <Routes>
               <Route path="/" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/*" element={<LoginPage />} />
+              <Route path="/about/comoney" element={<AboutCoMoneyPage />} />
+              <Route path="/about/teams" element={<AboutUsPage />} />
             </Routes>
           </main>
           <Footer />

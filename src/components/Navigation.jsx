@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 import { BsTranslate } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -26,6 +26,35 @@ function Navigation({ toggleLocale }) {
       }
     });
   };
+
+  if (!user) {
+    return (
+      <nav className="navbar navbar-expand-lg navbar-dark navbar__container">
+        <div className="container">
+          <a className="navbar-brand" href="/" title={locale === 'en' ? 'Back to Dashboard' : 'Kembali ke Dasbor'}>
+            <img className="navbar__logo" src={logo} alt="logo comoney" />
+          </a>
+          <button className="navbar-toggler pedingSaving" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto d-flex align-items-center">
+              <li className="nav-item me-2">
+                <Link to="/" className="navbar__button d-flex align-items-center pedingNav button-animate" title={locale === 'en' ? 'Log In' : 'Masuk'} type="submit">
+                  <FiLogIn />
+                </Link>
+              </li>
+              <li className="nav-item me-2">
+                <button type="button" className="navbar__button d-flex align-items-center pedingNav button-animate" title={locale === 'en' ? 'Switch Language' : 'Ganti Bahasa'} onClick={toggleLocale}>
+                  <BsTranslate />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar__container">

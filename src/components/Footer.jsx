@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiMail, FiPhoneCall } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo-dark.svg';
 import LocaleContext from '../context/LocaleContext';
 
@@ -23,14 +23,14 @@ function Footer() {
               <div>
                 <h2 className="fw-bold small__font">{locale === 'en' ? 'About' : 'Tentang'}</h2>
                 <p>
-                  <Link to="/about/comoney" className="pedingFoot text-decoration-none text-black small__font d-block">
+                  <a href="/about/comoney" className="pedingFoot text-decoration-none text-black small__font d-block">
                     {locale === 'en' ? 'About CoMoney' : 'Tentang CoMoney'}
-                  </Link>
+                  </a>
                 </p>
                 <p>
-                  <Link to="/about/teams" className="pedingFoot text-decoration-none text-black small__font d-block">
+                  <a href="/about/teams" className="pedingFoot text-decoration-none text-black small__font d-block">
                     {locale === 'en' ? 'Our Team' : 'Tim Kami'}
-                  </Link>
+                  </a>
                 </p>
               </div>
             </div>
