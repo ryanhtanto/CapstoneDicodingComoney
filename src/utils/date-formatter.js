@@ -1,7 +1,7 @@
 const getFullDate = () => {
   const unformattedDate = new Date();
-  const day = unformattedDate.getDate();
-  const month = unformattedDate.getMonth() + 1;
+  const day = String(unformattedDate.getDate()).padStart(2, '0');
+  const month = String(unformattedDate.getMonth() + 1).padStart(2, '0');
   const year = unformattedDate.getFullYear();
 
   return `${year}-${month}-${day}`;
@@ -9,7 +9,7 @@ const getFullDate = () => {
 
 const getMonthYear = () => {
   const unformattedDate = new Date();
-  const month = unformattedDate.getMonth() + 1;
+  const month = String(unformattedDate.getMonth() + 1).padStart(2, '0');
   const year = unformattedDate.getFullYear();
 
   return `${year}-${month}`;
@@ -17,7 +17,7 @@ const getMonthYear = () => {
 
 const getNextMonthYear = () => {
   const unformattedDate = new Date();
-  let month = unformattedDate.getMonth() + 1;
+  let month = String(unformattedDate.getMonth() + 1).padStart(2, '0');
   let year = unformattedDate.getFullYear();
 
   if (month <= 11) {
