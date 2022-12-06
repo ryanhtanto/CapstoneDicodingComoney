@@ -37,7 +37,7 @@ function Footer() {
 
             <div className="col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center footer__section my-2">
               <div>
-                <h2 className="fw-bold small__font">Contacts</h2>
+                <h2 className="fw-bold small__font">{locale === 'en' ? 'Contacts' : 'Kontak'}</h2>
                 <p className="pedingFoot">
                   <FiMail className="fs-5" />
                   {' '}

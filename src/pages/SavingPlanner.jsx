@@ -7,7 +7,7 @@ import SavingBarCount from '../components/SavingBarCount';
 import LocaleContext from '../context/LocaleContext';
 import { getAllSavings } from '../utils/savings';
 import UserContext from '../context/UserContext';
-import Quote from '../components/Quote';
+import QuoteItem from '../components/QuoteItem';
 
 function SavingPlanner() {
   const [savings, setSavings] = React.useState([]);
@@ -21,13 +21,10 @@ function SavingPlanner() {
       const valueFromDb = await getAllSavings(user.uid);
       setSavings(valueFromDb);
       setLoading(false);
-      console.log(1000);
     };
 
     getData();
   }, [refresh]);
-
-  console.log(refresh);
 
   const refreshCallback = () => {
     if (refresh) {
@@ -52,7 +49,7 @@ function SavingPlanner() {
             </div>
           </div>
           <div className="col-lg-6 col-sm-12 p-4 my-auto">
-            <Quote />
+            <QuoteItem />
           </div>
         </div>
 
@@ -64,7 +61,7 @@ function SavingPlanner() {
           />
         </div>
         <Link to="/add-saving-plan">
-          <button type="button" aria-label="add savings" id="addButton" className="addButton" title={locale === 'en' ? 'Add Saving Plan' : 'Tambah Rencana Tabungan'}>
+          <button type="button" aria-label="add savings" id="addButton" className="addButton button-animate" title={locale === 'en' ? 'Add Saving Plan' : 'Tambah Rencana Tabungan'}>
             <FiPlus />
           </button>
         </Link>

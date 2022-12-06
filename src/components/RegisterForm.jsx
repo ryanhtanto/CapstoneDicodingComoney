@@ -51,7 +51,7 @@ function RegisterForm() {
   return (
     <form onSubmit={onSubmit}>
       <div className="form-group">
-        <input type="text" className="form-control input__height" id="name" placeholder="Name" value={name} onChange={setName} />
+        <input type="text" className="form-control input__height" id="name" placeholder={locale === 'en' ? 'Name' : 'Nama'} value={name} onChange={setName} />
       </div>
       <div className="form-group mt-4">
         <input type="email" className="form-control input__height" id="email" placeholder="Email" value={email} onChange={setEmail} />
