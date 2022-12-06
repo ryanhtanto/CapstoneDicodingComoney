@@ -40,7 +40,7 @@ function Navigation({ toggleLocale }) {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto d-flex align-items-center">
               <li className="nav-item me-2">
-                <Link to="/" className="navbar__button d-flex align-items-center pedingNav button-animate" title={locale === 'en' ? 'Log In' : 'Masuk'} type="submit">
+                <Link to="/" style={{ color: 'inherit' }} className="navbar__button d-flex align-items-center pedingNav button-animate text-white" title={locale === 'en' ? 'Log In' : 'Masuk'} type="submit">
                   <FiLogIn />
                 </Link>
               </li>
