@@ -11,7 +11,6 @@ import {
 } from '../utils/category';
 
 function EditTransactionForm({ type, onEditHandler, previousValue }) {
-  // console.log(previousValue);
   const [refresh, setRefresh] = React.useState(true);
   const [name, setName, setDefaultName] = useInput('');
   const [amount, setAmount, setDefaultAmount] = useInput('');
@@ -148,6 +147,10 @@ function EditTransactionForm({ type, onEditHandler, previousValue }) {
       <input type="text" className="form-control mb-4 mt-2 input__height" placeholder={locale === 'en' ? 'Name' : 'Nama'} aria-label={locale === 'en' ? 'Name' : 'Nama'} value={name} onChange={setName} />
       <input type="number" className="form-control my-4 input__height" placeholder={locale === 'en' ? 'Amount' : 'Jumlah'} aria-label={locale === 'en' ? 'Amount' : 'Jumlah'} value={amount} onChange={setAmount} min="0" />
 
+      <p className="rounded prev-category py-1 px-3 mb-3">
+        {locale === 'en' ? 'Selected Category : ' : 'Kategori Terpilih : '}
+        {selectedCategory}
+      </p>
       <div className="text-center">
         <div className="row">
           <div className="col-sm-12 col-lg-8">
@@ -160,10 +163,6 @@ function EditTransactionForm({ type, onEditHandler, previousValue }) {
                   </option>
                 ))}
               </select>
-              <p className="rounded prev-category py-1 px-3 mb-2">
-                Previous Category :
-                {selectedCategory}
-              </p>
             </div>
           </div>
 
@@ -182,7 +181,7 @@ function EditTransactionForm({ type, onEditHandler, previousValue }) {
         </div>
       </div>
 
-      <textarea className="form-control mb-4" placeholder={locale === 'en' ? 'Description' : 'Deskripsi'} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: '120px' }} />
+      <textarea className="form-control mb-4 mt-2" placeholder={locale === 'en' ? 'Description' : 'Deskripsi'} aria-label="With textarea" value={description} onChange={setDescription} style={{ height: '120px' }} />
       <button type="submit" className="btn btn-primary input__height form-control btn-color">
         {locale === 'en' ? 'Save' : 'Simpan'}
       </button>

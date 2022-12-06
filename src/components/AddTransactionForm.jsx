@@ -41,6 +41,7 @@ function TransactionForm({ type, onAddHandler }) {
 
   const onDeleteCategory = async () => {
     if (selectedCategory) {
+      Swal.showLoading();
       await deleteCategory(categoryId, user.uid);
       Swal.fire({
         icon: 'success',

@@ -44,7 +44,7 @@ function LoginForm() {
       </div>
       <div className="form-group mt-4">
         <button type="submit" className="btn btn-primary btn-color col-12 text-white input__height">
-          Login
+          {locale === 'en' ? 'Login' : 'Masuk'}
         </button>
       </div>
       <div className="form-group mt-4">

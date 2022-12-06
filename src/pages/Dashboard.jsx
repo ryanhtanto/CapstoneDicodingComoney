@@ -12,7 +12,7 @@ function Dashboard() {
       <DailyTransaction />
       <MonthlyTransaction />
       <Link to="/add/income">
-        <button type="button" aria-label="add transaction" id="addButton" className="addButton">
+        <button type="button" aria-label="add transaction" id="addButton" className="addButton button-animate">
           <FiPlus />
         </button>
       </Link>

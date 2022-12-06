@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
-import UserContext from '../context/UserContext';
-import { getAllSavings } from '../utils/savings';
 import LocaleContext from '../context/LocaleContext';
 
-function SavingBarCount() {
+function SavingBarCount({ savings }) {
   const [target, setTarget] = useState('');
   const [total, setTotal] = useState('');
   const [loading, setLoading] = useState(true);
   const { locale } = React.useContext(LocaleContext);
-  const { user } = React.useContext(UserContext);
 
   React.useEffect(() => {
-    const getData = async () => {
-      const valueFromDb = await getAllSavings(user.uid);
-      if (valueFromDb) {
+    const getData = () => {
+      if (savings.length) {
         let totalAmount = 0;
-        valueFromDb.forEach((doc) => {
+        savings.forEach((doc) => {
           totalAmount += parseFloat(doc.data.amount);
           const numberString = totalAmount.toString().replace(/[^,\d]/g, '');
           const split = numberString.split(',');
@@ -29,13 +25,16 @@ function SavingBarCount() {
           }
           rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
           setTotal(rupiah);
-          setTarget(valueFromDb.length);
+          setTarget(savings.length);
         });
+      } else {
+        setTarget('');
+        setTotal('');
       }
       setLoading(false);
     };
     getData();
-  }, []);
+  }, [savings]);
 
   if (loading) {
     return (

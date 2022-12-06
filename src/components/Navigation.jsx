@@ -54,12 +54,12 @@ function Navigation({ toggleLocale }) {
               </Link>
             </li>
             <li className="nav-item me-2">
-              <button className="navbar__button d-flex align-items-center pedingNav" title={locale === 'en' ? 'Log Out' : 'Keluar'} type="submit" onClick={onLogout}>
+              <button className="navbar__button d-flex align-items-center pedingNav button-animate" title={locale === 'en' ? 'Log Out' : 'Keluar'} type="submit" onClick={onLogout}>
                 <FiLogOut />
               </button>
             </li>
             <li className="nav-item me-2">
-              <button type="button" className="navbar__button d-flex align-items-center pedingNav" title={locale === 'en' ? 'Switch Language' : 'Ganti Bahasa'} onClick={toggleLocale}>
+              <button type="button" className="navbar__button d-flex align-items-center pedingNav button-animate" title={locale === 'en' ? 'Switch Language' : 'Ganti Bahasa'} onClick={toggleLocale}>
                 <BsTranslate />
               </button>
             </li>
