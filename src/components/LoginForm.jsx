@@ -1,6 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import userContext from '../context/UserContext';
 import { login } from '../utils/authentication-user';
@@ -11,6 +11,7 @@ function LoginForm() {
   const [password, setPassword] = useInput('');
   const { setUser } = React.useContext(userContext);
   const { locale } = React.useContext(LocaleContext);
+  const navigate = useNavigate();
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +25,7 @@ function LoginForm() {
         timer: 1000,
       });
       setUser(data.user || null);
+      navigate('/');
     } else {
       Swal.fire({
         icon: 'error',
