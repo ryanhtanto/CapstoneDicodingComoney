@@ -16,6 +16,7 @@ function MonthlyTransaction() {
 
   React.useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       if (date !== null) {
         setTransactions(await getThisMonthTransactions(user.uid, date));
       } else {

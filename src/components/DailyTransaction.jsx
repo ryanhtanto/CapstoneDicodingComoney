@@ -16,10 +16,13 @@ function DailyTransaction() {
 
   React.useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       if (date !== null) {
-        setTransactions(await getTodayTransactions(user.uid, date));
+        const data = await getTodayTransactions(user.uid, date);
+        setTransactions(data);
       } else {
-        setTransactions(await getTodayTransactions(user.uid));
+        const data = await getTodayTransactions(user.uid);
+        setTransactions(data);
       }
       setLoading(false);
     };

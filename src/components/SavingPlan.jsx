@@ -5,6 +5,7 @@ import LocaleContext from '../context/LocaleContext';
 import { deleteSavings } from '../utils/savings';
 import UserContext from '../context/UserContext';
 import SavingPlanItemLoading from './SavingPlanItemLoading';
+import nodata from '../assets/images/no-data.svg';
 
 function SavingPlan({ savings, loading, refresh }) {
   const { locale } = React.useContext(LocaleContext);
@@ -50,9 +51,10 @@ function SavingPlan({ savings, loading, refresh }) {
   }
 
   return (
-    <h4 className="text-center fw-bold medium__font">
-      {locale === 'en' ? "You don't have savings item" : 'Anda tidak memiliki item tabungan'}
-    </h4>
+    <div className="empty-data mt-5 pt-4">
+      <img className="empty-data__image d-block mx-auto" src={nodata} alt="no data" />
+      <h2 className="medium__font text-center mt-3 fw-bold">{locale === 'en' ? "You Don't Have Savings Item" : 'Anda Tidak Memiliki Item Tabungan'}</h2>
+    </div>
   );
 }
 

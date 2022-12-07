@@ -35,6 +35,7 @@ function DetailPage() {
       cancelButtonText: `${locale === 'en' ? 'Cancel' : 'Batalkan'}`,
     }).then(async (result) => {
       if (result.isConfirmed) {
+        Swal.showLoading();
         await deleteTransaction(idCategory, user.uid);
         Swal.fire({
           icon: 'success',

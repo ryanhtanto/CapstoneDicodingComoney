@@ -205,5 +205,9 @@
 }
 
 .change-transaction__button {
-	width: fit-content;
+	width: 190px;
+}
+
+.empty-data__image {
+	width: 100px;
 }
