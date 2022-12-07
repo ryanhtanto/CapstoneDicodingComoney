@@ -6,10 +6,11 @@ import DeleteSavings from './DeleteSavings';
 import EditSavingButton from './EditSavingButton';
 import LocaleContext from '../context/LocaleContext';
 import { getMonthYear } from '../utils/date-formatter';
+import useRupiah from '../hooks/useRupiah';
 
 function SavingPlanItem({ saving, onDelete }) {
-  const [rupias, setRupias] = React.useState([]);
-  const [roundedAmount, setRoundedAmount] = React.useState([]);
+  const [rupias, setRupias] = useRupiah('');
+  const [roundedAmount, setRoundedAmount] = useRupiah('');
   const [savingMessage, setSavingMessage] = React.useState(null);
   const [progressInMonth, setProgressInMonth] = React.useState(0);
   const [targetMonth] = React.useState(saving.data.targetDate.slice(5, 7));
@@ -24,16 +25,7 @@ function SavingPlanItem({ saving, onDelete }) {
   React.useEffect(() => {
     const formatRupias = async () => {
       const numberString = saving.data.amount.replace(/[^,\d]/g, '').toString();
-      const split = numberString.split(',');
-      const sisa = split[0].length % 3;
-      let rupiah = split[0].substring(0, sisa);
-      const ribuan = split[0].substring(sisa).match(/\d{3}/gi);
-      if (ribuan) {
-        const separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
-      }
-      rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
-      setRupias(rupiah);
+      setRupias(numberString);
     };
 
     const spendPerMonth = async () => {
@@ -42,17 +34,7 @@ function SavingPlanItem({ saving, onDelete }) {
 
       const rounded = Math.round(spend);
       const numberString = rounded.toString();
-      const split = numberString.split(',');
-      const sisa = split[0].length % 3;
-      let rupiah = split[0].substring(0, sisa);
-      const ribuan = split[0].substring(sisa).match(/\d{3}/gi);
-
-      if (ribuan) {
-        const separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
-      }
-      rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
-      setRoundedAmount(rupiah);
+      setRoundedAmount(numberString);
     };
 
     const savingProgressInMonth = async () => {

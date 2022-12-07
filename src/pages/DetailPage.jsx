@@ -6,20 +6,23 @@ import UserContext from '../context/UserContext';
 import { deleteTransaction, getTransaction } from '../utils/transaction';
 import LocaleContext from '../context/LocaleContext';
 import NotFoundPage from './NotFoundPage';
+import useRupiah from '../hooks/useRupiah';
 
 function DetailPage() {
   const { id } = useParams();
   const { user } = React.useContext(UserContext);
   const [transaction, setTransaction] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [rupiah, setRupiah] = useRupiah(0);
   const navigate = useNavigate();
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
     const getData = async () => {
       const data = await getTransaction(user.uid, id);
-      setLoading(false);
       setTransaction(data);
+      setRupiah(data.amount);
+      setLoading(false);
     };
 
     getData();
@@ -87,8 +90,9 @@ function DetailPage() {
           <div className="my-4">
             <h5>{locale === 'en' ? 'Amount' : 'Nominal'}</h5>
             <p>
-              Rp.
-              {transaction.amount}
+              Rp
+              {' '}
+              {rupiah}
             </p>
           </div>
           <div className="my-4">

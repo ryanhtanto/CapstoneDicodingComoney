@@ -75,7 +75,6 @@ function TransactionForm({ type, onAddHandler }) {
     if (category) {
       Swal.showLoading();
       const searchData = await getCategoryByName(category, type, user.uid);
-
       if (searchData.length) {
         Swal.fire({
           icon: 'error',
@@ -85,7 +84,7 @@ function TransactionForm({ type, onAddHandler }) {
         });
         return;
       }
-
+      Swal.showLoading();
       const data = await addCategory(category, user.uid, type);
 
       if (data.success) {
