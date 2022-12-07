@@ -35,7 +35,6 @@ const getTransaction = async (accessToken, id) => {
   if (docSnap.exists()) {
     return docSnap.data();
   }
-  alert('No such document!');
 };
 
 const getTodayTransactions = async (accessToken, dateSelected = thisDay) => {
