@@ -12,7 +12,7 @@ import QuoteItem from '../components/QuoteItem';
 function SavingPlanner() {
   const [savings, setSavings] = React.useState([]);
   const [refresh, setRefresh] = React.useState(0);
-  const [loading, setLoading] = React.useState(0);
+  const [loading, setLoading] = React.useState(true);
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
 
@@ -40,7 +40,7 @@ function SavingPlanner() {
                 <img src={savingCard} alt="icon-savings" className="saving-image" />
               </div>
               <div className="col-lg-8 col-md-7 col-sm-12 my-auto">
-                <SavingBarCount savings={savings} />
+                <SavingBarCount savings={savings} loading={loading} />
               </div>
             </div>
           </div>

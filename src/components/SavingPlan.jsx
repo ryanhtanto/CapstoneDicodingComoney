@@ -12,24 +12,36 @@ function SavingPlan({ savings, loading, refresh }) {
   const { user } = React.useContext(UserContext);
 
   const onDeleteHandler = async (id) => {
-    Swal.showLoading();
-    const deleteHandler = await deleteSavings(id, user.uid);
-    if (deleteHandler.success) {
-      Swal.fire({
-        icon: 'success',
-        title: `${locale === 'en' ? 'Delete Saving Plan Success' : 'Berhasil Menghapus Rencana Tabungan'}`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      refresh();
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: deleteHandler.message,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
+    Swal.fire({
+      title: `${locale === 'en' ? 'Delete This Saving Plan?' : 'Hapus Rencana Tabungan?'}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#013496',
+      cancelButtonColor: '#DC3545',
+      confirmButtonText: `${locale === 'en' ? 'Delete' : 'Hapus'}`,
+      cancelButtonText: `${locale === 'en' ? 'Cancel' : 'Batalkan'}`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.showLoading();
+        const deleteHandler = await deleteSavings(id, user.uid);
+        if (deleteHandler.success) {
+          Swal.fire({
+            icon: 'success',
+            title: `${locale === 'en' ? 'Delete Saving Plan Success' : 'Berhasil Menghapus Rencana Tabungan'}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refresh();
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: deleteHandler.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      }
+    });
   };
 
   if (loading) {

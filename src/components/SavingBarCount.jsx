@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import LocaleContext from '../context/LocaleContext';
 import useRupiah from '../hooks/useRupiah';
 
-function SavingBarCount({ savings }) {
-  const [target, setTarget] = useState('');
-  const [total, setTotal] = useRupiah('');
-  const [loading, setLoading] = useState(true);
+function SavingBarCount({ savings, loading }) {
+  const [target, setTarget] = useState(0);
+  const [total, setTotal] = useRupiah(0);
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
@@ -19,10 +18,9 @@ function SavingBarCount({ savings }) {
           setTarget(savings.length);
         });
       } else {
-        setTarget('');
-        setTotal('');
+        setTarget(0);
+        setTotal(0);
       }
-      setLoading(false);
     };
     getData();
   }, [savings]);
@@ -58,7 +56,7 @@ function SavingBarCount({ savings }) {
       </div>
     );
   }
-
+  console.log(total);
   return (
     <div className="mx-4 my-auto text-center">
       <p className="fw-bold mb-1">
