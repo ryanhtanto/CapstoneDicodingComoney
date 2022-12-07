@@ -11,10 +11,10 @@ import {
 } from '../utils/category';
 
 function TransactionForm({ type, onAddHandler }) {
-  const [refresh, setRefresh] = React.useState(true);
   const [name, setName] = useInput('');
   const [amount, setAmount] = useInput('');
   const [description, setDescription] = useInput('');
+  const [refresh, setRefresh] = React.useState(0);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [categories, setCategories] = React.useState([]);
   const [categoryId, setCategoryId] = React.useState('');
@@ -95,11 +95,7 @@ function TransactionForm({ type, onAddHandler }) {
           showConfirmButton: false,
           timer: 1000,
         });
-        if (refresh) {
-          setRefresh(false);
-        } else {
-          setRefresh(true);
-        }
+        setRefresh(refresh + 1);
       } else {
         Swal.fire({
           icon: 'error',

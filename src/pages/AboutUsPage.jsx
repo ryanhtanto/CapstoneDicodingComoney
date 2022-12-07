@@ -6,11 +6,6 @@ import imam from '../assets/profile-images/imam.jpg';
 import ryan from '../assets/profile-images/ryan.jpg';
 
 function AboutUsPage() {
-  React.useEffect(() => {
-    const element = document.querySelector('nav');
-    element.classList.remove('d-none');
-  }, []);
-
   return (
     <section className="about-us container py-5">
       <h2 className="medium__font fw-bold mx-auto about__title p-2 rounded mb-4">Meet Our Teams</h2>

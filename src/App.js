@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route, Routes, Navigate, useLocation,
+} from 'react-router-dom';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
@@ -24,6 +26,7 @@ function App() {
   const [user, setUser] = React.useState(null);
   const [locale, setLocale] = React.useState('en');
   const [loading, setLoading] = React.useState(true);
+  const path = useLocation().pathname;
 
   React.useEffect(() => {
     const checkUser = async () => {
@@ -79,13 +82,15 @@ function App() {
       <UserContext.Provider value={userContextValue}>
         <LocaleContext.Provider value={localeContextValue}>
           <header>
-            <Navigation toggleLocale={toggleLocale} />
+            {
+              path !== '/login' && path !== '/register' ? <Navigation toggleLocale={toggleLocale} /> : ''
+            }
           </header>
           <main>
             <Routes>
-              <Route path="/" element={<LoginPage />} />
+              <Route path="/*" element={<Navigate to="/login" />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/*" element={<LoginPage />} />
               <Route path="/about/comoney" element={<AboutCoMoneyPage />} />
               <Route path="/about/teams" element={<AboutUsPage />} />
             </Routes>

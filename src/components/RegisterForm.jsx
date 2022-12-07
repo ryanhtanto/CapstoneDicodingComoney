@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import LocaleContext from '../context/LocaleContext';
 import UserContext from '../context/UserContext';
@@ -14,11 +14,6 @@ function RegisterForm() {
   const { locale } = React.useContext(LocaleContext);
   const { setUser } = React.useContext(UserContext);
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    const element = document.querySelector('nav');
-    element.classList.add('d-none');
-  }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -76,9 +71,9 @@ function RegisterForm() {
         <p className="text-center font-color">
           {locale === 'en' ? 'Already have an account?' : 'Sudah mempunyai akun?'}
           {' '}
-          <a href="/" className="linkedAuth fw-bold peding">
+          <Link to="/" className="linkedAuth fw-bold peding">
             {locale === 'en' ? 'Log In' : 'Masuk'}
-          </a>
+          </Link>
         </p>
       </div>
     </form>

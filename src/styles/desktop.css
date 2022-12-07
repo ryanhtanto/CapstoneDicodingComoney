@@ -203,3 +203,7 @@
 .transaction__content {
 	min-height: 400px;
 }
+
+.change-transaction__button {
+	width: fit-content;
+}

@@ -11,7 +11,7 @@ import QuoteItem from '../components/QuoteItem';
 
 function SavingPlanner() {
   const [savings, setSavings] = React.useState([]);
-  const [refresh, setRefresh] = React.useState(true);
+  const [refresh, setRefresh] = React.useState(0);
   const [loading, setLoading] = React.useState(0);
   const { locale } = React.useContext(LocaleContext);
   const { user } = React.useContext(UserContext);
@@ -27,11 +27,7 @@ function SavingPlanner() {
   }, [refresh]);
 
   const refreshCallback = () => {
-    if (refresh) {
-      setRefresh(false);
-    } else {
-      setRefresh(true);
-    }
+    setRefresh(refresh + 1);
   };
 
   return (

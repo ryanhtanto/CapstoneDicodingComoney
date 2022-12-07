@@ -8,11 +8,6 @@ import timeline from '../assets/images/timeline.svg';
 function AboutCoMoneyPage() {
   const { locale } = React.useContext(LocaleContext);
 
-  React.useEffect(() => {
-    const element = document.querySelector('nav');
-    element.classList.remove('d-none');
-  }, []);
-
   return (
     <div className="container">
       <section className="row about-company my-5 mx-auto">

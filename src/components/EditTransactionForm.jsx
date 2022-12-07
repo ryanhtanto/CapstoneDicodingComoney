@@ -11,7 +11,7 @@ import {
 } from '../utils/category';
 
 function EditTransactionForm({ type, onEditHandler, previousValue }) {
-  const [refresh, setRefresh] = React.useState(true);
+  const [refresh, setRefresh] = React.useState(0);
   const [name, setName, setDefaultName] = useInput('');
   const [amount, setAmount, setDefaultAmount] = useInput('');
   const [description, setDescription, setDefaultDescription] = useInput('');
@@ -98,11 +98,7 @@ function EditTransactionForm({ type, onEditHandler, previousValue }) {
           showConfirmButton: false,
           timer: 1000,
         });
-        if (refresh) {
-          setRefresh(false);
-        } else {
-          setRefresh(true);
-        }
+        setRefresh(refresh + 1);
       } else {
         Swal.fire({
           icon: 'error',

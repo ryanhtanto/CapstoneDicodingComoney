@@ -202,8 +202,12 @@ main {
   border: none;
   background-color: unset;
   position: absolute;
-  right: 50px;
   top: 50px;
+  right: 50px;
+}
+
+.logo__corner {
+  width: 40px;
 }
 
 .button-animate:active {
