@@ -8,20 +8,23 @@ import LocaleContext from '../context/LocaleContext';
 
 function Dashboard() {
   const { locale } = React.useContext(LocaleContext);
-  // const []
+  const [scopeTransaction, setScopeTransaction] = React.useState('daily');
 
-  // const toggleChangeTransaction = () => {
-
-  // };
+  const toggleChangeTransaction = () => {
+    if (scopeTransaction === 'daily') {
+      setScopeTransaction('monthly');
+    } else {
+      setScopeTransaction('daily');
+    }
+  };
 
   return (
     <div className="container dashboard__container px-3">
       <CardInformation />
-      <button type="submit" className="btn btn-primary input__height form-control btn-color mt-4 me-3 change-transaction__button">
-        {locale === 'en' ? 'Daily Transaction' : 'Transaksi Harian'}
+      <button type="submit" className="btn btn-primary input__height form-control btn-color mt-4 me-3 change-transaction__button" onClick={toggleChangeTransaction}>
+        {scopeTransaction === 'daily' ? `${locale === 'en' ? 'Monthly Transaction' : 'Transaksi Bulanan'}` : `${locale === 'en' ? 'Daily Transaction' : 'Transaksi Harian'}`}
       </button>
-      <DailyTransaction />
-      <MonthlyTransaction />
+      {scopeTransaction === 'daily' ? <DailyTransaction /> : <MonthlyTransaction />}
       <Link to="/add/income">
         <button type="button" aria-label="add transaction" id="addButton" className="addButton button-animate">
           <FiPlus />

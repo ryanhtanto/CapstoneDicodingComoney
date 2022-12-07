@@ -39,7 +39,6 @@ const getTransaction = async (accessToken, id) => {
 };
 
 const getTodayTransactions = async (accessToken, dateSelected = thisDay) => {
-  console.log(thisDay);
   const todayQuery = query(collection(db, 'financials', `${accessToken}`, 'transactions'), where('date', '==', dateSelected));
   const querySnapshot = await getDocs(todayQuery);
 
