@@ -56,7 +56,7 @@ function SavingBarCount({ savings, loading }) {
       </div>
     );
   }
-  console.log(total);
+
   return (
     <div className="mx-4 my-auto text-center">
       <p className="fw-bold mb-1">
