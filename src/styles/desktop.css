@@ -164,7 +164,7 @@
 .profile__item {
 	border: 1px solid #c7c7c7;
 	overflow: hidden;
-	width: 300px;
+	max-width: 300px;
 }
 
 .card-body {
@@ -173,12 +173,12 @@
 
 .profile__item img {
 	transition: all .5s;
-	height: 300px;
+	width: 100%;
 }
 
 .profile-image__wrapper {
 	overflow: hidden;
-	width: 300px;
+	width: 100%;
 }
 
 .profile__item img:hover {
