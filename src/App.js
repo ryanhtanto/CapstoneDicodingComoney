@@ -6,18 +6,18 @@ import {
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
-import EditTransaction from './pages/EditTransaction';
-import Dashboard from './pages/Dashboard';
+import EditTransactionPage from './pages/EditTransactionPage';
+import DashboardPage from './pages/DashboardPage';
 import DetailPage from './pages/DetailPage';
 import Footer from './components/Footer';
-import AddSavingPlan from './pages/AddSavingPlan';
-import News from './pages/News';
-import SavingPlanner from './pages/SavingPlanner';
+import AddSavingPlanPage from './pages/AddSavingPlanPage';
+import NewsPage from './pages/NewsPage';
+import SavingPlannerPage from './pages/SavingPlannerPage';
 import UserContext from './context/UserContext';
 import LocaleContext from './context/LocaleContext';
 import { getActiveUser } from './utils/authentication-user';
-import EditSavingPlan from './pages/EditSavingPlan';
-import AddTransaction from './pages/AddTransaction';
+import EditSavingPlanPage from './pages/EditSavingPlanPage';
+import AddTransactionPage from './pages/AddTransactionPage';
 import AboutUsPage from './pages/AboutUsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutCoMoneyPage from './pages/AboutComoneyPage';
@@ -108,14 +108,14 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/add/:type" element={<AddTransaction />} />
-            <Route path="/edit/transaction/:id" element={<EditTransaction />} />
-            <Route path="/news" element={<News />} />
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/add/:type" element={<AddTransactionPage />} />
+            <Route path="/edit/transaction/:id" element={<EditTransactionPage />} />
+            <Route path="/news" element={<NewsPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/saving-planner" element={<SavingPlanner />} />
-            <Route path="/add-saving-plan" element={<AddSavingPlan />} />
-            <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />
+            <Route path="/saving-planner" element={<SavingPlannerPage />} />
+            <Route path="/add-saving-plan" element={<AddSavingPlanPage />} />
+            <Route path="/edit-saving-plan/:id" element={<EditSavingPlanPage />} />
             <Route path="/about/comoney" element={<AboutCoMoneyPage />} />
             <Route path="/about/teams" element={<AboutUsPage />} />
             <Route path="/*" element={<NotFoundPage />} />
