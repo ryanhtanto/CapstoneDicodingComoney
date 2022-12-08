@@ -16,10 +16,13 @@ function DailyTransaction() {
 
   React.useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       if (date !== null) {
-        setTransactions(await getTodayTransactions(user.uid, date));
+        const data = await getTodayTransactions(user.uid, date);
+        setTransactions(data);
       } else {
-        setTransactions(await getTodayTransactions(user.uid));
+        const data = await getTodayTransactions(user.uid);
+        setTransactions(data);
       }
       setLoading(false);
     };
@@ -27,7 +30,7 @@ function DailyTransaction() {
   }, [date, user]);
 
   return (
-    <section className="list__transaction mt-4 mb-5">
+    <section className="list__transaction mt-2 mb-5">
       <div className="row transaction__header">
         <div className="col-sm-12 col-md-8 mt-2">
           <h2 className="fw-bold">{locale === 'en' ? 'Daily Transaction' : 'Transaksi Harian'}</h2>

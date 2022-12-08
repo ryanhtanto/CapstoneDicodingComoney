@@ -4,14 +4,15 @@ import waveHand from '../assets/images/wavehand.png';
 import UserContext from '../context/UserContext';
 import { getAllTransactions, getThisMonthTransactions, getTodayTransactions } from '../utils/transaction';
 import LocaleContext from '../context/LocaleContext';
+import useRupiah from '../hooks/useRupiah';
 
 function CardInformation() {
   const { user } = React.useContext(UserContext);
-  const [incomeDaily, setIncomeDaily] = React.useState(0);
-  const [expenseDaily, setExpenseDaily] = React.useState(0);
-  const [incomeMonthly, setIncomeMonthly] = React.useState(0);
-  const [expenseMonthly, setExpenseMonthly] = React.useState(0);
-  const [currentBalance, setCurrentBalance] = React.useState(0);
+  const [incomeDaily, setIncomeDaily] = useRupiah(0);
+  const [expenseDaily, setExpenseDaily] = useRupiah(0);
+  const [incomeMonthly, setIncomeMonthly] = useRupiah(0);
+  const [expenseMonthly, setExpenseMonthly] = useRupiah(0);
+  const [currentBalance, setCurrentBalance] = useRupiah(0);
   const [loading, setLoading] = React.useState(true);
   const { locale } = React.useContext(LocaleContext);
 

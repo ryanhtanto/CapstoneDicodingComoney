@@ -1,21 +1,23 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route, Routes, Navigate, useLocation,
+} from 'react-router-dom';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
-import EditTransaction from './pages/EditTransaction';
-import Dashboard from './pages/Dashboard';
+import EditTransactionPage from './pages/EditTransactionPage';
+import DashboardPage from './pages/DashboardPage';
 import DetailPage from './pages/DetailPage';
 import Footer from './components/Footer';
-import AddSavingPlan from './pages/AddSavingPlan';
-import News from './pages/News';
-import SavingPlanner from './pages/SavingPlanner';
+import AddSavingPlanPage from './pages/AddSavingPlanPage';
+import NewsPage from './pages/NewsPage';
+import SavingPlannerPage from './pages/SavingPlannerPage';
 import UserContext from './context/UserContext';
 import LocaleContext from './context/LocaleContext';
 import { getActiveUser } from './utils/authentication-user';
-import EditSavingPlan from './pages/EditSavingPlan';
-import AddTransaction from './pages/AddTransaction';
+import EditSavingPlanPage from './pages/EditSavingPlanPage';
+import AddTransactionPage from './pages/AddTransactionPage';
 import AboutUsPage from './pages/AboutUsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutCoMoneyPage from './pages/AboutComoneyPage';
@@ -24,6 +26,7 @@ function App() {
   const [user, setUser] = React.useState(null);
   const [locale, setLocale] = React.useState('en');
   const [loading, setLoading] = React.useState(true);
+  const path = useLocation().pathname;
 
   React.useEffect(() => {
     const checkUser = async () => {
@@ -79,13 +82,15 @@ function App() {
       <UserContext.Provider value={userContextValue}>
         <LocaleContext.Provider value={localeContextValue}>
           <header>
-            <Navigation toggleLocale={toggleLocale} />
+            {
+              path !== '/login' && path !== '/register' ? <Navigation toggleLocale={toggleLocale} /> : ''
+            }
           </header>
           <main>
             <Routes>
-              <Route path="/" element={<LoginPage />} />
+              <Route path="/*" element={<Navigate to="/login" />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/*" element={<LoginPage />} />
               <Route path="/about/comoney" element={<AboutCoMoneyPage />} />
               <Route path="/about/teams" element={<AboutUsPage />} />
             </Routes>
@@ -103,14 +108,14 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/add/:type" element={<AddTransaction />} />
-            <Route path="/edit/transaction/:id" element={<EditTransaction />} />
-            <Route path="/news" element={<News />} />
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/add/:type" element={<AddTransactionPage />} />
+            <Route path="/edit/transaction/:id" element={<EditTransactionPage />} />
+            <Route path="/news" element={<NewsPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/saving-planner" element={<SavingPlanner />} />
-            <Route path="/add-saving-plan" element={<AddSavingPlan />} />
-            <Route path="/edit-saving-plan/:id" element={<EditSavingPlan />} />
+            <Route path="/saving-planner" element={<SavingPlannerPage />} />
+            <Route path="/add-saving-plan" element={<AddSavingPlanPage />} />
+            <Route path="/edit-saving-plan/:id" element={<EditSavingPlanPage />} />
             <Route path="/about/comoney" element={<AboutCoMoneyPage />} />
             <Route path="/about/teams" element={<AboutUsPage />} />
             <Route path="/*" element={<NotFoundPage />} />

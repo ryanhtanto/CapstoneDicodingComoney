@@ -22,7 +22,7 @@
 	overflow: hidden;
 	display: -webkit-box;
 	text-overflow: ellipsis;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 }
 
@@ -164,7 +164,7 @@
 .profile__item {
 	border: 1px solid #c7c7c7;
 	overflow: hidden;
-	height: 100%;
+	max-width: 300px;
 }
 
 .profile__item img {
@@ -174,7 +174,7 @@
 
 .profile-image__wrapper {
 	overflow: hidden;
-	height: fit-content;
+	width: 100%;
 }
 
 .profile__item img:hover {
@@ -202,4 +202,12 @@
 
 .transaction__content {
 	min-height: 400px;
+}
+
+.change-transaction__button {
+	width: 190px;
+}
+
+.empty-data__image {
+	width: 100px;
 }

@@ -72,14 +72,16 @@ main {
 .btn-color {
   background-color: #013496;
   border-radius: 10px;
+  border: none;
+}
+
+.btn-color:focus {
+  background-color: #023eac;
+  color: white;
 }
 
 .btn-hapus {
   border-radius: 10px;
-}
-
-.btn-color:hover {
-  border: solid 1px;
 }
 
 .font-color {
@@ -202,8 +204,12 @@ main {
   border: none;
   background-color: unset;
   position: absolute;
-  right: 50px;
   top: 50px;
+  right: 50px;
+}
+
+.logo__corner {
+  width: 40px;
 }
 
 .button-animate:active {

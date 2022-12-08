@@ -35,11 +35,9 @@ const getTransaction = async (accessToken, id) => {
   if (docSnap.exists()) {
     return docSnap.data();
   }
-  alert('No such document!');
 };
 
 const getTodayTransactions = async (accessToken, dateSelected = thisDay) => {
-  console.log(thisDay);
   const todayQuery = query(collection(db, 'financials', `${accessToken}`, 'transactions'), where('date', '==', dateSelected));
   const querySnapshot = await getDocs(todayQuery);
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import LocaleContext from '../context/LocaleContext';
+import useRupiah from '../hooks/useRupiah';
 
-function SavingBarCount({ savings }) {
-  const [target, setTarget] = useState('');
-  const [total, setTotal] = useState('');
-  const [loading, setLoading] = useState(true);
+function SavingBarCount({ savings, loading }) {
+  const [target, setTarget] = useState(0);
+  const [total, setTotal] = useRupiah(0);
   const { locale } = React.useContext(LocaleContext);
 
   React.useEffect(() => {
@@ -14,24 +14,13 @@ function SavingBarCount({ savings }) {
         savings.forEach((doc) => {
           totalAmount += parseFloat(doc.data.amount);
           const numberString = totalAmount.toString().replace(/[^,\d]/g, '');
-          const split = numberString.split(',');
-          const sisa = split[0].length % 3;
-          let rupiah = split[0].substring(0, sisa);
-          const ribuan = split[0].substring(sisa).match(/\d{3}/gi);
-
-          if (ribuan) {
-            const separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-          }
-          rupiah = split[1] !== undefined ? `${rupiah},${split[1]}` : rupiah;
-          setTotal(rupiah);
+          setTotal(numberString);
           setTarget(savings.length);
         });
       } else {
-        setTarget('');
-        setTotal('');
+        setTarget(0);
+        setTotal(0);
       }
-      setLoading(false);
     };
     getData();
   }, [savings]);
@@ -60,6 +49,7 @@ function SavingBarCount({ savings }) {
         <p className="mt-3">
           <span className="saving-count__wrapper px-2 py-2 rounded">
             Total Rp
+            {' '}
             {total}
           </span>
         </p>
