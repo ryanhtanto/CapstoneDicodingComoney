@@ -12,7 +12,7 @@ function AboutCoMoneyPage() {
     <div className="container">
       <section className="row about-company my-5 mx-auto">
         <div className="col-lg-6 my-auto">
-          <h2 className="medium__font fw-bold mb-4 about__title rounded p-2">About CoMoney</h2>
+          <h2 className="medium__font fw-bold mb-4 about__title rounded p-2">{locale === 'en' ? 'About CoMoney' : 'Tentang CoMoney'}</h2>
           <p className="lh-lg">
             {locale === 'en' ? 'CoMoney is a website-based financial management utility application to help people manage their finances and educate finances with income and expenditure dashboard features, savings targets, automatic calculations and daily financial news.' : 'CoMoney adalah aplikasi utilitas pengelolaan keuangan berbasis website untuk membantu masyarakat mengelola keuangannya dan mengedukasi. dengan fitur dashboard pemasukan dan pengeluaran, target tabungan, kalkulasi otomatis dan berita keuangan harian.'}
           </p>
@@ -23,7 +23,7 @@ function AboutCoMoneyPage() {
       </section>
 
       <section className="about-feature row mx-auto py-4">
-        <h2 className="about-underline__title medium__font fw-bold p-2 col-12 mx-auto mb-5">Why Us</h2>
+        <h2 className="about-underline__title medium__font fw-bold p-2 col-12 mx-auto mb-5">{locale === 'en' ? 'Why Us' : 'Mengapa Kita?'}</h2>
         <div className="feature-content row col-12">
           <div className="col-lg-4">
             <img className="feature__image mx-auto d-block" src={organizer} alt="organize financial" />

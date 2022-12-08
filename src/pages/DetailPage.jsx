@@ -20,8 +20,10 @@ function DetailPage() {
   React.useEffect(() => {
     const getData = async () => {
       const data = await getTransaction(user.uid, id);
-      setTransaction(data);
-      setRupiah(data.amount);
+      if (data) {
+        setTransaction(data);
+        setRupiah(data.amount);
+      }
       setLoading(false);
     };
 

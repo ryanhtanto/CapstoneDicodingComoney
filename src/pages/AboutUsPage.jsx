@@ -4,11 +4,14 @@ import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 import vincent from '../assets/profile-images/vincent.jpg';
 import imam from '../assets/profile-images/imam.jpg';
 import ryan from '../assets/profile-images/ryan.jpg';
+import LocaleContext from '../context/LocaleContext';
 
 function AboutUsPage() {
+  const { locale } = React.useContext(LocaleContext);
+
   return (
     <section className="about-us container py-5">
-      <h2 className="medium__font fw-bold mx-auto about__title p-2 rounded mb-2">Meet Our Teams</h2>
+      <h2 className="medium__font fw-bold mx-auto about__title p-2 rounded mb-2">{locale === 'en' ? 'Our Teams' : 'Tim Kita'}</h2>
 
       <div className="profile__wrapper d-flex justify-content-evenly flex-wrap g-4">
         <div className="profile__item card m-3">
