@@ -1,6 +1,6 @@
 ## CoMoney - Manage Your Money Correctly
 ![CoMoney Logo](https://raw.githubusercontent.com/imfaditya/CapstoneDicodingComoney/readme-assets/header-fix.png) 
-<p align="center"><a href="#">Deployed App</a></p>
+<p align="center"><a href="#">Deployed App</a><a href="#">Cara Menggunakan Aplikasi</a></p>
 ### Deskripsi Aplikasi
 CoMoney adalah aplikasi utilitas pengelolaan keuangan berbasis website untuk membantu orang mengelola dan mengedukasi keuangannya dengan fitur dashboard pemasukan dan pengeluaran, target tabungan dengan perhitungan otomatis, dan berita keuangan harian.
 
@@ -28,5 +28,3 @@ CoMoney adalah aplikasi utilitas pengelolaan keuangan berbasis website untuk mem
 - Server : Firebase Hosting
 - Linter : ESlint
 - Assets : Undraw, Google Fonts
-#### Cara Penggunaan
-[Demo Aplikasi](#)
