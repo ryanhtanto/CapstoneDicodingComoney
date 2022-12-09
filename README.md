@@ -21,7 +21,7 @@ CoMoney adalah aplikasi utilitas pengelolaan keuangan berbasis website untuk mem
 ### Tampilan Aplikasi
 ![Interface CoMoney](https://raw.githubusercontent.com/imfaditya/CapstoneDicodingComoney/readme-assets/group-screenshots.png)
 ### Project Resources
-- Library : React JS, React Icons, React Router DOM, Axios, Lazysizes, Workbox
+- Library : React JS, React Icons, React Router DOM, Axios, Lazysizes, Workbox, Sweet Alert 2
 - Framework : Bootstrap
 - Api : GNews API, Quotes Ninja API
 - Database : Cloud Firestore by Firebase
