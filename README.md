@@ -11,6 +11,9 @@ CoMoney adalah aplikasi utilitas pengelolaan keuangan berbasis website untuk mem
  - Membuat rencana tabungan, serta menampilkan informasi berapa banyak uang yang harus disishkan setiap bulannya
  - Aplikasi tersedia dalam 2 bahasa (Indonesia dan Inggris)
 
+### Link Deployed
+https://comoney-dicoding.web.app/
+
 ### Tim Kami (C22-022)
 |ID|Nama|
 |--|--|
