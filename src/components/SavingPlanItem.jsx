@@ -87,7 +87,7 @@ function SavingPlanItem({ saving, onDelete }) {
             </p>
             <p className="mb-2">
               <FiCalendar className="me-2 mb-1" />
-              Start:
+              {locale === 'en' ? 'Start:' : 'Mulai'}
               {' '}
               {startMonth}
               ,
