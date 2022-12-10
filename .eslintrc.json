@@ -22,6 +22,8 @@
         "no-plusplus": "off",
         "no-underscore-dangle": "off",
         "prefer-regex-literals": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "no-alert": "off",
+        "no-console": "off"
     }
 }
